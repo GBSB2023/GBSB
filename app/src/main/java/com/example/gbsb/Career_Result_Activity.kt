@@ -9,7 +9,7 @@ import com.example.gbsbwork.databinding.CareerResultBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
-class Career_Result_Activity : AppCompatActivity() {
+class Career_Result_Activity : AppCompatActivity() { 
     lateinit var binding : CareerResultBinding
     var userChoiceList : ArrayList<String> = ArrayList()
     var SI :Int = 0
