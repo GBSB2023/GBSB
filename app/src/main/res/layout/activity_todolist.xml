@@ -4,18 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TodolistActivity"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:weightSum="10"
+    tools:context=".TodolistActivity">
 
-<!--    Menu-->
+    <!--    Menu-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/subTitleBar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
+            android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/arrow_back"
@@ -26,6 +29,7 @@
 
         <!--        SubPageTitle-->
         <TextView
+            android:id="@+id/textView"
             style="@style/SubpageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,6 +43,7 @@
             app:layout_constraintVertical_bias="0.5" />
 
         <ImageButton
+            android:id="@+id/imageButton2"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:scaleType="fitCenter"
@@ -51,10 +56,13 @@
 
     <View
         android:id="@+id/seperator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginBottom="670dp"
         android:background="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@+id/subTitleBar" />
+        app:layout_constraintTop_toBottomOf="@+id/subTitleBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <CalendarView
@@ -64,6 +72,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seperator" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -78,14 +95,15 @@
         app:layout_constraintTop_toBottomOf="@+id/calendarView"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:src="@drawable/add"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:src="@drawable/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
