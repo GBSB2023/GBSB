@@ -16,7 +16,7 @@ class mainWindow : AppCompatActivity(){  // 메인 화면
 
         initLayout()
     }
-    private fun initLayout(){
+    private fun initLayout(){ // 메인화면 레이아웃 설정
         binding.recommand.setOnClickListener{ // 진로 추천 화면으로 넘어가기
             val intent = Intent(this, RecommandAcitivty::class.java)
             startActivity(intent)
