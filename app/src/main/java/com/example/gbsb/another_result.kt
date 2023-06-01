@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gbsbwork.databinding.AnotherResultBinding
 
-class another_result: AppCompatActivity() {  // 전체 진로 추천 결과 보여 주는 화면
+class another_result: AppCompatActivity() {  // 전체 진로 추천 결과 보여 주는 화면 
     lateinit var binding : AnotherResultBinding
     lateinit var adapter : reulst_Adapter
     val RecommandResultList: ArrayList<RecommandResultData> = ArrayList()
