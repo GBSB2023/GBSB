@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면 
+class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
     lateinit var binding: RecommandBinding
     lateinit var adapter : MyAdapter
 
