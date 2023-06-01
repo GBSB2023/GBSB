@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {  // 로그인으로 시작
         initlayout()
     }
 
-    fun initlayout(){
+    fun initlayout(){ // 레이아웃 설정
         binding.button.setOnClickListener{ // 메인 화면으로 넘어가기
             val intent = Intent(this, mainWindow::class.java)
             startActivity(intent)
