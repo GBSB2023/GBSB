@@ -11,7 +11,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 
-class questionFragment : Fragment() { // 질문 Fragment
+class questionFragment : Fragment() { // 질문 Fragment 
     val questionList : ArrayList<question_List> = ArrayList()
     var number : Int = 0
     private var selectedOption: String? = null
