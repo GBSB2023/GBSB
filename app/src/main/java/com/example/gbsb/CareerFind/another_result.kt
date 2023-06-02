@@ -23,7 +23,7 @@ class another_result: AppCompatActivity() {  // 전체 진로 추천 결과 보�
     fun datainput(){
         RecommandResultList.add(RecommandResultData("SI/SM","컴퓨터시스템에서 운용되는 각종 유틸리티 소프트웨어를 설계하고 개발합니다. "))
         RecommandResultList.add(RecommandResultData("DataBase","데이터베이스 개발자는 데이터베이스 시스템을 설계, 구축, 유지보수하는 전문가입니다."))
-        RecommandResultList.add(RecommandResultData("WebFront","백엔드 API에서 가져온 데이터의 출력, 입력을 통한 비즈니스 로직 구성과 사용자와 대화하는 사용자 인터페이스 부분을 작업하는 개발자를 말합니다."))
+        RecommandResultList.add(RecommandResultData("Web","백엔드 API에서 가져온 데이터의 출력, 입력을 통한 비즈니스 로직 구성과 사용자와 대화하는 사용자 인터페이스 부분을 작업하는 개발자를 말합니다."))
         RecommandResultList.add(RecommandResultData("AI","인공지능 개발자는 인공지능 시스템을 설계, 개발 및 유지보수하는 전문가입니다.\n"))
         RecommandResultList.add(RecommandResultData("Security","보안 개발자는 시스템 및 소프트웨어의 보안 측면을 설계, 개발 및 유지보수하는 전문가입니다.\n"))
         RecommandResultList.add(RecommandResultData("App","기획자가 기획한 앱을 구체화해 스마트폰에서 사용이 가능하도록 프로그램을 개발하고 오류를 수정하고 업데이트하는 업무를 수행합니다."))
