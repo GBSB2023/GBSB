@@ -1,4 +1,4 @@
-package com.example.gbsb
+package com.example.gbsb.todolist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,28 +11,28 @@ class TodoAdapter(options: FirebaseRecyclerOptions<TodoItem>)
     : FirebaseRecyclerAdapter<TodoItem, TodoAdapter.ViewHolder>(options) {
 
     interface OnItemClickListener{
-        fun OnItemClick(position: Int)
+        fun onItemClick(position: Int)
     }
 
-    var itemClickListener:OnItemClickListener?=null
+    var itemClickListener: OnItemClickListener?=null
 
     inner class ViewHolder(val binding: RowTodoBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener{
-                itemClickListener!!.OnItemClick(bindingAdapterPosition)
+                itemClickListener!!.onItemClick(bindingAdapterPosition)
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = RowTodoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TodoAdapter.ViewHolder, position: Int, model: TodoItem) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, model: TodoItem) {
         holder.binding.apply {
             content.text = model.content
-            time.text = model.time
+            time.text = model.timeStamp
             checkBox.isChecked = model.isDone
         }
     }

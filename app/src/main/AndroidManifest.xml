@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TodolistActivity"
+            android:name=".todolist.TodolistActivity"
             android:exported="true">
         </activity>
     </application>

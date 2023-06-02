@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".MainActivity">
 
     <!--Menu -->
@@ -52,9 +53,6 @@
 
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"/>
 
     <!-- To-do List-->
     <LinearLayout
@@ -112,15 +110,12 @@
 
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"/>
 
     <!-- Search career -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <!-- Title -->
@@ -130,28 +125,40 @@
             android:layout_height="wrap_content"
             android:text="진로 탐색하기" />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/careerExploreBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!-- Date -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="23.06.02"/>
-
-        </LinearLayout>
+            android:text="진로 검사하기"/>
 
     </LinearLayout>
 
-    <Space
+    <!-- Community -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+        <!-- Title -->
+        <TextView
+            style="@style/mainTitleFontStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="커뮤니티" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </LinearLayout>
+
 
     <!-- Find career -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:orientation="vertical">
 
         <!-- Title-->
@@ -162,7 +169,8 @@
             android:text="직무 확인하기" />
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:stretchColumns="*">
 
             <TableRow>
@@ -170,57 +178,57 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_gravity="center"
                         android:src="@drawable/personal_icon"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="모바일"/>
+                        android:text="앱"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_gravity="center"
                         android:src="@drawable/personal_icon"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="모바일"/>
+                        android:text="웹"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_gravity="center"
                         android:src="@drawable/personal_icon"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="모바일"/>
+                        android:text="인공지능"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_gravity="center"
                         android:src="@drawable/personal_icon"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="모바일"/>
+                        android:text="클라우드"/>
                 </LinearLayout>
 
             </TableRow>
@@ -229,57 +237,57 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_gravity="center"
                         android:src="@drawable/personal_icon"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="모바일"/>
+                        android:text="게임"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_gravity="center"
                         android:src="@drawable/personal_icon"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="모바일"/>
+                        android:text="보안"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_gravity="center"
                         android:src="@drawable/personal_icon"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="모바일"/>
+                        android:text="데이터베이스"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_gravity="center"
                         android:src="@drawable/personal_icon"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="모바일"/>
+                        android:text="전산"/>
                 </LinearLayout>
 
             </TableRow>

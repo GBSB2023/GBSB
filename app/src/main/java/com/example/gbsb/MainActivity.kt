@@ -3,8 +3,8 @@ package com.example.gbsb
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.gbsb.todolist.TodolistActivity
 import com.example.gbsb.databinding.ActivityMainBinding
-import com.google.firebase.database.DatabaseReference
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, TodolistActivity::class.java)
                 startActivity(intent)
             }
+
         }
     }
 }
