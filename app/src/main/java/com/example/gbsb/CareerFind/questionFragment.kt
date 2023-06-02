@@ -1,4 +1,4 @@
-package com.example.gbsbwork
+package com.example.gbsb
 
 import android.annotation.SuppressLint
 import android.os.Bundle
