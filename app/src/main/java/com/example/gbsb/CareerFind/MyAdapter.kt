@@ -1,4 +1,4 @@
-package com.example.gbsbwork
+package com.example.gbsb
 
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gbsbwork.databinding.DatafindBinding
+import com.example.gbsb.databinding.DatafindBinding
 
 class MyAdapter(val items : ArrayList<RecommandUser>): // 진로 추천 결과 보여주는 Adapter
     RecyclerView.Adapter<MyAdapter.ViewHolder>(){
