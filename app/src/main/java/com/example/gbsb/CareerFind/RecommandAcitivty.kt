@@ -91,11 +91,40 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
         adapter.btnClickListener = object:MyAdapter.OnBtnClickListener{ // 자세히 보기 클릭
             override fun OnBtnClickListener(holder: MyAdapter.ViewHolder,viewHolder: MyAdapter.ViewHolder){
                 // 해당 직업으로 이동
-
+                if(holder.binding.recommend.text == "SI/SM 개발자"){
+                    navigateToMain2Activity(8)
+                }
+                else  if(holder.binding.recommend.text == "데이터 베이스 개발자"){
+                    navigateToMain2Activity(7)
+                }
+                else  if(holder.binding.recommend.text == "웹 개발자"){
+                    navigateToMain2Activity(2)
+                }
+                else  if(holder.binding.recommend.text == "AI 개발자"){
+                    navigateToMain2Activity(3)
+                }
+                else  if(holder.binding.recommend.text == "보안 개발자"){
+                    navigateToMain2Activity(6)
+                }
+                else  if(holder.binding.recommend.text == "APP 개발자"){
+                      navigateToMain2Activity(1)
+                }   
+                else  if(holder.binding.recommend.text == "클라우드 네트워크 엔지니어"){
+                    navigateToMain2Activity(4)
+                }
+                else {
+                    navigateToMain2Activity(5)
+                }
             }
-
         }
 
         binding.recyclerview.adapter = adapter
     }
+    
+    private fun navigateToMain2Activity(buttonId: Int) {
+        val intent = Intent(this, MainActivity2::class.java)
+        intent.putExtra("buttonId", buttonId)
+        startActivity(intent)
+    }
+
 }
