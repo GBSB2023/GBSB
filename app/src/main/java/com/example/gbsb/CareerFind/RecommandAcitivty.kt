@@ -58,7 +58,7 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
         }
         binding.id.setOnClickListener{  // 사용자 정보 창으로 넘어가기
             //val intent = Intent(this, UserInfor::class.java)
-            startActivity(intent)
+            //startActivity(intent)
         }
         binding.add.setOnClickListener{ // 진로 탐색 시작
             val intent = Intent(this, FindCourse::class.java)
