@@ -39,8 +39,8 @@ class Career_Result_Activity : AppCompatActivity() {
             finish()
         }
         binding.id.setOnClickListener { // 사용자 정보 이동
-            val intent = Intent(this, UserInfor::class.java)
-            startActivity(intent)
+            //val intent = Intent(this, UserInfor::class.java)
+            //startActivity(intent)
         }
         binding.check.setOnClickListener{// 다른 결과 확인
             val intent = Intent(this, another_result::class.java)
