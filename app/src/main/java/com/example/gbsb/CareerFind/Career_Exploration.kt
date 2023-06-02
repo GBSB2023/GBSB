@@ -1,11 +1,11 @@
-package com.example.gbsbwork
+package com.example.gbsb
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gbsbwork.databinding.CareerExplorationBinding
+import com.example.gbsb.databinding.CareerExplorationBinding
 
 class Career_Exploration : AppCompatActivity() {  // 진로 탐색 화면 (질문 포함)
     lateinit var binding: CareerExplorationBinding
