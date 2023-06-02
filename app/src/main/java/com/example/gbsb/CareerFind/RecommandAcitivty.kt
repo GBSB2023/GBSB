@@ -1,11 +1,11 @@
-package com.example.gbsbwork
+package com.example.gbsb
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gbsbwork.databinding.RecommandBinding
+import com.example.gbsb.databinding.RecommandBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -52,12 +52,12 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
         adapter = MyAdapter(RecommandUserList)
 
         binding.back.setOnClickListener{ // 메인화면으로 돌아가기
-            val intent = Intent(this, mainWindow::class.java)
+            //val intent = Intent(this, mainWindow::class.java)
             startActivity(intent)
             finish()
         }
         binding.id.setOnClickListener{  // 사용자 정보 창으로 넘어가기
-            val intent = Intent(this, UserInfor::class.java)
+            //val intent = Intent(this, UserInfor::class.java)
             startActivity(intent)
         }
         binding.add.setOnClickListener{ // 진로 탐색 시작
