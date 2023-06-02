@@ -85,7 +85,7 @@ class MyAdapter(val items : ArrayList<RecommandUser>): // 진로 추천 결과 �
             val drawable = holder.binding.imageView.context.getDrawable(R.drawable.frontend)
             holder.binding.imageView.setImageDrawable(drawable)
             visible(3,holder)
-            holder.binding.recommend.text = "웹 프론트 개발자"
+            holder.binding.recommend.text = "웹 개발자"
             holder.binding.button1.text = "HTML"
             holder.binding.button2.text = "CSS"
             holder.binding.button3.text = "C++"
