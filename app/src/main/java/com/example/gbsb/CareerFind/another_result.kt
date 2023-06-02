@@ -44,14 +44,6 @@ class another_result: AppCompatActivity() {  // 전체 진로 추천 결과 보�
             finish()
         }
         binding.recyclerview.adapter = adapter
-
-//        binding.id.setOnClickListener{
-//            val intent = Intent(this, RecommandAcitivty::class.java)
-//            intent.putExtra("RecommandUser", receivedData)
-//            startActivity(intent)
-//            finish()
-//        }
-
     }
 
 }
