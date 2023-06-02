@@ -26,6 +26,23 @@
             android:name=".todolist.TodolistActivity"
             android:exported="true">
         </activity>
+    <activity
+            android:name=".FindCourse"
+            android:exported="true"/>
+        <activity
+            android:name=".mainWindow"
+            android:exported="true"/>
+        <activity
+            android:name=".RecommandAcitivty"
+            android:exported="true"/>
+        <activity
+            android:name=".Career_Exploration"
+            android:exported="true"/>
+        <activity
+            android:name=".Career_Result_Activity"
+            android:exported="true"/>
+        <activity
+            android:name=".another_result"
+            android:exported="true"/>
     </application>
-
 </manifest>
