@@ -1,10 +1,10 @@
-package com.example.gbsbwork
+package com.example.gbsb
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gbsbwork.databinding.AnotherResultBinding
+import com.example.gbsb.databinding.AnotherResultBinding
 
 class another_result: AppCompatActivity() {  // 전체 진로 추천 결과 보여 주는 화면
     lateinit var binding : AnotherResultBinding
