@@ -14,7 +14,7 @@ class Career_Result_Activity : AppCompatActivity() {
     var userChoiceList : ArrayList<String> = ArrayList()
     var SI :Int = 0
     var DataBase : Int = 0
-    var WebFront : Int = 0
+    var Web : Int = 0
     var AI : Int = 0
     var Security : Int = 0
     var App : Int = 0
@@ -73,7 +73,7 @@ class Career_Result_Activity : AppCompatActivity() {
             binding.explain2.text = "데이터베이스 개발자는 데이터베이스 시스템을 설계, 구축, 유지보수하는 전문가입니다."
             return "2"
         }
-        else if (set == "WebFront"){
+        else if (set == "Web"){
             val imageView: ImageView = findViewById(R.id.imageView1)
             val drawable = imageView.context.getDrawable(R.drawable.frontend)
             imageView.setImageDrawable(drawable)
@@ -120,7 +120,7 @@ class Career_Result_Activity : AppCompatActivity() {
         when(userChoiceList[0]){
             "1" -> Cloud++
             "2" -> DataBase++
-            "3" -> WebFront++
+            "3" -> Web++
             "4" -> Security++
             "5" -> Game++
         }
@@ -132,14 +132,14 @@ class Career_Result_Activity : AppCompatActivity() {
             "5" -> Security++
         }
         when(userChoiceList[2]){
-            "1" -> WebFront++
+            "1" -> Web++
             "2" -> SI++
             "3" -> AI++
             "4" -> Security++
             "5" -> Game++
         }
         when(userChoiceList[3]){
-            "1" -> WebFront++
+            "1" -> Web++
             "2" -> SI++
             "3" -> AI++
             "4" -> Security++
@@ -147,7 +147,7 @@ class Career_Result_Activity : AppCompatActivity() {
         }
         when(userChoiceList[4]){
             "1" -> SI++
-            "2" -> WebFront++
+            "2" -> Web++
             "3" -> DataBase++
             "4" -> Security++
             "5" -> AI++
@@ -156,19 +156,19 @@ class Career_Result_Activity : AppCompatActivity() {
             "1" -> DataBase++
             "2" -> AI++
             "3" -> SI++
-            "4" -> WebFront++
+            "4" -> Web++
             "5" -> Security++
         }
 
         return findMaxValue()
     }
     fun findMaxValue(): String {
-        val max = listOf(SI, DataBase, WebFront, AI, Security, App, Cloud, Game).maxOrNull()
+        val max = listOf(SI, DataBase, Web, AI, Security, App, Cloud, Game).maxOrNull()
 
         return when (max) {
             SI -> "SI/SM"
             DataBase -> "DataBase"
-            WebFront -> "WebFront"
+            Web -> "Web"
             AI -> "AI"
             Security -> "Security"
             App -> "App"
