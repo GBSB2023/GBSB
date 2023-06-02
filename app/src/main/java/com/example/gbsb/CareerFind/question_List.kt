@@ -1,5 +1,4 @@
-package com.example.gbsbwork
-
+package com.example.gbsb
 data class question_List(var question : String,
                          var frist : String,
                          var second : String,
