@@ -1,9 +1,9 @@
-package com.example.gbsbwork
+package com.example.gbsb
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gbsbwork.databinding.AnotherResultDataBinding
+import com.example.gbsb.databinding.AnotherResultDataBinding
 
 class reulst_Adapter (val items : ArrayList<RecommandResultData>): // 전체 진로 추천 결과 보여 주는 Adapter
     RecyclerView.Adapter<reulst_Adapter.ViewHolder>(){
@@ -54,7 +54,6 @@ class reulst_Adapter (val items : ArrayList<RecommandResultData>): // 전체 진
             val drawable = holder.binding.imageView1.context.getDrawable(R.drawable.game)
             holder.binding.imageView1.setImageDrawable(drawable)
         }
-
 
         holder.binding.explain2.text = items[position].explain
     }
