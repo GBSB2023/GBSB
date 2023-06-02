@@ -1,10 +1,10 @@
-package com.example.gbsbwork
+package com.example.gbsb
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.gbsbwork.databinding.FindcourseBinding
+import com.example.gbsb.databinding.FindcourseBinding
 
 class FindCourse : AppCompatActivity() { // 진로 찾기 첫 번째 화면
     lateinit var binding: FindcourseBinding
