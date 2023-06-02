@@ -30,9 +30,6 @@
             android:name=".FindCourse"
             android:exported="true"/>
         <activity
-            android:name=".mainWindow"
-            android:exported="true"/>
-        <activity
             android:name=".RecommandAcitivty"
             android:exported="true"/>
         <activity
