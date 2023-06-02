@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rowContent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/contentName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="글 제목/본문"
+        android:textAlignment="center"
+        style="@style/Widget.AppCompat.Button.Small"/>
+    <LinearLayout
+        android:id="@+id/descriptionLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/contentDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="날짜"
+            android:textSize="10dp"
+            style="@style/Widget.AppCompat.Button.Small"/>
+        <TextView
+            android:id="@+id/contentWriter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성자"
+            android:textSize="10dp"
+            style="@style/Widget.AppCompat.Button.Small"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/contentLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="좋아요"
+            android:textSize="10dp"
+            style="@style/Widget.AppCompat.Button.Small"/>
+        <TextView
+            android:id="@+id/contentComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="댓글수"
+            android:textSize="10dp"
+            style="@style/Widget.AppCompat.Button.Small"/>
+    </LinearLayout>
+</LinearLayout>

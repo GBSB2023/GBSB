@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="community_category">
+        카테고리 선택 후 검색 버튼을 눌러주세요.
+    </string>
+    <string-array name="category_arrays">
+        <item>전체</item>
+        <item>모바일 앱</item>
+        <item>웹</item>
+        <item>인공지능</item>
+        <item>클라우드</item>
+        <item>게임</item>
+        <item>보안</item>
+        <item>데이터베이스</item>
+        <item>전산 시스템</item>
+    </string-array>
+    <string-array name="add_arrays">
+        <item>모바일 앱</item>
+        <item>웹</item>
+        <item>인공지능</item>
+        <item>클라우드</item>
+        <item>게임</item>
+        <item>보안</item>
+        <item>데이터베이스</item>
+        <item>전산 시스템</item>
+    </string-array>
+</resources>
