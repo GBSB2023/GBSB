@@ -38,8 +38,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="15dp"
-                style="@style/Widget.AppCompat.Button.Small"/>
+                android:maxLength="30"
+                android:textSize="15dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,8 +59,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="15dp"
-                style="@style/Widget.AppCompat.Button.Small"/>
+                android:maxLength="500"
+                android:textSize="15dp"/>
 
         </LinearLayout>
         <LinearLayout

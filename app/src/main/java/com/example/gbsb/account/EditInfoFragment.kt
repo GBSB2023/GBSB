@@ -2,6 +2,9 @@ package com.example.gbsb.account
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
@@ -10,12 +13,13 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class EditInfoFragment: DialogFragment() {
+class EditInfoFragment:DialogFragment() {
     private var _binding: EditInfoBinding?= null
     private val binding get() = _binding!!
     val model: AccountViewModel by activityViewModels()
     lateinit var info: Info
     private lateinit var infodb: DatabaseReference
+    lateinit var dialog:AlertDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = EditInfoBinding.inflate(layoutInflater)
@@ -31,6 +35,8 @@ class EditInfoFragment: DialogFragment() {
             editBirth.setText(info.birth)
             editMajor.setText(info.major)
         }
+
+        initPattern()
 
         val builder = AlertDialog.Builder(requireActivity())
         builder.setView(view)
@@ -51,7 +57,82 @@ class EditInfoFragment: DialogFragment() {
             dialog.dismiss()
         }
 
-        return builder.create()
+        dialog = builder.create()
+        dialog.setOnShowListener {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = false
+        }
+
+        initBtn()
+        return dialog
+    }
+
+    private fun initBtn() {
+        binding.validBtn.setOnClickListener {
+            if(validateRegister()){
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = true
+            }else{
+                Toast.makeText(activity, "양식을 올바르게 작성해주세요.", Toast.LENGTH_LONG).show()
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = false
+            }
+        }
+    }
+
+    private fun initPattern() {
+        val callPattern = "^0\\d{1,2}-\\d{3,4}-\\d{4}$"
+        val callText = binding.editCall
+        callText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val input = p0.toString()
+
+                if (input.matches(callPattern.toRegex())) {
+                    callText.error = null
+                } else {
+                    callText.error = "010-1234-5678 또는 02-1234-5678 과 같은 전화번호 형식을 입력해주세요."
+                }
+            }
+
+        })
+
+        val birthPattern = "^\\d{4}-\\d{2}-\\d{2}$"
+        val birthText = binding.editBirth
+        birthText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val input = p0.toString()
+
+                if (input.matches(birthPattern.toRegex())) {
+                    birthText.error = null
+                } else {
+                    birthText.error = "2000-01-01 과 같은 생일 형식으로 입력해주세요."
+                }
+
+            }
+
+        })
+
+    }
+
+    private fun validateRegister(): Boolean {
+        var isValid = true
+
+        binding.apply {
+            if(!binding.editCall.error.isNullOrEmpty()||!binding.editBirth.error.isNullOrEmpty()){
+                isValid = false
+            }
+        }
+
+        return isValid
     }
 
     override fun onDestroyView() {

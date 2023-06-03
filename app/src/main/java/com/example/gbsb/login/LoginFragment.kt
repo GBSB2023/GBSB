@@ -2,6 +2,8 @@ package com.example.gbsb.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +25,7 @@ import com.google.firebase.ktx.Firebase
 class LoginFragment : Fragment() {
     var binding: FragmentLoginBinding?=null
     var auth: FirebaseAuth?= null
-    var googleSignInClient: GoogleSignInClient?=null
+    var googleSignInClient: GoogleSignInClient ?=null
 
     private lateinit var accountdb: DatabaseReference
     private lateinit var infodb: DatabaseReference
@@ -73,6 +75,56 @@ class LoginFragment : Fragment() {
                 signInAnonymous()
             }
         }
+
+        initPattern()
+    }
+
+    private fun initPattern() {
+        val emailPattern = "[a-zA-Z0-9]+@[a-z]+\\.+[a-z]+"
+        val emailText = binding!!.loginEmail
+        emailText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val input = p0.toString()
+
+                if (input.matches(emailPattern.toRegex())) {
+                    // 이메일 형식이 맞는 경우
+                    emailText.error = null
+                } else {
+                    // 이메일 형식이 아닌 경우
+                    emailText.error = "올바른 이메일 형식이 아닙니다."
+                }
+            }
+
+        })
+
+        val passwordPattern = "^.{6,15}$"
+        val passwordText = binding!!.loginPassword
+        passwordText.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val input = p0.toString()
+
+                if (input.matches(passwordPattern.toRegex())) {
+                    // 이메일 형식이 맞는 경우
+                    passwordText.error = null
+                } else {
+                    // 이메일 형식이 아닌 경우
+                    passwordText.error = "비밀번호는 6 ~ 15자리입니다."
+                }
+            }
+
+        })
     }
 
     private fun signInUser() {

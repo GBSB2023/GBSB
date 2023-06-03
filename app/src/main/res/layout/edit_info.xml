@@ -61,8 +61,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="15dp"
-                style="@style/Widget.AppCompat.Button.Small"/>
+                android:maxLength="15"
+                android:textSize="15dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,8 +82,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="15dp"
-                style="@style/Widget.AppCompat.Button.Small"/>
+                android:maxLength="20"
+                android:textSize="15dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -103,13 +103,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="15dp"
-                style="@style/Widget.AppCompat.Button.Small"/>
+                android:maxLength="30"
+                android:textSize="15dp"/>
         </LinearLayout>
         <Button
+            android:id="@+id/validBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저장"
+            android:text="유효성 검사하기"
             android:layout_gravity="center"/>
     </LinearLayout>
 </LinearLayout>

@@ -2,6 +2,8 @@ package com.example.gbsb.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.gbsb.MainActivity
 import com.example.gbsb.R
+import com.example.gbsb.account.Info
 import com.example.gbsb.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -45,9 +48,89 @@ class RegisterFragment : Fragment() {
                 fragment.commit()
             }
             registerComplete.setOnClickListener {
-                createUserId()
+                if(validateRegister())
+                    createUserId()
+                else
+                    Toast.makeText(activity, "회원가입에 실패했습니다. 양식을 확인해주세요.", Toast.LENGTH_LONG).show()
             }
         }
+
+        initPattern()
+    }
+
+    private fun validateRegister(): Boolean {
+        var isValid = true
+
+        binding!!.apply {
+            if(registerName.text.toString().isEmpty()){
+                registerName.error="필수 입력칸입니다."
+                isValid = false
+            }
+            if(registerId.text.toString().isEmpty()){
+                registerId.error="필수 입력칸입니다."
+                isValid = false
+            }
+            if(registerPw.text.toString().isEmpty()){
+                registerPw.error="필수 입력칸입니다."
+                isValid = false
+            }
+            if(registerPw.text.toString()!=registerPwRe.text.toString()){
+                registerPwRe.error="비밀번호와 일치하지 않습니다."
+                isValid = false
+            }
+            if(!binding!!.registerId.error.isNullOrEmpty()||!binding!!.registerPw.error.isNullOrEmpty()){
+                isValid = false
+            }
+        }
+
+        return isValid
+    }
+
+    private fun initPattern() {
+        val idPattern = "^[a-zA-Z0-9]{4,16}\$"
+        val idText = binding!!.registerId
+        idText.error = "이메일은 제외하고 아이디만 입력해주세요."
+        idText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val input = p0.toString()
+
+                if (input.matches(idPattern.toRegex())) {
+                    idText.error = null
+                } else {
+                    idText.error = "4 ~ 16 자리의 영문, 숫자로 입력해주세요."
+                }
+            }
+
+        })
+
+
+        val pwPattern = "^.{6,15}$"
+        val pwText = binding!!.registerPw
+        pwText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val input = p0.toString()
+
+                if (input.matches(pwPattern.toRegex())) {
+                    pwText.error = null
+                } else {
+                    pwText.error = "6 ~ 15자리로 입력해주세요."
+                }
+
+            }
+
+        })
     }
 
     private fun createUserId() {
@@ -82,6 +165,7 @@ class RegisterFragment : Fragment() {
 
     private fun addUserToDatabase(email: String, password: String, name: String, nickname: String, uId:String) {
         accountdb.child(uId).setValue(Account(email, password, name, nickname, uId))
+        Firebase.database.getReference("Info").child(uId).setValue(Info(email,"010-0000-0000","","",""))
     }
 
     // 로그인이 성공하면 다음 페이지로 넘어가는 함수
