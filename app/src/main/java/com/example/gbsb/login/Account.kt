@@ -7,5 +7,5 @@ data class Account(
     var pNickname: String,
     var uId: String
 ){
-    constructor(): this("","","","","")
+    constructor(): this("","","","익명","")
 }

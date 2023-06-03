@@ -26,7 +26,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:textSize="15dp"
-            style="@style/Widget.AppCompat.Button.Small"/>
+            android:maxLength="500"
+            android:inputType="textMultiLine"/>
+        <TextView
+            android:id="@+id/textCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0 / 500"
+            android:gravity="right"
+            android:padding="16dp"/>
 
     </LinearLayout>
 </LinearLayout>

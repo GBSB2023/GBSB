@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:layout_margin="10dp"
+                android:maxLength="35"
                 android:ems="15"
                 android:layout_gravity="center"
                 android:hint="email@example.com"/>
@@ -46,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:layout_margin="10dp"
+                android:maxLength="15"
                 android:ems="15"
                 android:layout_gravity="center"
                 android:hint="password"/>
