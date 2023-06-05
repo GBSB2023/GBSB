@@ -214,15 +214,6 @@
                     android:ems="15"/>
 
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/accountBookmark"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="10dp"
-                android:background="#aaaaaa">
-
-            </LinearLayout>
 
         </LinearLayout>
 
