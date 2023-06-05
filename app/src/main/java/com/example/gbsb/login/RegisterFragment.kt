@@ -22,6 +22,7 @@ import com.google.firebase.ktx.Firebase
 class RegisterFragment : Fragment() {
     var binding: FragmentRegisterBinding?=null
     var auth: FirebaseAuth?= null
+    var duplicate=true
 
     private lateinit var accountdb: DatabaseReference
 
@@ -39,6 +40,11 @@ class RegisterFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         accountdb = Firebase.database.getReference("Accounts")
 
+        initBtn()
+        initPattern()
+    }
+
+    private fun initBtn() {
         binding!!.apply {
             registerBack.setOnClickListener {
                 val fragment = requireActivity().supportFragmentManager.beginTransaction()
@@ -53,9 +59,33 @@ class RegisterFragment : Fragment() {
                 else
                     Toast.makeText(activity, "회원가입에 실패했습니다. 양식을 확인해주세요.", Toast.LENGTH_LONG).show()
             }
-        }
+            duplicateBtn.setOnClickListener {
+                var checkid = registerId.text.toString()
+                if(checkid.isNullOrEmpty()){
+                    duplicate=true
+                }else{
+                    auth!!.fetchSignInMethodsForEmail(checkid+"@gsbs.com").addOnCompleteListener {
+                            task->
+                        if(task.isSuccessful){
+                            val signInMethods = task.result?.signInMethods
+                            if(signInMethods.isNullOrEmpty()){
+                                duplicate = false
+                                Toast.makeText(activity, "사용 가능한 아이디입니다.", Toast.LENGTH_LONG).show()
+                                registerId.error=null
+                            }else{
+                                duplicate = true
+                                Toast.makeText(activity, "이미 존재하는 아이디입니다.", Toast.LENGTH_LONG).show()
+                                registerId.error="중복검사 실패"
+                            }
+                        }else{
+                            Toast.makeText(activity, "auth 조회 실패", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
 
-        initPattern()
+
+            }
+        }
     }
 
     private fun validateRegister(): Boolean {
@@ -81,6 +111,10 @@ class RegisterFragment : Fragment() {
             if(!binding!!.registerId.error.isNullOrEmpty()||!binding!!.registerPw.error.isNullOrEmpty()){
                 isValid = false
             }
+            if(duplicate){
+                isValid = false
+                binding!!.registerId.error = "중복검사를 진행해주세요"
+            }
         }
 
         return isValid
@@ -105,6 +139,7 @@ class RegisterFragment : Fragment() {
                 } else {
                     idText.error = "4 ~ 16 자리의 영문, 숫자로 입력해주세요."
                 }
+                duplicate = true
             }
 
         })
