@@ -25,7 +25,7 @@ class FindCourse : AppCompatActivity() { // 진로 찾기 첫 번째 화면
             finish()
         }
         binding.id.setOnClickListener{// 사용자 정보 창으로 넘어 가기
-            val i= Intent(this@MainActivity, AccountActivity::class.java)
+            val i= Intent(this, AccountActivity::class.java)
             startActivity(i)
         }
         binding.start.setOnClickListener{// 진로 탐색 시작
