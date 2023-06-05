@@ -39,7 +39,7 @@ class Career_Result_Activity : AppCompatActivity() {
             finish()
         }
         binding.id.setOnClickListener { // 사용자 정보 이동
-            val i= Intent(this, AccountActivity::class.java)
+            val i= Intent(this@Career_Result_Activity, AccountActivity::class.java)
             startActivity(i)
         }
         binding.check.setOnClickListener{// 다른 결과 확인
