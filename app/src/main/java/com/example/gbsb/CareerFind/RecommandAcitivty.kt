@@ -52,13 +52,13 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
         adapter = MyAdapter(RecommandUserList)
 
         binding.back.setOnClickListener{ // 메인화면으로 돌아가기
-            //val intent = Intent(this, mainWindow::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
         binding.id.setOnClickListener{  // 사용자 정보 창으로 넘어가기
-            //val intent = Intent(this, UserInfor::class.java)
-            //startActivity(intent)
+            val i= Intent(this@MainActivity, AccountActivity::class.java)
+            startActivity(i)
         }
         binding.add.setOnClickListener{ // 진로 탐색 시작
             val intent = Intent(this, FindCourse::class.java)
