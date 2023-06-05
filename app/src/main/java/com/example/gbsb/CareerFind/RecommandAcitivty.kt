@@ -13,7 +13,7 @@ import com.google.firebase.database.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면 
+class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
     lateinit var binding: RecommandBinding
     lateinit var adapter : MyAdapter
     private lateinit var auth: FirebaseAuth
@@ -88,8 +88,13 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
             finish()
         }
         binding.id.setOnClickListener{  // 사용자 정보 창으로 넘어가기
-            val i= Intent(this, AccountActivity::class.java)
-            startActivity(i)
+            if(intent.getBooleanExtra("anonymous",false)){
+                val i= Intent(this, AccountActivity::class.java)
+                startActivity(i)
+            }
+            else{
+                Toast.makeText(this@RecommandAcitivty,"익명 로그인의 경우 해당 기능을 이용할 수 없습니다",Toast.LENGTH_SHORT).show()
+            }
         }
         binding.add.setOnClickListener{ // 진로 탐색 시작
             val intent = Intent(this, FindCourse::class.java)
@@ -138,8 +143,8 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
                     navigateToMain2Activity(6)
                 }
                 else  if(holder.binding.recommend.text == "APP 개발자"){
-                      navigateToMain2Activity(1)
-                }   
+                    navigateToMain2Activity(1)
+                }
                 else  if(holder.binding.recommend.text == "클라우드 네트워크 엔지니어"){
                     navigateToMain2Activity(4)
                 }
@@ -151,7 +156,7 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
 
         binding.recyclerview.adapter = adapter
     }
-    
+
     private fun navigateToMain2Activity(buttonId: Int) {
         val intent = Intent(this, MainActivity2::class.java)
         intent.putExtra("buttonId", buttonId)
