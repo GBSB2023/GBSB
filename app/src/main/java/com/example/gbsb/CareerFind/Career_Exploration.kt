@@ -60,8 +60,8 @@ class Career_Exploration : AppCompatActivity() {  // 진로 탐색 화면 (질�
         }
 
         binding.id.setOnClickListener { //사용자 정보 이동
-            //val intent = Intent(this, UserInfor::class.java)
-            startActivity(intent)
+            val i= Intent(this@MainActivity, AccountActivity::class.java)
+            startActivity(i)
         }
     }
 
