@@ -57,7 +57,7 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
             finish()
         }
         binding.id.setOnClickListener{  // 사용자 정보 창으로 넘어가기
-            val i= Intent(this@MainActivity, AccountActivity::class.java)
+            val i= Intent(this, AccountActivity::class.java)
             startActivity(i)
         }
         binding.add.setOnClickListener{ // 진로 탐색 시작
