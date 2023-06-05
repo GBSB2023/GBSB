@@ -3,16 +3,21 @@ package com.example.gbsb
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gbsb.account.AccountActivity
 import com.example.gbsb.databinding.RecommandBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면 
     lateinit var binding: RecommandBinding
     lateinit var adapter : MyAdapter
+    private lateinit var auth: FirebaseAuth
+    private lateinit var databaseRef: DatabaseReference
 
     companion object {
         val RecommandUserList: ArrayList<RecommandUser> = ArrayList()
@@ -23,17 +28,43 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
         binding = RecommandBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //exampleData()
+        auth = FirebaseAuth.getInstance()
+        databaseRef = FirebaseDatabase.getInstance().getReference("users")
+
         inputData()
         initLayout()
+        if(intent.getBooleanExtra("anonymous",false)){
+            loadDataFromFirebase()
+        }
+    }
+    private fun loadDataFromFirebase() {
+        databaseRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                RecommandUserList.clear()
+
+                for (userSnapshot in dataSnapshot.children) {
+                    val user = userSnapshot.getValue(RecommandUser::class.java)
+                    user?.let {
+                        RecommandUserList.add(it)
+                    }
+                }
+                adapter.notifyDataSetChanged()
+            }
+            override fun onCancelled(databaseError: DatabaseError) {// 오류 처리
+                Toast.makeText(this@RecommandAcitivty,"오류 발생",Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
-    fun exampleData(){ // 확인용 임시 데이터
-        RecommandUserList.add(RecommandUser("7","2023-05-25"))
-        RecommandUserList.add(RecommandUser("2","2023-05-24"))
-        RecommandUserList.add(RecommandUser("5","2023-05-21"))
-        RecommandUserList.add(RecommandUser("1","2023-05-20"))
-        RecommandUserList.add(RecommandUser("4","2023-05-12"))
+    fun saveCareerData(careerData: RecommandUser) {
+        val userId = auth.currentUser?.uid
+        if (userId != null) {
+            val careerRef = databaseRef.child(userId).child("Career")
+            val careerKey = careerRef.push().key
+            careerKey?.let {
+                careerRef.child(it).setValue(careerData)
+            }
+        }
     }
     fun inputData(){
         val receivedData = intent.getStringExtra("RecommandUser")
@@ -41,10 +72,10 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val currentDate = dateFormat.format(Date())
             RecommandUserList.add(RecommandUser(receivedData,currentDate))
+            if(intent.getBooleanExtra("anonymous",false))
+                saveCareerData(RecommandUser(receivedData,currentDate))
         }
     }
-
-
 
     private fun initLayout(){
         binding.recyclerview.layoutManager = LinearLayoutManager(this,
