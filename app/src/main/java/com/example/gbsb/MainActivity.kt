@@ -68,15 +68,13 @@ class MainActivity : AppCompatActivity() {
             }
             careerExploreBtn.setOnClickListener{// 진로 탐색으로 넘어가기
                 val currentUser = FirebaseAuth.getInstance().currentUser
+                val intent = Intent(this@MainActivity, RecommandAcitivty::class.java)
                 if(currentUser?.isAnonymous==true){ // 익명 사용자일 경우
-                    val intent = Intent(this@MainActivity, RecommandBinding::class.java)
                     intent.putExtra("anonymous",false)
-                    startActivity(intent)
                 }else{
-                    val intent = Intent(this@MainActivity, RecommandBinding::class.java)
                     intent.putExtra("anonymous",true)
-                    startActivity(intent)
                 }
+                startActivity(intent)
             }
         }
     }
