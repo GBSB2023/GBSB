@@ -20,23 +20,28 @@
             android:id="@+id/accountTop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
+            android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/register_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="뒤로"
-                android:layout_margin="20dp"/>
+                android:layout_gravity="center"
+                android:src="@drawable/arrow_back"/>
             <TextView
+                style="@style/SubpageTitle"
                 android:id="@+id/community_title"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="모바일 앱 개발자"
                 android:textSize="30dp"
-                android:layout_marginVertical="10dp"/>
+                android:layout_gravity="center"/>
+            <ImageView
+                android:id="@+id/accountBtn"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center" />
 
         </LinearLayout>
 
