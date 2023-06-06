@@ -121,8 +121,8 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
             finish()
         }
         binding.id.setOnClickListener{  // 사용자 정보 창으로 넘어가기
-            if(intent.getBooleanExtra("anonymous",false)){
-                val i= Intent(this, AccountActivity::class.java)
+            if (currentUser?.isAnonymous == false){
+            val i= Intent(this, AccountActivity::class.java)
                 startActivity(i)
             }
             else{
