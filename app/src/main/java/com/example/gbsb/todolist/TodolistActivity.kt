@@ -25,7 +25,7 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
     var userFirebasePath = "TodoList/uid"
 
     // Number of limits that can be expressed in the calendar list
-    val listSizeLimit = 50
+    private val listSizeLimit = 50
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +36,16 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
         initLayout()
     }
 
+    override fun onStart() {
+        super.onStart()
+        adapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        adapter.stopListening()
+    }
+
     private fun initLayout() {
         // database
         rdb = Firebase.database.getReference(userFirebasePath)
@@ -43,8 +53,8 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
             .orderByChild("date")
             .equalTo(formatToDateString(selectedDateTime))
 
-        val option = FirebaseRecyclerOptions.Builder<TodoItem>()
-            .setQuery(query, TodoItem::class.java)
+        val option = FirebaseRecyclerOptions.Builder<Schedule>()
+            .setQuery(query, Schedule::class.java)
             .build()
 
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -89,30 +99,26 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
 
 
     }
+
     // If you select a date, update the To Do list for that date
     @SuppressLint("NotifyDataSetChanged")
     private fun refreshData() {
-        val query = rdb.limitToLast(50)
+        val query = rdb.limitToLast(listSizeLimit)
             .orderByChild("date")
             .equalTo(formatToDateString(selectedDateTime))
 
-        val option = FirebaseRecyclerOptions.Builder<TodoItem>()
-            .setQuery(query, TodoItem::class.java)
+        val option = FirebaseRecyclerOptions.Builder<Schedule>()
+            .setQuery(query, Schedule::class.java)
             .build()
         adapter.updateOptions(option)
         adapter.notifyDataSetChanged()
     }
 
-    override fun onStart() {
-        super.onStart()
-        adapter.startListening()
-    }
-
-
+    // Store Schedule data in firebase
     override fun onDialogClosed(chosenDateTime: LocalDateTime, content: String) {
         val newChildRef= rdb.push()
         val childKey = newChildRef.key
-        val item = TodoItem(childKey!!, content, 
+        val item = Schedule(childKey!!, content,
             formatToDateString(chosenDateTime), formatToTimeString(chosenDateTime),false)
         newChildRef.setValue(item)
     }
@@ -128,5 +134,4 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
         val formatter = DateTimeFormatter.ofPattern("HH:mm")
         return localDateTime.format(formatter)
     }
-
 }

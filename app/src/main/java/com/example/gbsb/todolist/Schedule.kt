@@ -1,6 +1,6 @@
 package com.example.gbsb.todolist
 
-data class TodoItem(
+data class Schedule(
     var id : String,
     var content:String,
     var date : String, // "yyyy-mm-dd"

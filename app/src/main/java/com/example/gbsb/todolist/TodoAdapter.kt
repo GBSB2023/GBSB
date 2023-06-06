@@ -7,8 +7,8 @@ import com.example.gbsb.databinding.RowTodoBinding
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 
-class TodoAdapter(options: FirebaseRecyclerOptions<TodoItem>)
-    : FirebaseRecyclerAdapter<TodoItem, TodoAdapter.ViewHolder>(options) {
+class TodoAdapter(options: FirebaseRecyclerOptions<Schedule>)
+    : FirebaseRecyclerAdapter<Schedule, TodoAdapter.ViewHolder>(options) {
 
     interface OnItemClickListener{
         fun onItemClick(position: Int)
@@ -29,7 +29,7 @@ class TodoAdapter(options: FirebaseRecyclerOptions<TodoItem>)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int, model: TodoItem) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, model: Schedule) {
         holder.binding.apply {
             content.text = model.content
             time.text = model.date
