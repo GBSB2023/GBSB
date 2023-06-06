@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.gbsb.MainActivity
 import com.example.gbsb.databinding.ActivityTodolistBinding
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -71,7 +73,11 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = adapter
 
+            // SwipeHelper
+            val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+            itemTouchHelper.attachToRecyclerView(recyclerView)
 
+            recyclerView
             // floatingActionButton
             floatingActionButton.setOnClickListener {
                 val dialogFragment = TodoDialogFragment.newInstance(selectedDateTime)
@@ -133,5 +139,22 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
     private fun formatToTimeString(localDateTime: LocalDateTime):String {
         val formatter = DateTimeFormatter.ofPattern("HH:mm")
         return localDateTime.format(formatter)
+    }
+
+
+    // Swipe left to delete the schedule
+    private val itemTouchHelperCallback = object :
+        ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            return false
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            adapter.deleteItem(viewHolder.absoluteAdapterPosition)
+        }
     }
 }

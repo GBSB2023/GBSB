@@ -2,6 +2,7 @@ package com.example.gbsb.todolist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gbsb.databinding.RowTodoBinding
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -37,5 +38,7 @@ class TodoAdapter(options: FirebaseRecyclerOptions<Schedule>)
         }
     }
 
-
+    public fun deleteItem(position: Int) {
+        snapshots.getSnapshot(position).ref.removeValue()
+    }
 }

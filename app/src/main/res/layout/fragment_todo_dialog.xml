@@ -20,9 +20,11 @@
         android:id="@+id/date_title"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="86dp"
         android:text="date"
-        tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="86dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/content_title"
