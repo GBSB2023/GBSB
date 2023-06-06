@@ -56,7 +56,7 @@ class BoardFragment : Fragment() {
         binding!!.boardSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 findFromDB()
-                activityBinding.communityTitle.text=binding!!.boardSpinner.selectedItem.toString()+" 게시판"
+                activityBinding.communityTitle.text=binding!!.boardSpinner.selectedItem.toString()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
