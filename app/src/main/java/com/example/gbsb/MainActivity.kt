@@ -47,9 +47,13 @@ class MainActivity : AppCompatActivity() {
     }
     private fun initLayout() {
         binding.apply {
-            calendarBtn.setOnClickListener {
-                val intent = Intent(this@MainActivity, TodolistActivity::class.java)
-                startActivity(intent)
+            todoListArea.setOnClickListener {
+                if(FirebaseAuth.getInstance().currentUser?.isAnonymous == true){
+                    Toast.makeText(this@MainActivity, "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show()
+                }else{
+                    val intent = Intent(this@MainActivity, TodolistActivity::class.java)
+                    startActivity(intent)
+                }
             }
             accountBtn.setOnClickListener {
                 val currentUser = FirebaseAuth.getInstance().currentUser

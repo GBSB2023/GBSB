@@ -3,6 +3,7 @@ package com.example.gbsb.todolist
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gbsb.MainActivity
 import com.example.gbsb.databinding.ActivityTodolistBinding
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -24,7 +26,7 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
     lateinit var rdb: DatabaseReference
     lateinit var adapter: TodoAdapter
     private var selectedDateTime = LocalDateTime.now()
-    var userFirebasePath = "TodoList/uid"
+    var userFirebasePath = "TodoList/"
 
     // Number of limits that can be expressed in the calendar list
     private val listSizeLimit = 50
@@ -49,6 +51,11 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
     }
 
     private fun initLayout() {
+        // Auth
+        val curUser = FirebaseAuth.getInstance().currentUser
+        Log.d("TodolistActivity", curUser?.uid + " / " + selectedDateTime.toString())
+        userFirebasePath += curUser?.uid
+
         // database
         rdb = Firebase.database.getReference(userFirebasePath)
         val query = rdb.limitToLast(listSizeLimit)
