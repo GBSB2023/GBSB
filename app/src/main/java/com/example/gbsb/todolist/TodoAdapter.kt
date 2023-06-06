@@ -32,7 +32,7 @@ class TodoAdapter(options: FirebaseRecyclerOptions<TodoItem>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int, model: TodoItem) {
         holder.binding.apply {
             content.text = model.content
-            time.text = model.timeStamp
+            time.text = model.date
             checkBox.isChecked = model.isDone
         }
     }

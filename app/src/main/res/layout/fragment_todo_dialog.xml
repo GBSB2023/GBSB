@@ -7,7 +7,7 @@
     android:layout_margin="16dp">
 
     <DatePicker
-        android:id="@+id/datePicker1"
+        android:id="@+id/date_picker"
         android:layout_width="wrap_content"
         android:layout_height="130dp"
         android:calendarViewShown="false"

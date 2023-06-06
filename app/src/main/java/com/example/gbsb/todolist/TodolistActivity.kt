@@ -1,8 +1,8 @@
 package com.example.gbsb.todolist
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,11 +12,8 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogListener {
 
@@ -24,10 +21,11 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
     lateinit var layoutManager: LinearLayoutManager
     lateinit var rdb: DatabaseReference
     lateinit var adapter: TodoAdapter
-    private var selectedDate = LocalDate.now()
+    private var selectedDateTime = LocalDateTime.now()
     var userFirebasePath = "TodoList/uid"
 
-
+    // Number of limits that can be expressed in the calendar list
+    val listSizeLimit = 50
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +39,10 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
     private fun initLayout() {
         // database
         rdb = Firebase.database.getReference(userFirebasePath)
-        val query = rdb.limitToLast(50)
+        val query = rdb.limitToLast(listSizeLimit)
+            .orderByChild("date")
+            .equalTo(formatToDateString(selectedDateTime))
+
         val option = FirebaseRecyclerOptions.Builder<TodoItem>()
             .setQuery(query, TodoItem::class.java)
             .build()
@@ -63,22 +64,20 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
 
             // floatingActionButton
             floatingActionButton.setOnClickListener {
-                val dialogFragment = TodoDialogFragment.newInstance(
-                    selectedDate
-                )
+                val dialogFragment = TodoDialogFragment.newInstance(selectedDateTime)
 
-//                Toast.makeText(this@TodolistActivity, selectedDate.monthValue, Toast.LENGTH_SHORT).show()
                 dialogFragment.show(supportFragmentManager, "todo_item_add_dialog")
             }
 
 
             // calendarView
             calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
-                val selectedDateData = Calendar.getInstance()
-                selectedDateData.set(year, month, dayOfMonth)
-
-                selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
-                updateList()
+                selectedDateTime = LocalDateTime.now()
+                    .withYear(year)
+                    .withMonth(month + 1)
+                    .withDayOfMonth(dayOfMonth)
+//                Toast.makeText(this@TodolistActivity, selectedDateTime.toString(), Toast.LENGTH_SHORT).show()
+                refreshData()
             }
 
             // BackBtn
@@ -91,8 +90,17 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
 
     }
     // If you select a date, update the To Do list for that date
-    private fun updateList() {
+    @SuppressLint("NotifyDataSetChanged")
+    private fun refreshData() {
+        val query = rdb.limitToLast(50)
+            .orderByChild("date")
+            .equalTo(formatToDateString(selectedDateTime))
 
+        val option = FirebaseRecyclerOptions.Builder<TodoItem>()
+            .setQuery(query, TodoItem::class.java)
+            .build()
+        adapter.updateOptions(option)
+        adapter.notifyDataSetChanged()
     }
 
     override fun onStart() {
@@ -100,17 +108,25 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
         adapter.startListening()
     }
 
-    override fun onDialogClosed(choosedDate: LocalDateTime, content: String) {
+
+    override fun onDialogClosed(chosenDateTime: LocalDateTime, content: String) {
         val newChildRef= rdb.push()
         val childKey = newChildRef.key
-        val item = TodoItem(childKey!!, content, formatToLocalDateTimeString(choosedDate), false)
+        val item = TodoItem(childKey!!, content, 
+            formatToDateString(chosenDateTime), formatToTimeString(chosenDateTime),false)
         newChildRef.setValue(item)
     }
 
-    fun formatToLocalDateTimeString(localDateTime: LocalDateTime): String {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-
+    // LocalDateTime -> "yyyy-MM-dd"
+    private fun formatToDateString(localDateTime: LocalDateTime): String {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         return localDateTime.format(formatter)// ex: "2023-06-02 15:30"
+    }
+
+    // LocalDateTime -> "HH:mm"
+    private fun formatToTimeString(localDateTime: LocalDateTime):String {
+        val formatter = DateTimeFormatter.ofPattern("HH:mm")
+        return localDateTime.format(formatter)
     }
 
 }
