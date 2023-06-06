@@ -19,6 +19,24 @@ class BoardAdapter(options: FirebaseRecyclerOptions<Board>):
             binding.rowContent.setOnClickListener {
                 itemClickListener!!.onItemClick(adapterPosition)
             }
+            binding.apply {
+                contentComment.setOnClickListener{
+                    binding.rowContent.performClick()
+                }
+                contentLike.setOnClickListener{
+                    binding.rowContent.performClick()
+                }
+                contentWriter.setOnClickListener{
+                    binding.rowContent.performClick()
+                }
+                contentName.setOnClickListener{
+                    binding.rowContent.performClick()
+                }
+                contentDate.setOnClickListener{
+                    binding.rowContent.performClick()
+                }
+
+            }
         }
     }
 
