@@ -57,9 +57,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="checkbox1"
                 android:background="@drawable/selector_button"
-                android:textColor="@drawable/selector_text" />
+                android:text="checkbox1"
+                android:textColor="@drawable/selector_text"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <!-- 체크박스 2 -->
             <CheckBox
@@ -67,9 +68,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="checkbox2"
                 android:background="@drawable/selector_button"
-                android:textColor="@drawable/selector_text" />
+                android:text="checkbox2"
+                android:textColor="@drawable/selector_text"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <!-- 체크박스 3 -->
             <CheckBox
@@ -77,9 +79,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="checkbox3"
                 android:background="@drawable/selector_button"
-                android:textColor="@drawable/selector_text" />
+                android:text="checkbox3"
+                android:textColor="@drawable/selector_text"
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
         </LinearLayout>
 
         <!-- Fragment Container -->

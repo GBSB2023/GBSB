@@ -1,15 +1,9 @@
 package com.example.gbsb
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import android.widget.FrameLayout
-import android.widget.Spinner
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.gbsb.account.AccountActivity
 import com.example.gbsb.databinding.ActivityMainBinding
 import com.example.gbsb.todolist.TodolistActivity
@@ -67,13 +61,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             careerExploreBtn.setOnClickListener{// 진로 탐색으로 넘어가기
-                val currentUser = FirebaseAuth.getInstance().currentUser
                 val intent = Intent(this@MainActivity, RecommandAcitivty::class.java)
-                if(currentUser?.isAnonymous==true){ // 익명 사용자일 경우
-                    intent.putExtra("anonymous",false)
-                }else{
-                    intent.putExtra("anonymous",true)
-                }
                 startActivity(intent)
             }
         }

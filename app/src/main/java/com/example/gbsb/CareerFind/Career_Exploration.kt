@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.gbsb.account.AccountActivity
 import com.example.gbsb.databinding.CareerExplorationBinding
 
 class Career_Exploration : AppCompatActivity() {  // 진로 탐색 화면 (질문 포함)

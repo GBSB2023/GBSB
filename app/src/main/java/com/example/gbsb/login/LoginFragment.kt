@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -82,7 +83,7 @@ class LoginFragment : Fragment() {
     private fun initPattern() {
         val emailPattern = "[a-zA-Z0-9]+@[a-z]+\\.+[a-z]+"
         val emailText = binding!!.loginEmail
-        emailText.addTextChangedListener(object : TextWatcher {
+        emailText.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
@@ -130,6 +131,25 @@ class LoginFragment : Fragment() {
     private fun signInUser() {
         val email = binding!!.loginEmail.text.toString().trim()
         val password = binding!!.loginPassword.text.toString().trim()
+        var isValid = true
+
+        binding!!.apply {
+            if(loginEmail.text.toString().isEmpty()){
+                loginEmail.error="필수 입력칸입니다."
+                isValid = false
+            }
+            if(loginPassword.text.toString().isEmpty()){
+                loginPassword.error="필수 입력칸입니다."
+                isValid = false
+            }
+            if(!loginEmail.error.isNullOrEmpty()||!loginPassword.error.isNullOrEmpty()){
+                isValid = false
+            }
+        }
+        if(!isValid){
+            Toast.makeText(activity, "로그인 양식을 다시 확인해주세요.", Toast.LENGTH_LONG).show()
+            return
+        }
         auth?.signInWithEmailAndPassword(email, password)
             ?.addOnCompleteListener {
                     task ->

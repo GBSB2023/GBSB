@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.startActivity
+import com.example.gbsb.community.CommunityActivity
 import com.example.gbsb.databinding.ActivityMain2Binding
 
 class MainActivity2 : AppCompatActivity() {
@@ -27,7 +28,7 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val items = resources.getStringArray(R.array.my_array)
+        val items = resources.getStringArray(R.array.add_arrays)
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinner.adapter = adapter
@@ -120,6 +121,11 @@ class MainActivity2 : AppCompatActivity() {
         // 뒤로 가기 버튼
         binding.backButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.bottomButton1.setOnClickListener {
+            val intent = Intent(this, CommunityActivity::class.java)
             startActivity(intent)
         }
     }

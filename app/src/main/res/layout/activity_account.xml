@@ -69,6 +69,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"/>
                     <ImageView
+                        android:id="@+id/accountinfoBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:srcCompat="@drawable/baseline_edit_24" />
@@ -92,6 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="15dp"
+                        android:textAllCaps="false"
                         style="@style/Widget.AppCompat.Button.Small"/>
                 </LinearLayout>
                 <LinearLayout
@@ -113,6 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="15dp"
+                        android:textAllCaps="false"
                         style="@style/Widget.AppCompat.Button.Small"/>
                 </LinearLayout>
                 <LinearLayout
@@ -134,6 +137,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="15dp"
+                        android:textAllCaps="false"
                         style="@style/Widget.AppCompat.Button.Small"/>
                 </LinearLayout>
                 <LinearLayout
@@ -155,16 +159,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textSize="15dp"
+                        android:textAllCaps="false"
                         style="@style/Widget.AppCompat.Button.Small"/>
                 </LinearLayout>
-                <Button
-                    android:id="@+id/accountinfoBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_gravity="center"
-                    android:text="내용 추가하기"
-                    android:ems="15"/>
 
             </LinearLayout>
             <LinearLayout
@@ -193,6 +190,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"/>
                     <ImageView
+                        android:id="@+id/accountintroduceBtn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         app:srcCompat="@drawable/baseline_edit_24" />
@@ -200,27 +198,13 @@
                 <TextView
                     android:id="@+id/infoIntroduce"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textAllCaps="false"
+                    android:ellipsize="marquee"
                     style="@style/Widget.AppCompat.Button.Small"/>
-                <Button
-                    android:id="@+id/accountintroduceBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_gravity="center"
-                    android:text="자기소개 추가하기"
-                    android:ems="15"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/accountBookmark"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="10dp"
-                android:background="#aaaaaa">
 
             </LinearLayout>
 

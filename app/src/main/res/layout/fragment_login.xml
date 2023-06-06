@@ -87,19 +87,25 @@
                     android:id="@+id/googleBtn"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    app:srcCompat="@drawable/ic_launcher_foreground"/>
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/google_logo"/>
 
                 <ImageButton
                     android:id="@+id/githubBtn"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    app:srcCompat="@drawable/ic_launcher_foreground"/>
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/github_logo"/>
 
                 <ImageButton
                     android:id="@+id/anonymousBtn"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    app:srcCompat="@drawable/ic_launcher_foreground"/>
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/anonymous_logo"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
