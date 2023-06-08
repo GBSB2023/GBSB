@@ -14,22 +14,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <Button
-                android:id="@+id/boardAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="게시글 추가하기"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
+
             <Spinner
                 android:id="@+id/board_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:entries="@array/category_arrays"
-                android:prompt="@string/community_category"
-                />
+                android:prompt="@string/community_category"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/boardAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="게시글 추가하기"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

@@ -51,13 +51,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_gravity="fill_vertical"
                 android:text="글내용"
                 android:textSize="15dp"
                 style="@style/Widget.AppCompat.Button.Small"/>
             <EditText
                 android:id="@+id/addContent"
+                android:background="@drawable/edittext_rounded_corner_rectangle"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_weight="1"
                 android:maxLength="500"
                 android:textSize="15dp"/>

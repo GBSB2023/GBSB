@@ -23,8 +23,9 @@
         <EditText
             android:id="@+id/editIntroduce"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_margin="20dp"
+            android:background="@drawable/edittext_rounded_corner_rectangle"
             android:textSize="15dp"
             android:maxLength="500"
             android:inputType="textMultiLine"/>
