@@ -1,10 +1,10 @@
 package com.example.gbsb.todolist
 
 import android.annotation.SuppressLint
-import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -14,7 +14,11 @@ import com.example.gbsb.MainActivity
 import com.example.gbsb.databinding.ActivityTodolistBinding
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.Query
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDateTime
@@ -26,6 +30,7 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
     lateinit var layoutManager: LinearLayoutManager
     lateinit var rdb: DatabaseReference
     lateinit var adapter: TodoAdapter
+    lateinit var query:Query
     private var selectedDateTime = LocalDateTime.now()
     var userFirebasePath = "TodoList/"
 
@@ -59,9 +64,28 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
 
         // database
         rdb = Firebase.database.getReference(userFirebasePath)
-        val query = rdb.limitToLast(listSizeLimit)
+        query = rdb.limitToLast(listSizeLimit)
             .orderByChild("date")
             .equalTo(formatToDateString(selectedDateTime))
+
+        // Replace "recyclerView" with "textView" if there is no schedule on the selected date
+        query.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists() && snapshot.hasChildren()){
+                    Log.d("TodoActivity", "There is a schedule for that date")
+                    binding.recyclerView.visibility = View.VISIBLE
+                    binding.noScheduleText.visibility = View.GONE
+                }else{
+                    Log.d("TodoActivity", "No schedule for that date")
+                    binding.recyclerView.visibility = View.GONE
+                    binding.noScheduleText.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
 
         val option = FirebaseRecyclerOptions.Builder<Schedule>()
             .setQuery(query, Schedule::class.java)
@@ -120,16 +144,33 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
                 startActivity(intent)
             }
         }
-
-
     }
 
     // If you select a date, update the To Do list for that date
     @SuppressLint("NotifyDataSetChanged")
     private fun refreshData() {
-        val query = rdb.limitToLast(listSizeLimit)
+        query = rdb.limitToLast(listSizeLimit)
             .orderByChild("date")
             .equalTo(formatToDateString(selectedDateTime))
+
+        // Replace "recyclerView" with "textView" if there is no schedule on the selected date
+        query.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists() && snapshot.hasChildren()){
+                    Log.d("TodoActivity", "There is a schedule for that date")
+                    binding.recyclerView.visibility = View.VISIBLE
+                    binding.noScheduleText.visibility = View.GONE
+                }else{
+                    Log.d("TodoActivity", "No schedule for that date")
+                    binding.recyclerView.visibility = View.GONE
+                    binding.noScheduleText.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
 
         val option = FirebaseRecyclerOptions.Builder<Schedule>()
             .setQuery(query, Schedule::class.java)
