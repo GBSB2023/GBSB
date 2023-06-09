@@ -175,10 +175,10 @@
 
             <TableRow>
                 <LinearLayout
+                    android:id="@+id/career0"
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:id="@+id/button1"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
@@ -190,10 +190,10 @@
                         android:text="앱"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/career1"
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:id="@+id/button2"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
@@ -205,10 +205,10 @@
                         android:text="웹"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/career2"
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:id="@+id/button3"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
@@ -220,10 +220,10 @@
                         android:text="인공지능"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/career3"
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:id="@+id/button4"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
@@ -238,10 +238,10 @@
             </TableRow>
             <TableRow>
                 <LinearLayout
+                    android:id="@+id/career4"
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:id="@+id/button5"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
@@ -253,10 +253,10 @@
                         android:text="게임"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/career5"
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:id="@+id/button6"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
@@ -268,10 +268,10 @@
                         android:text="보안"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/career6"
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:id="@+id/button7"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
@@ -283,10 +283,10 @@
                         android:text="데이터베이스"/>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/career7"
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ImageView
-                        android:id="@+id/button8"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
