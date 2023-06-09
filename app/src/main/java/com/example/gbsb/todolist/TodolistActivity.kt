@@ -34,7 +34,7 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityTodolistBinding.inflate(layoutInflater)
+        binding = com.example.gbsb.databinding.ActivityTodolistBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initLayout()
@@ -178,16 +178,17 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
         val item = Schedule(childKey!!, content,
             formatToDateString(chosenDateTime), formatToTimeString(chosenDateTime),false)
         newChildRef.setValue(item)
+        adapter.notifyDataSetChanged()
     }
 
     // LocalDateTime -> "yyyy-MM-dd"
-    private fun formatToDateString(localDateTime: LocalDateTime): String {
+    fun formatToDateString(localDateTime: LocalDateTime): String {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         return localDateTime.format(formatter)// ex: "2023-06-02 15:30"
     }
 
     // LocalDateTime -> "HH:mm"
-    private fun formatToTimeString(localDateTime: LocalDateTime):String {
+    fun formatToTimeString(localDateTime: LocalDateTime):String {
         val formatter = DateTimeFormatter.ofPattern("HH:mm")
         return localDateTime.format(formatter)
     }

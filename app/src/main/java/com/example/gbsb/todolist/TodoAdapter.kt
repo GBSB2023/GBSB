@@ -29,7 +29,7 @@ class TodoAdapter(options: FirebaseRecyclerOptions<Schedule>)
                 itemClickListener!!.onItemClick(bindingAdapterPosition)
             }
 
-            binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            binding.todayScheduleDone.setOnCheckedChangeListener { _, isChecked ->
                 val schedule = snapshots.getSnapshot(bindingAdapterPosition).getValue(Schedule::class.java)
                 if (schedule != null) {
                     itemClickListener?.onCheckedChange(schedule.id, isChecked)
@@ -56,7 +56,7 @@ class TodoAdapter(options: FirebaseRecyclerOptions<Schedule>)
         holder.binding.apply {
             content.text = contentStr
             time.text = dateTimeStr
-            checkBox.isChecked = doneValue
+            todayScheduleDone.isChecked = doneValue
 
             if(doneValue)
                 slideLayout.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this.root.context, R.color.todo_done_schedule_bg) )
