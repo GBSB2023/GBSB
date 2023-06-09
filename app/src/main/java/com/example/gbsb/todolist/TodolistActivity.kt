@@ -1,6 +1,7 @@
 package com.example.gbsb.todolist
 
 import android.annotation.SuppressLint
+import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -72,6 +73,17 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
             override fun onItemClick(position: Int) {
                 Toast.makeText(this@TodolistActivity, "itemclicked", Toast.LENGTH_SHORT).show()
             }
+
+            override fun onCheckedChange(scheduleID: String, isChecked: Boolean) {
+                rdb.child(scheduleID).child("done").setValue(isChecked)
+                    .addOnSuccessListener {
+                        Log.d("TodoActivity", "is Done check success")
+                    }
+                    .addOnFailureListener {
+                        Log.e("TodoActivity", "is Done check fail")
+                    }
+                adapter.onDataChanged()
+            }
         }
 
 
@@ -84,7 +96,6 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
             val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
             itemTouchHelper.attachToRecyclerView(recyclerView)
 
-            recyclerView
             // floatingActionButton
             floatingActionButton.setOnClickListener {
                 val dialogFragment = TodoDialogFragment.newInstance(selectedDateTime)

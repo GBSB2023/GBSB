@@ -5,7 +5,7 @@ data class Schedule(
     var content:String,
     var date : String, // "yyyy-mm-dd"
     var time : String, // "HH:MM"
-    var isDone:Boolean){
+    var done : Boolean){
 
     constructor():this("","default Content", "yyyy-mm-dd", "HH:MM",false)
 }
