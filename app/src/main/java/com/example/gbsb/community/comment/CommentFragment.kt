@@ -31,6 +31,7 @@ class CommentFragment : Fragment() {
     val model: CommentViewModel by activityViewModels()
     private lateinit var communitydb: DatabaseReference
     private lateinit var commentdb: DatabaseReference
+    private lateinit var likedb: DatabaseReference
     var boardId = ""
     var auth: FirebaseAuth?= null
     lateinit var currentUser: FirebaseUser
@@ -51,6 +52,7 @@ class CommentFragment : Fragment() {
         uid = currentUser?.uid!!
         boardId = model.getBoardId()
         communitydb = Firebase.database.getReference("Community")
+        likedb = Firebase.database.getReference("Like")
         var userRef = communitydb.child(boardId)
         userRef.get().addOnCompleteListener {
                 task->
@@ -83,25 +85,7 @@ class CommentFragment : Fragment() {
                 }
             }
             boardLikebtn.setOnClickListener {
-                var userRef = communitydb.child(boardId).child("like")
-                userRef.get().addOnCompleteListener {
-                        task->
-                    if(task.isSuccessful){
-                        val snapshot = task.result
-                        if(snapshot.exists()){
-                            val likeCount = task.result.value.toString().toInt()+1
-                            userRef.setValue(likeCount)
-                                .addOnCompleteListener {
-                                        task->
-                                    if(!task.isSuccessful){
-                                        Toast.makeText(activity, "board like DB 수정 실패2", Toast.LENGTH_SHORT).show()
-                                    }
-                                }
-                        }
-                    }else{
-                        Toast.makeText(activity, "board like DB 수정 실패", Toast.LENGTH_SHORT).show()
-                    }
-                }
+                checkLike()
             }
             boardDeletebtn.setOnClickListener {
                 var userRef = communitydb.child(boardId).child("uid")
@@ -147,6 +131,68 @@ class CommentFragment : Fragment() {
                         Toast.makeText(activity, "board 삭제 중 DB 접근 실패", Toast.LENGTH_SHORT).show()
                     }
                 }
+            }
+        }
+    }
+
+    private fun checkLike() {
+        var likeRef = likedb.child(boardId).child("like")
+        likeRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (!snapshot.exists()) {
+                    // 해당 경로에 데이터가 없는 경우 생성
+                    likeRef.setValue(0)
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(activity, "like DB 접근 실패", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        likeRef.get().addOnCompleteListener {
+                task->
+            if(task.isSuccessful){
+                val snapshot = task.result
+                val like:Int
+                if(snapshot.exists()){
+                    like = task.result.value.toString().toInt()
+                }else{
+                    like = 0
+                }
+                dbLike(like)
+                if(like == 0){
+                    likeRef.setValue(1)
+                }else{
+                    likeRef.setValue(0)
+                }
+            }else{
+                Toast.makeText(activity, "like DB 접근 실패", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun dbLike(like:Int){
+        var userRef = communitydb.child(boardId).child("like")
+        userRef.get().addOnCompleteListener {
+                task->
+            if(task.isSuccessful){
+                val snapshot = task.result
+                if(snapshot.exists()){
+                    val likeCount:Int = if(like == 0){
+                        task.result.value.toString().toInt()+1
+                    }else{
+                        task.result.value.toString().toInt()-1
+                    }
+                    userRef.setValue(likeCount)
+                        .addOnCompleteListener {
+                                task->
+                            if(!task.isSuccessful){
+                                Toast.makeText(activity, "board like DB 수정 실패2", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                }
+            }else{
+                Toast.makeText(activity, "board like DB 수정 실패", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -198,14 +244,45 @@ class CommentFragment : Fragment() {
         adapter.itemClickListener = object:CommentAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val commentId = adapter.getItem(position).commentid
-                val likeCount = adapter.getItem(position).like+1
-                commentdb.child(commentId).child("like").setValue(likeCount)
-                    .addOnCompleteListener {
-                            task->
-                        if(!task.isSuccessful){
-                            Toast.makeText(activity, "comment like DB 수정 실패", Toast.LENGTH_SHORT).show()
+                var count = adapter.getItem(position).like
+                var likeRef = likedb.child(boardId+commentId).child("like")
+                likeRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (!snapshot.exists()) {
+                            // 해당 경로에 데이터가 없는 경우 생성
+                            likeRef.setValue(0)
                         }
                     }
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(activity, "like DB 접근 실패", Toast.LENGTH_SHORT).show()
+                    }
+                })
+                var like=0
+                likeRef.get().addOnCompleteListener {
+                        task->
+                    if(task.isSuccessful){
+                        val snapshot = task.result
+                        if(snapshot.exists()){
+                            like = task.result.value.toString().toInt()
+                        }
+                    }else{
+                        Toast.makeText(activity, "like DB 접근 실패", Toast.LENGTH_SHORT).show()
+                    }
+                    if(like == 0){
+                        likeRef.setValue(1)
+                        count++
+                    }else{
+                        likeRef.setValue(0)
+                        count--
+                    }
+                    commentdb.child(commentId).child("like").setValue(count)
+                        .addOnCompleteListener {
+                                task->
+                            if(!task.isSuccessful){
+                                Toast.makeText(activity, "comment like DB 수정 실패", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                }
             }
         }
         adapter.deleteClickListener = object :CommentAdapter.OnItemClickListener{
@@ -254,8 +331,7 @@ class CommentFragment : Fragment() {
             }
 
         }
-        binding!!.commentView.layoutManager=
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding!!.commentView.layoutManager=LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding!!.commentView.adapter=adapter
         adapter.startListening()
     }
