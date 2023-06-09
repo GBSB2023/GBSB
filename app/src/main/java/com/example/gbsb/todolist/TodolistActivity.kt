@@ -13,14 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gbsb.MainActivity
 import com.example.gbsb.databinding.ActivityTodolistBinding
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -28,11 +24,9 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
 
     lateinit var binding : ActivityTodolistBinding
     lateinit var layoutManager: LinearLayoutManager
-    lateinit var rdb: DatabaseReference
     lateinit var adapter: TodoAdapter
     lateinit var query:Query
     private var selectedDateTime = LocalDateTime.now()
-    var userFirebasePath = "TodoList/"
 
     // Number of limits that can be expressed in the calendar list
     private val listSizeLimit = 50
@@ -57,14 +51,7 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
     }
 
     private fun initLayout() {
-        // Auth
-        val curUser = FirebaseAuth.getInstance().currentUser
-        Log.d("TodolistActivity", curUser?.uid + " / " + selectedDateTime.toString())
-        userFirebasePath += curUser?.uid
-
-        // database
-        rdb = Firebase.database.getReference(userFirebasePath)
-        query = rdb.limitToLast(listSizeLimit)
+        query = MainActivity.getRDB().limitToLast(listSizeLimit)
             .orderByChild("date")
             .equalTo(formatToDateString(selectedDateTime))
 
@@ -72,11 +59,11 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
         query.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists() && snapshot.hasChildren()){
-                    Log.d("TodoActivity", "There is a schedule for that date")
+                    Log.d("TodolistActivity", "There is a schedule for that date")
                     binding.recyclerView.visibility = View.VISIBLE
                     binding.noScheduleText.visibility = View.GONE
                 }else{
-                    Log.d("TodoActivity", "No schedule for that date")
+                    Log.d("TodolistActivity", "No schedule for that date")
                     binding.recyclerView.visibility = View.GONE
                     binding.noScheduleText.visibility = View.VISIBLE
                 }
@@ -99,12 +86,12 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
             }
 
             override fun onCheckedChange(scheduleID: String, isChecked: Boolean) {
-                rdb.child(scheduleID).child("done").setValue(isChecked)
+                MainActivity.getRDB().child(scheduleID).child("done").setValue(isChecked)
                     .addOnSuccessListener {
-                        Log.d("TodoActivity", "is Done check success")
+                        Log.d("TodolistActivity", "is Done check success")
                     }
                     .addOnFailureListener {
-                        Log.e("TodoActivity", "is Done check fail")
+                        Log.e("TodolistActivity", "is Done check fail")
                     }
                 adapter.onDataChanged()
             }
@@ -130,12 +117,18 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
 
             // calendarView
             calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
-                selectedDateTime = LocalDateTime.now()
-                    .withYear(year)
-                    .withMonth(month + 1)
-                    .withDayOfMonth(dayOfMonth)
+                if(formatToDateString(selectedDateTime) != formatToDateString(LocalDateTime.of(year, month+1, dayOfMonth,0,0))){
+                    selectedDateTime = LocalDateTime.now()
+                        .withYear(year)
+                        .withMonth(month + 1)
+                        .withDayOfMonth(dayOfMonth)
 //                Toast.makeText(this@TodolistActivity, selectedDateTime.toString(), Toast.LENGTH_SHORT).show()
-                refreshData()
+                    refreshData()
+                    Log.d("TodolistActivity", "date changed")
+                }else{
+                    Log.d("TodolistActivity", "date not changed")
+
+                }
             }
 
             // BackBtn
@@ -149,19 +142,18 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
     // If you select a date, update the To Do list for that date
     @SuppressLint("NotifyDataSetChanged")
     private fun refreshData() {
-        query = rdb.limitToLast(listSizeLimit)
+        query = MainActivity.getRDB().limitToLast(listSizeLimit)
             .orderByChild("date")
             .equalTo(formatToDateString(selectedDateTime))
-
         // Replace "recyclerView" with "textView" if there is no schedule on the selected date
         query.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists() && snapshot.hasChildren()){
-                    Log.d("TodoActivity", "There is a schedule for that date")
+                    Log.d("TodolistActivity", "There is a schedule for that date")
                     binding.recyclerView.visibility = View.VISIBLE
                     binding.noScheduleText.visibility = View.GONE
                 }else{
-                    Log.d("TodoActivity", "No schedule for that date")
+                    Log.d("TodolistActivity", "No schedule for that date")
                     binding.recyclerView.visibility = View.GONE
                     binding.noScheduleText.visibility = View.VISIBLE
                 }
@@ -181,7 +173,7 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
 
     // Store Schedule data in firebase
     override fun onDialogClosed(chosenDateTime: LocalDateTime, content: String) {
-        val newChildRef= rdb.push()
+        val newChildRef= MainActivity.getRDB().push()
         val childKey = newChildRef.key
         val item = Schedule(childKey!!, content,
             formatToDateString(chosenDateTime), formatToTimeString(chosenDateTime),false)

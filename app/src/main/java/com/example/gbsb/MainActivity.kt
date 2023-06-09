@@ -9,9 +9,24 @@ import com.example.gbsb.account.AccountActivity
 import com.example.gbsb.databinding.ActivityMainBinding
 import com.example.gbsb.todolist.TodolistActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    private var userFirebasePath = "TodoList/"
+    companion object {
+        private lateinit var rdb: DatabaseReference
+
+        fun getRDB(): DatabaseReference {
+            return rdb
+        }
+
+        fun setRDB(ref: DatabaseReference) {
+            rdb = ref
+        }
+    }
 
     private val areaIds = intArrayOf(
         R.id.career0, R.id.career1, R.id.career2, R.id.career3,
@@ -24,8 +39,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initLayout()
+
     }
+
+    override fun onStart() {
+        super.onStart()
+        refreshTodaySchedule()
+    }
+    private fun refreshTodaySchedule() {
+
+    }
+
     private fun initLayout() {
+        // Auth
+        val curUser = FirebaseAuth.getInstance().currentUser
+        userFirebasePath += curUser?.uid
+        setRDB(Firebase.database.getReference(userFirebasePath))
+
         // Connect listener to each career button
         for (areaId in areaIds) {
             val area = findViewById<LinearLayout>(areaId)
