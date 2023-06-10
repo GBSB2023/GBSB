@@ -62,7 +62,7 @@ class TodoDialogFragment : DialogFragment() {
                 // Run when the Save button is pressed
             .setPositiveButton("저장") { dialog, which ->
 
-                val inputContent = binding.contentEdit.text.toString()
+                val inputContent = binding.addContent.text.toString()
                 if(inputContent.isNotEmpty()){
                     todoListener?.onDialogClosed(selectedAddScheduleDate, inputContent)
                     dialog.dismiss()
@@ -100,14 +100,14 @@ class TodoDialogFragment : DialogFragment() {
         setChoosedDateTime(y=curYear, m= curMonth, d= curDay)
 
         binding.apply {
-            datePicker.init(curYear, curMonth-1, curDay
-            ) { view, year, monthOfYear, dayOfMonth ->
+            addDatePicker.init(curYear, curMonth-1, curDay
+            ) { _, year, monthOfYear, dayOfMonth ->
 
                 setChoosedDateTime(y=year, m= monthOfYear+1, d= dayOfMonth)
 
             }
-            timePicker.setOnTimeChangedListener {
-                    timePicker, hourOfDay, minute ->
+            addTimePicker.setOnTimeChangedListener {
+                    _, hourOfDay, minute ->
 
                 setChoosedDateTime(hour= hourOfDay, minute = minute)
 

@@ -17,10 +17,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogListener {
+class TodolistActivity : AppCompatActivity(),
+    TodoDialogFragment.TodoDialogListener, TodoEditFragment.TodoEditListener {
 
     lateinit var binding : ActivityTodolistBinding
     lateinit var layoutManager: LinearLayoutManager
@@ -80,9 +82,14 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
 
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         adapter = TodoAdapter(option)
+        // Item clicked
         adapter.itemClickListener = object : TodoAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int) {
+
+            override fun onItemClick(schedule: Schedule) {
                 Toast.makeText(this@TodolistActivity, "itemclicked", Toast.LENGTH_SHORT).show()
+                val todoEditFragment = TodoEditFragment.newInstance(schedule)
+
+                todoEditFragment.show(supportFragmentManager, "todo_item_edit_dialog")
             }
 
             override fun onCheckedChange(scheduleID: String, isChecked: Boolean) {
@@ -181,6 +188,11 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
         adapter.notifyDataSetChanged()
     }
 
+    override fun editSchedule(editedSchedule: Schedule) {
+        MainActivity.getRDB().child(editedSchedule.id).setValue(editedSchedule)
+        adapter.notifyDataSetChanged()
+    }
+
     // LocalDateTime -> "yyyy-MM-dd"
     fun formatToDateString(localDateTime: LocalDateTime): String {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -192,7 +204,6 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
         val formatter = DateTimeFormatter.ofPattern("HH:mm")
         return localDateTime.format(formatter)
     }
-
 
     // Swipe left to delete the schedule
     private val itemTouchHelperCallback = object :
@@ -209,4 +220,6 @@ class TodolistActivity : AppCompatActivity() , TodoDialogFragment.TodoDialogList
             adapter.deleteItem(viewHolder.absoluteAdapterPosition)
         }
     }
+
+
 }

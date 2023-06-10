@@ -2,10 +2,8 @@ package com.example.gbsb.todolist
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContentResolverCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gbsb.R
@@ -17,7 +15,7 @@ class TodoAdapter(options: FirebaseRecyclerOptions<Schedule>)
     : FirebaseRecyclerAdapter<Schedule, TodoAdapter.ViewHolder>(options) {
 
     interface OnItemClickListener{
-        fun onItemClick(position: Int)
+        fun onItemClick(schedule: Schedule)
         fun onCheckedChange(scheduleID: String, isChecked : Boolean)
     }
 
@@ -26,11 +24,14 @@ class TodoAdapter(options: FirebaseRecyclerOptions<Schedule>)
     inner class ViewHolder(val binding: RowTodoBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener{
-                itemClickListener!!.onItemClick(bindingAdapterPosition)
+                itemClickListener!!.onItemClick(
+                    snapshots.getSnapshot(bindingAdapterPosition).getValue(Schedule::class.java)!!)
             }
 
             binding.todayScheduleDone.setOnCheckedChangeListener { _, isChecked ->
-                val schedule = snapshots.getSnapshot(bindingAdapterPosition).getValue(Schedule::class.java)
+                val schedule =
+                    snapshots.getSnapshot(bindingAdapterPosition).getValue(Schedule::class.java)
+
                 if (schedule != null) {
                     itemClickListener?.onCheckedChange(schedule.id, isChecked)
                 }
@@ -39,12 +40,14 @@ class TodoAdapter(options: FirebaseRecyclerOptions<Schedule>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = RowTodoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = RowTodoBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(view)
     }
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ViewHolder, position: Int, model: Schedule) {
+
         // Get real-time information
         val snapshot = snapshots.getSnapshot(position)
 
@@ -59,13 +62,15 @@ class TodoAdapter(options: FirebaseRecyclerOptions<Schedule>)
             todayScheduleDone.isChecked = doneValue
 
             if(doneValue)
-                slideLayout.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this.root.context, R.color.todo_done_schedule_bg) )
+                slideLayout.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(this.root.context, R.color.todo_done_schedule_bg) )
             else
-                slideLayout.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this.root.context, R.color.todo_default_schedule_bg) )
+                slideLayout.backgroundTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(this.root.context, R.color.todo_default_schedule_bg) )
         }
     }
 
-    public fun deleteItem(position: Int) {
+    fun deleteItem(position: Int) {
         snapshots.getSnapshot(position).ref.removeValue()
     }
 }
