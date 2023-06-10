@@ -33,7 +33,7 @@ class TodoDialogFragment : DialogFragment() {
     private var todoListener: TodoDialogListener?= null
 
     interface TodoDialogListener{
-        fun onDialogClosed(chosenDateTime : LocalDateTime, content:String)
+        fun addSchedule(chosenDateTime : LocalDateTime, content:String)
     }
 
 
@@ -63,9 +63,11 @@ class TodoDialogFragment : DialogFragment() {
             .setPositiveButton("저장") { dialog, which ->
 
                 val inputContent = binding.addContent.text.toString()
+
                 if(inputContent.isNotEmpty()){
-                    todoListener?.onDialogClosed(selectedAddScheduleDate, inputContent)
+                    todoListener?.addSchedule(selectedAddScheduleDate, inputContent)
                     dialog.dismiss()
+
                 }else{
                     Toast.makeText(requireContext(), "일정 내용을 입력해주세요", Toast.LENGTH_SHORT).show()
                 }
@@ -79,14 +81,6 @@ class TodoDialogFragment : DialogFragment() {
         return builder.create()
     }
 
-    private fun setChoosedDateTime(y:Int = -1, m:Int = -1, d:Int = -1, hour:Int = -1, minute:Int = -1) {
-        // month start with 0
-        if(y!= -1) selectedAddScheduleDate = selectedAddScheduleDate.withYear(y)
-        if(m!= -1) selectedAddScheduleDate = selectedAddScheduleDate.withMonth(m)
-        if(d!= -1) selectedAddScheduleDate = selectedAddScheduleDate.withDayOfMonth(d)
-        if(hour!= -1) selectedAddScheduleDate = selectedAddScheduleDate.withHour(hour)
-        if(minute!= -1) selectedAddScheduleDate = selectedAddScheduleDate.withMinute(minute)
-    }
 
     // Set Date to selected date
     private fun initialSetting() {
@@ -97,20 +91,27 @@ class TodoDialogFragment : DialogFragment() {
         val curDay = selectedCalendarDate.dayOfMonth
 
         // Set initial date to selected date
-        setChoosedDateTime(y=curYear, m= curMonth, d= curDay)
+        selectedAddScheduleDate = selectedAddScheduleDate
+            .withYear(curYear)
+            .withMonth(curMonth)
+            .withDayOfMonth(curDay)
+
 
         binding.apply {
             addDatePicker.init(curYear, curMonth-1, curDay
             ) { _, year, monthOfYear, dayOfMonth ->
 
-                setChoosedDateTime(y=year, m= monthOfYear+1, d= dayOfMonth)
-
+                selectedAddScheduleDate = selectedAddScheduleDate
+                    .withYear(year)
+                    .withMonth(monthOfYear + 1)
+                    .withDayOfMonth(dayOfMonth)
             }
             addTimePicker.setOnTimeChangedListener {
                     _, hourOfDay, minute ->
 
-                setChoosedDateTime(hour= hourOfDay, minute = minute)
-
+                selectedAddScheduleDate = selectedAddScheduleDate
+                    .withHour(hourOfDay)
+                    .withMinute(hourOfDay)
             }
         }
 

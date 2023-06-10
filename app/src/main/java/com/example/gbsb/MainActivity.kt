@@ -23,12 +23,19 @@ import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+
+    // Today Schedule
     lateinit var todayScheduleAdapter: TodayScheduleAdapter
-    lateinit var recentCommunityAdapter : RecentCommunityAdapter
     var todayScheduleData: ArrayList<Schedule> = ArrayList()
+
+    // RecentCommunity
+    lateinit var recentCommunityAdapter : RecentCommunityAdapter
     var recentCommunityData : ArrayList<Board> = ArrayList()
+
+    // FireBase
     private var userFirebasePath = "TodoList/"
     lateinit var communityDB:DatabaseReference
+
     companion object {
         private lateinit var rdb: DatabaseReference
 
@@ -155,6 +162,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initLayout() {
+
         // TodoList firebase reference
         val curUser = FirebaseAuth.getInstance().currentUser
         userFirebasePath += curUser?.uid

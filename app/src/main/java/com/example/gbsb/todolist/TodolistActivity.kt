@@ -36,7 +36,7 @@ class TodolistActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = com.example.gbsb.databinding.ActivityTodolistBinding.inflate(layoutInflater)
+        binding = ActivityTodolistBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initLayout()
@@ -60,10 +60,12 @@ class TodolistActivity : AppCompatActivity(),
         // Replace "recyclerView" with "textView" if there is no schedule on the selected date
         query.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 if (snapshot.exists() && snapshot.hasChildren()){
                     Log.d("TodolistActivity", "There is a schedule for that date")
                     binding.recyclerView.visibility = View.VISIBLE
                     binding.noScheduleText.visibility = View.GONE
+
                 }else{
                     Log.d("TodolistActivity", "No schedule for that date")
                     binding.recyclerView.visibility = View.GONE
@@ -86,7 +88,6 @@ class TodolistActivity : AppCompatActivity(),
         adapter.itemClickListener = object : TodoAdapter.OnItemClickListener {
 
             override fun onItemClick(schedule: Schedule) {
-                Toast.makeText(this@TodolistActivity, "itemclicked", Toast.LENGTH_SHORT).show()
                 val todoEditFragment = TodoEditFragment.newInstance(schedule)
 
                 todoEditFragment.show(supportFragmentManager, "todo_item_edit_dialog")
@@ -123,13 +124,16 @@ class TodolistActivity : AppCompatActivity(),
 
 
             // calendarView
-            calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
-                if(formatToDateString(selectedDateTime) != formatToDateString(LocalDateTime.of(year, month+1, dayOfMonth,0,0))){
+            calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+
+                // Run when selected date and click date are different
+                if(formatToDateString(selectedDateTime)
+                    != formatToDateString(LocalDateTime.of(year, month+1, dayOfMonth,0,0))){
+
                     selectedDateTime = LocalDateTime.now()
                         .withYear(year)
                         .withMonth(month + 1)
                         .withDayOfMonth(dayOfMonth)
-//                Toast.makeText(this@TodolistActivity, selectedDateTime.toString(), Toast.LENGTH_SHORT).show()
                     refreshData()
                     Log.d("TodolistActivity", "date changed")
                 }else{
@@ -149,12 +153,16 @@ class TodolistActivity : AppCompatActivity(),
     // If you select a date, update the To Do list for that date
     @SuppressLint("NotifyDataSetChanged")
     private fun refreshData() {
+
         query = MainActivity.getRDB().limitToLast(listSizeLimit)
             .orderByChild("date")
             .equalTo(formatToDateString(selectedDateTime))
+
         // Replace "recyclerView" with "textView" if there is no schedule on the selected date
         query.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+
+                // If the schedule exists on the selected date
                 if (snapshot.exists() && snapshot.hasChildren()){
                     Log.d("TodolistActivity", "There is a schedule for that date")
                     binding.recyclerView.visibility = View.VISIBLE
@@ -174,16 +182,18 @@ class TodolistActivity : AppCompatActivity(),
         val option = FirebaseRecyclerOptions.Builder<Schedule>()
             .setQuery(query, Schedule::class.java)
             .build()
+
         adapter.updateOptions(option)
         adapter.notifyDataSetChanged()
     }
 
-    // Store Schedule data in firebase
-    override fun onDialogClosed(chosenDateTime: LocalDateTime, content: String) {
+    // Add Schedule data in firebase
+    override fun addSchedule(chosenDateTime: LocalDateTime, content: String) {
         val newChildRef= MainActivity.getRDB().push()
         val childKey = newChildRef.key
         val item = Schedule(childKey!!, content,
             formatToDateString(chosenDateTime), formatToTimeString(chosenDateTime),false)
+
         newChildRef.setValue(item)
         adapter.notifyDataSetChanged()
     }
