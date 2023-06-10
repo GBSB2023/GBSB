@@ -3,10 +3,12 @@ package com.example.gbsb.community.comment
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,6 +38,8 @@ class CommentFragment : Fragment() {
     var auth: FirebaseAuth?= null
     lateinit var currentUser: FirebaseUser
     lateinit var uid:String
+    private var isLikeBtnBoard = true
+    private var isLikeBtnComment = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -136,18 +140,10 @@ class CommentFragment : Fragment() {
     }
 
     private fun checkLike() {
+        if(!isLikeBtnBoard)
+            return
+        isLikeBtnBoard=false
         var likeRef = likedb.child(boardId).child("like")
-        likeRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (!snapshot.exists()) {
-                    // 해당 경로에 데이터가 없는 경우 생성
-                    likeRef.setValue(0)
-                }
-            }
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(activity, "like DB 접근 실패", Toast.LENGTH_SHORT).show()
-            }
-        })
 
         likeRef.get().addOnCompleteListener {
                 task->
@@ -195,6 +191,17 @@ class CommentFragment : Fragment() {
                 Toast.makeText(activity, "board like DB 수정 실패", Toast.LENGTH_SHORT).show()
             }
         }
+        if (like == 0) {
+            binding!!.likeImg.setImageResource(R.drawable.likeimg)
+            binding!!.likeImg.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.like))
+        } else {
+            binding!!.likeImg.setImageResource(R.drawable.unlikeimg)
+//            binding!!.likeImg.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.unlike))
+//            적절한 애니메이션 설정 필요
+        }
+        binding!!.boardLikebtn.postDelayed({
+                                           isLikeBtnBoard = true
+        }, 1000)
     }
 
     private fun initContent() {
@@ -217,6 +224,41 @@ class CommentFragment : Fragment() {
                 Toast.makeText(context, "DB 조회 중 에러 발생", Toast.LENGTH_LONG).show()
             }
         })
+
+        var likeRef = likedb.child(boardId).child("like")
+        likeRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (!snapshot.exists()) {
+                    // 해당 경로에 데이터가 없는 경우 생성
+                    likeRef.setValue(0)
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(activity, "like DB 접근 실패", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        likeRef.get().addOnCompleteListener {
+                task->
+            if(task.isSuccessful){
+                val snapshot = task.result
+                val like:Int
+                if(snapshot.exists()){
+                    like = task.result.value.toString().toInt()
+                }else{
+                    like = 0
+                }
+                if(like == 0){
+                    likeRef.setValue(0)
+                    binding!!.likeImg.setImageResource(R.drawable.unlikeimg)
+                }else{
+                    likeRef.setValue(1)
+                    binding!!.likeImg.setImageResource(R.drawable.likeimg)
+                }
+            }else{
+                Toast.makeText(activity, "like DB 접근 실패", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     }
 
@@ -243,6 +285,9 @@ class CommentFragment : Fragment() {
         adapter= CommentAdapter(option)
         adapter.itemClickListener = object:CommentAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
+                if(!isLikeBtnComment)
+                    return
+                isLikeBtnComment=false
                 val commentId = adapter.getItem(position).commentid
                 var count = adapter.getItem(position).like
                 var likeRef = likedb.child(boardId+commentId).child("like")
@@ -280,6 +325,10 @@ class CommentFragment : Fragment() {
                                 task->
                             if(!task.isSuccessful){
                                 Toast.makeText(activity, "comment like DB 수정 실패", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Handler().postDelayed({
+                                    isLikeBtnComment = true
+                                }, 1000)
                             }
                         }
                 }
