@@ -125,6 +125,24 @@ class MainActivity : AppCompatActivity() {
             todayScheduleRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity,
             LinearLayoutManager.VERTICAL, false)
             todayScheduleAdapter = TodayScheduleAdapter(todayScheduleData)
+            todayScheduleAdapter.itemClickListener = object : TodayScheduleAdapter.onItemClickListener{
+                override fun onCheckedChange(schedule:Schedule, isChecked: Boolean) {
+                    Log.d("MainActivity", "onCheckedChange called")
+                    schedule.done = isChecked
+                    getRDB().child(schedule.id).child("done").setValue(isChecked)
+                        .addOnSuccessListener {
+                            Log.d("TodolistActivity", "is Done check success")
+                            todayScheduleAdapter.notifyDataSetChanged()
+
+                        }
+                        .addOnFailureListener {
+                            Log.e("TodolistActivity", "is Done check fail")
+                        }
+                }
+
+            }
+
+
             todayScheduleRecyclerView.adapter = todayScheduleAdapter
 
 
