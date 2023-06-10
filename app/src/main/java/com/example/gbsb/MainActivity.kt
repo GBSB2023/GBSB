@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gbsb.account.AccountActivity
+import com.example.gbsb.community.board.Board
 import com.example.gbsb.databinding.ActivityMainBinding
+import com.example.gbsb.main.RecentCommunityAdapter
 import com.example.gbsb.main.TodayScheduleAdapter
 import com.example.gbsb.todolist.Schedule
 import com.example.gbsb.todolist.TodolistActivity
@@ -22,9 +24,11 @@ import java.time.LocalDateTime
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var todayScheduleAdapter: TodayScheduleAdapter
+    lateinit var recentCommunityAdapter : RecentCommunityAdapter
     var todayScheduleData: ArrayList<Schedule> = ArrayList()
+    var recentCommunityData : ArrayList<Board> = ArrayList()
     private var userFirebasePath = "TodoList/"
-
+    lateinit var communityDB:DatabaseReference
     companion object {
         private lateinit var rdb: DatabaseReference
 
@@ -53,7 +57,50 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         refreshTodaySchedule()
+        refreshRecentCommunity()
     }
+
+    private fun refreshRecentCommunity() {
+        Log.d("MainActivity", "refreshRecentCommunity call")
+
+        val query = communityDB.orderByChild("date")
+
+        query.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val recentList = ArrayList<Board>()
+                for(snapshot in dataSnapshot.children){
+                    val board = snapshot.getValue(Board::class.java)
+                    board?.let{
+                        recentList.add(it)
+                    }
+                }
+                val newList = recentList
+                    .reversed()
+                    .take(5)
+
+                Log.d("MainActivity", "recentCommunity Number : " + newList.size)
+                if(newList.isEmpty()){
+                    Log.d("MainActivity", "no recent data")
+                    binding.noRecentCommunityText.visibility = View.VISIBLE
+                    binding.communityRecentRecyclerView.visibility = View.GONE
+                }else{
+                    Log.d("MainActivity", "yes recent data")
+                    binding.noRecentCommunityText.visibility = View.GONE
+                    binding.communityRecentRecyclerView.visibility = View.VISIBLE
+                }
+
+                // Update the dataList with the new list
+                recentCommunityData.clear()
+                recentCommunityData.addAll(newList)
+                recentCommunityAdapter.updateItemList(recentCommunityData)
+                recentCommunityAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
     private fun refreshTodaySchedule() {
         Log.d("MainActivity", "refreshTodaySchedule call")
 
@@ -108,10 +155,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initLayout() {
-        // Auth
+        // TodoList firebase reference
         val curUser = FirebaseAuth.getInstance().currentUser
         userFirebasePath += curUser?.uid
         setRDB(Firebase.database.getReference(userFirebasePath))
+
+        // Community firebase reference
+        communityDB = Firebase.database.getReference("Community")
 
         // Connect listener to each career button
         for (areaId in areaIds) {
@@ -122,6 +172,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.apply {
+
+            // TodoList Adapter
             todayScheduleRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity,
             LinearLayoutManager.VERTICAL, false)
             todayScheduleAdapter = TodayScheduleAdapter(todayScheduleData)
@@ -141,11 +193,17 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
-
-
             todayScheduleRecyclerView.adapter = todayScheduleAdapter
 
 
+            // RecentCommunity Adapter
+            communityRecentRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity,
+            LinearLayoutManager.VERTICAL, false)
+            recentCommunityAdapter = RecentCommunityAdapter(recentCommunityData)
+            communityRecentRecyclerView.adapter = recentCommunityAdapter
+
+
+            // TodoList Click
             todoListArea.setOnClickListener {
                 if(FirebaseAuth.getInstance().currentUser?.isAnonymous == true){
                     Toast.makeText(this@MainActivity, "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show()
@@ -156,6 +214,7 @@ class MainActivity : AppCompatActivity() {
             }
 
 
+            // Account Click
             accountBtn.setOnClickListener {
                 val currentUser = FirebaseAuth.getInstance().currentUser
                 if(currentUser?.isAnonymous==true){ // 익명 사용자일 경우
@@ -167,6 +226,7 @@ class MainActivity : AppCompatActivity() {
             }
 
 
+            // CareerExplore Click
             careerExploreBtn.setOnClickListener{// 진로 탐색으로 넘어가기
                 val intent = Intent(this@MainActivity, RecommandAcitivty::class.java)
                 startActivity(intent)
