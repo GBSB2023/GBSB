@@ -41,10 +41,36 @@ class CommentFragment : Fragment() {
     private var isLikeBtnBoard = true
     private var isLikeBtnComment = true
 
+    // Check if this fragment has been run on the main
+    private var isFragmentExecuteFromMain = false
+    private var boardIdFromMain:String ?= null
+
+
+
+    companion object {
+        private const val BOARD_ID_FROM_MAIN_ACTIVITY = "board_id_from_main_activity"
+
+        fun newInstance(argumentValue: String): CommentFragment {
+            val fragment = CommentFragment()
+            val args = Bundle()
+            args.putString(BOARD_ID_FROM_MAIN_ACTIVITY, argumentValue)
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        boardIdFromMain = arguments?.getString(BOARD_ID_FROM_MAIN_ACTIVITY)
+        if(boardIdFromMain != null){
+            isFragmentExecuteFromMain = true
+        }
+
+
         binding = FragmentCommentBinding.inflate(layoutInflater, container, false)
         return binding!!.root
     }
@@ -54,7 +80,14 @@ class CommentFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         currentUser=auth!!.currentUser!!
         uid = currentUser?.uid!!
-        boardId = model.getBoardId()
+
+
+        if(isFragmentExecuteFromMain){
+            boardId = boardIdFromMain!!
+        }else{
+            boardId = model.getBoardId()
+        }
+
         communitydb = Firebase.database.getReference("Community")
         likedb = Firebase.database.getReference("Like")
         var userRef = communitydb.child(boardId)

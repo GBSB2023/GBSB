@@ -9,14 +9,16 @@ import com.example.gbsb.databinding.RowRecentCommunityBinding
 
 
 class RecentCommunityAdapter(private var items : ArrayList<Board>) : RecyclerView.Adapter<RecentCommunityAdapter.ViewHolder>() {
-//    var itemClickListener: RecentCommunityAdapter.onItemClickListener?= null
+    var itemClickListener: OnRecentRowClickListener?= null
 
-//    interface onItemClickListener{
-////        fun onCheckedChange(board: Board, isChecked : Boolean)
-//    }
+    interface OnRecentRowClickListener{
+        fun onItemClick(boardId : String)
+    }
     inner class ViewHolder(val binding : RowRecentCommunityBinding) : RecyclerView.ViewHolder(binding.root){
         init{
-
+            binding.root.setOnClickListener {
+                itemClickListener?.onItemClick(items[absoluteAdapterPosition].boardid)
+            }
         }
     }
 
