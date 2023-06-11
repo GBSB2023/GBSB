@@ -54,7 +54,8 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/rounded_corner">
+            android:background="@drawable/rounded_corner"
+            android:backgroundTint="#F6FFDE">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/todoListArea"
@@ -91,13 +92,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.5" />
 
-                <ImageButton
-                    android:id="@+id/plusTodolistBtn"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/add"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </FrameLayout>
@@ -123,6 +117,7 @@
             android:id="@+id/careerExploreBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#E3F2C1"
             android:text="진로 검사하기"/>
 
     </LinearLayout>
@@ -145,6 +140,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/rounded_corner"
+            android:backgroundTint="#C9DBB2"
             android:padding="10dp">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/communityRecentRecyclerView"
