@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gbsb.account.AccountActivity
+import com.example.gbsb.community.CommunityActivity
 import com.example.gbsb.community.board.Board
 import com.example.gbsb.databinding.ActivityMainBinding
 import com.example.gbsb.main.RecentCommunityAdapter
@@ -237,6 +238,12 @@ class MainActivity : AppCompatActivity() {
             // CareerExplore Click
             careerExploreBtn.setOnClickListener{// 진로 탐색으로 넘어가기
                 val intent = Intent(this@MainActivity, RecommandAcitivty::class.java)
+                startActivity(intent)
+            }
+
+            // Community Click
+            communityBtn.setOnClickListener{
+                val intent = Intent(this@MainActivity, CommunityActivity::class.java)
                 startActivity(intent)
             }
         }
