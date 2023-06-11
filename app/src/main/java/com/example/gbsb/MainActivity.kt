@@ -241,11 +241,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-            // Community Click
-            communityBtn.setOnClickListener{
-                val intent = Intent(this@MainActivity, CommunityActivity::class.java)
-                startActivity(intent)
-            }
         }
     }
     private fun navigateToMain2Activity(buttonId: Int) {
