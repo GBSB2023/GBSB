@@ -151,6 +151,7 @@
         android:orientation="vertical">
         <!-- Title -->
         <TextView
+            android:id="@+id/testbtn"
             style="@style/mainTitleFontStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

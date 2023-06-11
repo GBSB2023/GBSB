@@ -135,6 +135,8 @@ class BoardFragment : Fragment() {
             adapter.itemClickListener = object : BoardAdapter.OnItemClickListener {
                 override fun onItemClick(position: Int) {
                     binding.apply {
+                        val boardId = adapter.getItem(position).boardid
+                        model.setBoardId(boardId)
                         val fragment = requireActivity().supportFragmentManager.beginTransaction()
                         fragment.addToBackStack(null)
                         val commentFragment = CommentFragment()
