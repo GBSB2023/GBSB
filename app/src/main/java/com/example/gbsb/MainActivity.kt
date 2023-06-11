@@ -236,6 +236,12 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
+            // CommunityBtn Click
+            communityEnterBtn.setOnClickListener {
+                val intent = Intent(this@MainActivity, CommunityActivity::class.java)
+                startActivity(intent)
+            }
+
 
             // Account Click
             accountBtn.setOnClickListener {
