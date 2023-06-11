@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rowContent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -12,46 +13,71 @@
         android:layout_height="wrap_content"
         android:text="글 제목/본문"
         android:textAlignment="center"
+        android:background="@drawable/button_style2"
+        android:textColor="#164B03"
+        android:textStyle="bold"
         style="@style/Widget.AppCompat.Button.Small"/>
     <LinearLayout
         android:id="@+id/descriptionLayout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
 
         <TextView
             android:id="@+id/contentDate"
+            style="@style/Widget.AppCompat.Button.Small"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_style"
             android:text="날짜"
+            android:textColor="@color/white"
             android:textSize="10dp"
-            style="@style/Widget.AppCompat.Button.Small"/>
+            android:textStyle="bold"
+            tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
+
         <TextView
             android:id="@+id/contentWriter"
+            style="@style/Widget.AppCompat.Button.Small"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/button_style"
             android:text="작성자"
+            android:textColor="@color/white"
             android:textSize="10dp"
-            style="@style/Widget.AppCompat.Button.Small"/>
+            tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"/>
+
         <TextView
             android:id="@+id/contentLike"
+            style="@style/Widget.AppCompat.Button.Small"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_style3"
             android:text="좋아요"
+            android:textColor="@color/white"
             android:textSize="10dp"
-            style="@style/Widget.AppCompat.Button.Small"/>
+            android:textStyle="bold"
+            tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
+
         <TextView
             android:id="@+id/contentComment"
+            style="@style/Widget.AppCompat.Button.Small"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/button_style3"
             android:text="댓글수"
+            android:textColor="@color/white"
             android:textSize="10dp"
-            style="@style/Widget.AppCompat.Button.Small"/>
+            android:textStyle="bold"
+            tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
     </LinearLayout>
     <View
         android:layout_width="match_parent"

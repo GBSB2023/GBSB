@@ -18,8 +18,8 @@
             android:layout_marginRight="10dp"
             android:layout_gravity="center"
             android:text="자기소개란 수정"
-            android:textSize="20dp"
-            style="@style/Widget.AppCompat.Button.Small"/>
+            android:textSize="30sp"
+            android:textStyle="bold"/>
         <EditText
             android:id="@+id/editIntroduce"
             android:layout_width="match_parent"

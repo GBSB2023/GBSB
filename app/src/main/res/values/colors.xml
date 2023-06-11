@@ -8,6 +8,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="green1">#164B03</color>
+    <color name="green2">#25851B</color>
+    <color name="green3">#3C6255</color>
+    <color name="green4">#7D8F69</color>
+    <color name="green5">#61876E</color>
+    <color name="green6">#547153</color>
+
+
     <color name="section">#C2C2C2</color>
     
     <color name="todo_default_schedule_bg">#C2C2C2</color>

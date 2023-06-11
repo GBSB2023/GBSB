@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".community.comment.CommentAddFragment">
+    tools:context=".community.comment.CommentAddFragment"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,21 +19,24 @@
             android:layout_marginRight="10dp"
             android:layout_gravity="center"
             android:text="댓글 작성"
-            android:textSize="20dp"
-            style="@style/Widget.AppCompat.Button.Small"/>
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_gravity="fill_vertical"
                 android:text="내용"
                 android:textSize="15dp"
+                android:background="@drawable/button_style2"
+                android:textColor="@color/green3"
+                android:textStyle="bold"
                 style="@style/Widget.AppCompat.Button.Small"/>
             <EditText
                 android:id="@+id/addComment"
@@ -46,9 +50,15 @@
 
         <Button
             android:id="@+id/addComplete"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="작성 완료"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_style"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:layout_gravity="center"/>
     </LinearLayout>
 

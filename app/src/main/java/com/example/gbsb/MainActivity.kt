@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gbsb.account.AccountActivity
+import com.example.gbsb.community.CommunityActivity
 import com.example.gbsb.community.board.Board
 import com.example.gbsb.databinding.ActivityMainBinding
 import com.example.gbsb.main.RecentCommunityAdapter
@@ -239,6 +240,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, RecommandAcitivty::class.java)
                 startActivity(intent)
             }
+
         }
     }
     private fun navigateToMain2Activity(buttonId: Int) {

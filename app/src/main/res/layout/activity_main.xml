@@ -15,19 +15,17 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
-
-        <!-- Logo -->
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/title_logo" />
-
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2" />
+        <!-- Logo -->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/gb2" />
 
         <!-- User menu-->
         <LinearLayout
@@ -35,12 +33,6 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:layout_gravity="end">
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/calendar" />
 
             <ImageView
                 android:id="@+id/accountBtn"
@@ -108,13 +100,16 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.5" />
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/plusTodolistBtn"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
                     android:src="@drawable/add"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </FrameLayout>
@@ -140,7 +135,11 @@
             android:id="@+id/careerExploreBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="진로 검사하기"/>
+            android:text="진로 검사하기"
+            android:background="@drawable/button_style3"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 
@@ -205,12 +204,12 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/personal_icon"/>
+                        android:src="@drawable/logo_app"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="앱"/>
+                        android:text="모바일 앱"/>
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/career1"
@@ -220,7 +219,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/personal_icon"/>
+                        android:src="@drawable/logo_web"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -235,7 +234,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/personal_icon"/>
+                        android:src="@drawable/logo_ai"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -250,12 +249,12 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/personal_icon"/>
+                        android:src="@drawable/logo_network"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="클라우드"/>
+                        android:text="네트워크"/>
                 </LinearLayout>
 
             </TableRow>
@@ -268,7 +267,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/personal_icon"/>
+                        android:src="@drawable/logo_game"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -283,7 +282,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/personal_icon"/>
+                        android:src="@drawable/logo_security"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -298,7 +297,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/personal_icon"/>
+                        android:src="@drawable/logo_db"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -313,12 +312,12 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/personal_icon"/>
+                        android:src="@drawable/logo_system"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="전산"/>
+                        android:text="전산 시스템"/>
                 </LinearLayout>
 
             </TableRow>
