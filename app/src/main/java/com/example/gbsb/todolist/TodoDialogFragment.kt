@@ -13,7 +13,8 @@ class TodoDialogFragment : DialogFragment() {
 
     private lateinit var binding : FragmentTodoDialogBinding
     private lateinit var selectedCalendarDate:LocalDateTime
-    
+
+
     // month start with 1
     private var selectedAddScheduleDate = LocalDateTime.now()
 
@@ -90,6 +91,7 @@ class TodoDialogFragment : DialogFragment() {
         val curMonth = selectedCalendarDate.monthValue // monthValue is start with 1
         val curDay = selectedCalendarDate.dayOfMonth
 
+
         // Set initial date to selected date
         selectedAddScheduleDate = selectedAddScheduleDate
             .withYear(curYear)
@@ -105,13 +107,15 @@ class TodoDialogFragment : DialogFragment() {
                     .withYear(year)
                     .withMonth(monthOfYear + 1)
                     .withDayOfMonth(dayOfMonth)
+
             }
             addTimePicker.setOnTimeChangedListener {
                     _, hourOfDay, minute ->
 
                 selectedAddScheduleDate = selectedAddScheduleDate
                     .withHour(hourOfDay)
-                    .withMinute(hourOfDay)
+                    .withMinute(minute)
+
             }
         }
 

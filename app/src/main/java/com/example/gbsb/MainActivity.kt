@@ -37,6 +37,9 @@ class MainActivity : AppCompatActivity() {
     private var userFirebasePath = "TodoList/"
     lateinit var communityDB:DatabaseReference
 
+    // System
+    // Save the time the user pressed the Back button
+    private var backKeyPressedTime: Long = 0
     companion object {
         private lateinit var rdb: DatabaseReference
 
@@ -250,7 +253,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        // No action when clicking the previous button
+        // 2000 milliseconds = 2 seconds
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis()
+            Toast.makeText(this, "Click the 'Back' button one more time to exit.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // If you click the back button once more within 2 seconds, finish() (exit the app)
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            moveTaskToBack(true); // 태스크를 백그라운드로 이동
+            finishAndRemoveTask(); // 액티비티 종료 + 태스크 리스트에서 지우기
+            System.exit(0);
+        }
     }
 
 }
