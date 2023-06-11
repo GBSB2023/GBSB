@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:outlineAmbientShadowColor="#00FFFFFF"
     android:outlineSpotShadowColor="#00FFFFFF"
+    android:background="#FFFFFF"
     android:padding="15dp"
     android:weightSum="10"
     tools:context=".MainActivity">
