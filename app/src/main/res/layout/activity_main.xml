@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
     android:orientation="vertical"
+    android:outlineAmbientShadowColor="#00FFFFFF"
+    android:outlineSpotShadowColor="#00FFFFFF"
+    android:padding="15dp"
     android:weightSum="10"
     tools:context=".MainActivity">
 
@@ -15,6 +17,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
+
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -23,23 +26,23 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
             android:layout_gravity="center_vertical"
+            android:layout_weight="5"
             android:src="@drawable/gb2" />
 
         <!-- User menu-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:layout_gravity="end">
+            android:layout_gravity="end"
+            android:layout_weight="2">
 
             <ImageView
                 android:id="@+id/accountBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center_vertical"
+                android:layout_weight="1"
                 android:src="@drawable/personal_icon" />
         </LinearLayout>
 
@@ -47,75 +50,90 @@
 
 
     <!-- To-do List-->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/todoListArea"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="vertical">
+        android:layout_weight="2">
 
         <!-- Title-->
         <TextView
+            android:id="@+id/todoListTitle"
             style="@style/mainTitleFontStyle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="To-Do List" />
+            android:text="To-Do List"
+            app:layout_constraintBottom_toTopOf="@+id/todoListInnerArea"
+            app:layout_constraintStart_toStartOf="@id/todoListArea"
+            app:layout_constraintTop_toTopOf="@+id/todoListArea" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/rounded_corner">
+        <TextView
+            android:id="@+id/todoListEnterBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="일정 더 보기 >"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/todoListTitle"
+            app:layout_constraintEnd_toEndOf="@id/todoListArea"
+            app:layout_constraintTop_toTopOf="@+id/todoListTitle" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/todoListArea"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/todoListInnerArea"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rounded_corner"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="@id/todoListArea"
+            app:layout_constraintEnd_toEndOf="@+id/todoListArea"
+            app:layout_constraintStart_toStartOf="@+id/todoListArea"
+            app:layout_constraintTop_toBottomOf="@+id/todoListTitle">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/todayScheduleRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="none">
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:overScrollMode="never"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/todayScheduleRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:visibility="visible"
-                    android:overScrollMode="never"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/noScheduleTextMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="추가하려면 클릭하세요"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
 
-                <TextView
-                    android:id="@+id/noScheduleTextMain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="추가하려면 클릭하세요"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/plusTodolistBtn"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
-                    android:src="@drawable/add"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </FrameLayout>
-
-    </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/todoListAddBtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            app:backgroundTint="#00FFFFFF"
+            app:fabCustomSize="48dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="@id/todoListInnerArea"
+            app:layout_constraintEnd_toEndOf="@id/todoListInnerArea"
+            app:srcCompat="@drawable/add" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <!-- Search career -->
@@ -136,8 +154,8 @@
             android:id="@+id/careerExploreBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="진로 검사하기"
             android:background="@drawable/button_style3"
+            android:text="진로 검사하기"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             tools:ignore="TouchTargetSizeCheck" />
@@ -161,17 +179,17 @@
             android:id="@+id/communityRecentRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"
             android:overScrollMode="never"
-            android:visibility="visible"/>
+            android:scrollbars="none"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/noRecentCommunityText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="최근 글이 없습니다"
             android:gravity="center"
-            android:visibility="gone"/>
+            android:text="최근 글이 없습니다"
+            android:visibility="gone" />
 
 
     </LinearLayout>
@@ -190,6 +208,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="직무 확인하기" />
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -197,128 +216,153 @@
             android:stretchColumns="*">
 
             <TableRow>
+
                 <LinearLayout
                     android:id="@+id/career0"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/logo_app"/>
+                        android:src="@drawable/logo_app" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="모바일 앱"/>
+                        android:text="모바일 앱" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/career1"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/logo_web"/>
+                        android:src="@drawable/logo_web" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="웹"/>
+                        android:text="웹" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/career2"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/logo_ai"/>
+                        android:src="@drawable/logo_ai" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="인공지능"/>
+                        android:text="인공지능" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/career3"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/logo_network"/>
+                        android:src="@drawable/logo_network" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="네트워크"/>
+                        android:text="네트워크" />
                 </LinearLayout>
 
             </TableRow>
+
             <TableRow>
+
                 <LinearLayout
                     android:id="@+id/career4"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/logo_game"/>
+                        android:src="@drawable/logo_game" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="게임"/>
+                        android:text="게임" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/career5"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/logo_security"/>
+                        android:src="@drawable/logo_security" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="보안"/>
+                        android:text="보안" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/career6"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/logo_db"/>
+                        android:src="@drawable/logo_db" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="데이터베이스"/>
+                        android:text="데이터베이스" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/career7"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/logo_system"/>
+                        android:src="@drawable/logo_system" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="전산 시스템"/>
+                        android:text="전산 시스템" />
                 </LinearLayout>
 
             </TableRow>
@@ -327,7 +371,6 @@
 
 
     </LinearLayout>
-
 
 
 </LinearLayout>

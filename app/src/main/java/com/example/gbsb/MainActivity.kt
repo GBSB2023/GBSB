@@ -1,5 +1,6 @@
 package com.example.gbsb
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,7 +21,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.lang.System.exit
 import java.time.LocalDateTime
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -216,13 +219,21 @@ class MainActivity : AppCompatActivity() {
 
 
             // TodoList Click
-            todoListArea.setOnClickListener {
+            todoListEnterBtn.setOnClickListener {
                 if(FirebaseAuth.getInstance().currentUser?.isAnonymous == true){
                     Toast.makeText(this@MainActivity, "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show()
                 }else{
                     val intent = Intent(this@MainActivity, TodolistActivity::class.java)
+                    intent.putExtra("AddBtnClicked", false)
                     startActivity(intent)
                 }
+            }
+
+            // TodoListAddBtn Click
+            todoListAddBtn.setOnClickListener {
+                val intent = Intent(this@MainActivity, TodolistActivity::class.java)
+                intent.putExtra("AddBtnClicked", true)
+                startActivity(intent)
             }
 
 
@@ -253,19 +264,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        // 2000 milliseconds = 2 seconds
-        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
-            backKeyPressedTime = System.currentTimeMillis()
-            Toast.makeText(this, "Click the 'Back' button one more time to exit.", Toast.LENGTH_SHORT).show()
-            return
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("GBSB를 종료할까요?")
+        builder.setCancelable(false)
+        builder.setPositiveButton("Yes") { dialog, which ->
+            moveTaskToBack(true) // 태스크를 백그라운드로 이동
+            finishAndRemoveTask() // 액티비티 종료 + 태스크 리스트에서 지우기
+            exitProcess(0)
         }
 
-        // If you click the back button once more within 2 seconds, finish() (exit the app)
-        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
-            moveTaskToBack(true); // 태스크를 백그라운드로 이동
-            finishAndRemoveTask(); // 액티비티 종료 + 태스크 리스트에서 지우기
-            System.exit(0);
+        builder.setNegativeButton("No") { dialog, which ->
+            // Do nothing
         }
+
+        builder.show()
     }
 
 }
+
