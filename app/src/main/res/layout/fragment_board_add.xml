@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".community.board.BoardAddFragment">
+    tools:context=".community.board.BoardAddFragment"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,53 +17,68 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="center"
             android:text="게시판 작성"
-            android:textSize="20dp"
-            style="@style/Widget.AppCompat.Button.Small"/>
+            android:textSize="30sp"
+            android:textStyle="bold"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:background="@drawable/button_style2"
                 android:text="글제목"
+                android:textColor="@color/green3"
                 android:textSize="15dp"
-                style="@style/Widget.AppCompat.Button.Small"/>
+                android:textStyle="bold"
+                tools:ignore="TextSizeCheck" />
+
             <EditText
                 android:id="@+id/addName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:maxLength="30"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="fill_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="fill_vertical"
+                android:background="@drawable/button_style2"
                 android:text="글내용"
+                android:textColor="@color/green3"
                 android:textSize="15dp"
-                style="@style/Widget.AppCompat.Button.Small"/>
+                android:textStyle="bold"
+                tools:ignore="TextSizeCheck" />
+
             <EditText
                 android:id="@+id/addContent"
-                android:background="@drawable/edittext_rounded_corner_rectangle"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_weight="1"
+                android:background="@drawable/edittext_rounded_corner_rectangle"
                 android:maxLength="500"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
         </LinearLayout>
         <LinearLayout
@@ -70,14 +86,19 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:orientation="horizontal">
+
             <TextView
-                android:layout_width="wrap_content"
+                style="@style/Widget.AppCompat.Button.Small"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:background="@drawable/button_style2"
                 android:text="카테고리"
+                android:textColor="@color/green3"
                 android:textSize="15dp"
-                style="@style/Widget.AppCompat.Button.Small"/>
+                android:textStyle="bold"
+                tools:ignore="TextSizeCheck" />
             <Spinner
                 android:id="@+id/addSpinner"
                 android:layout_width="0dp"
@@ -92,8 +113,14 @@
 
         <Button
             android:id="@+id/addComplete"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_style"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:text="작성 완료"
             android:layout_gravity="center"/>
     </LinearLayout>

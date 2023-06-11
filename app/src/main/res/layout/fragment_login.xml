@@ -20,12 +20,14 @@
                 android:layout_height="150dp"
                 android:layout_marginTop="20dp"
                 android:paddingTop="20dp"
-                android:src="@drawable/title_logo"/>
+                android:src="@drawable/gb2"
+                android:layout_marginBottom="30dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="개발새발에 오신 것을 환영합니다!"
                 android:gravity="center"
+                android:layout_marginBottom="30dp"
                 android:textSize="18dp"/>
         </LinearLayout>
         <LinearLayout
@@ -33,39 +35,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <EditText
                 android:id="@+id/login_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:layout_margin="10dp"
-                android:maxLength="35"
-                android:ems="15"
                 android:layout_gravity="center"
-                android:hint="email@example.com"/>
+                android:layout_margin="10dp"
+                android:ems="15"
+                android:hint="email@example.com"
+                android:inputType="textEmailAddress"
+                android:maxLength="35"
+                tools:ignore="TouchTargetSizeCheck" />
+
             <EditText
                 android:id="@+id/login_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:layout_margin="10dp"
-                android:maxLength="15"
-                android:ems="15"
                 android:layout_gravity="center"
-                android:hint="password"/>
+                android:layout_margin="10dp"
+                android:ems="15"
+                android:hint="password"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                tools:ignore="TouchTargetSizeCheck" />
             <Button
                 android:id="@+id/loginBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:ems="15"
-                android:text="이메일로 로그인 하기"/>
+                android:text="이메일로 로그인 하기"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_style3"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
             <Button
                 android:id="@+id/registerBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginBottom="10dp"
                 android:layout_gravity="center"
                 android:ems="15"
+                android:background="@drawable/button_style"
+                android:textStyle="bold"
+                android:textColor="@color/white"
                 android:text="회원가입"/>
         </LinearLayout>
         <LinearLayout
@@ -84,14 +99,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_margin="10dp">
+
                 <ImageButton
                     android:id="@+id/googleBtn"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/google_logo"/>
+                    app:srcCompat="@drawable/google_logo"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/githubBtn"
@@ -99,7 +117,8 @@
                     android:layout_height="70dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/github_logo"/>
+                    app:srcCompat="@drawable/github_logo"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/anonymousBtn"
@@ -107,7 +126,8 @@
                     android:layout_height="70dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/anonymous_logo"/>
+                    app:srcCompat="@drawable/anonymous_logo"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

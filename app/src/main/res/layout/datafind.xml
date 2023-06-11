@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -15,16 +16,22 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_weight="5">
+
             <Button
                 android:id="@+id/button1"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="R"
+                android:background="@drawable/button_style3"
                 android:gravity="center"
-                android:visibility="visible"
+                android:text="R"
+                android:textColor="@color/white"
                 android:textSize="10sp"
-                android:layout_marginRight="10dp"/>
+                android:textStyle="bold"
+                android:visibility="visible"
+                tools:ignore="TouchTargetSizeCheck" />
 
 
             <Button
@@ -36,6 +43,9 @@
                 android:gravity="center"
                 android:visibility="invisible"
                 android:textSize="10sp"
+                android:background="@drawable/button_style3"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:layout_marginRight="10dp"/>
 
             <Button
@@ -47,20 +57,30 @@
                 android:gravity="center"
                 android:visibility="invisible"
                 android:textSize="10sp"
+                android:background="@drawable/button_style3"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:layout_marginRight="10dp"/>
         </LinearLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="3">
 
             <Button
                 android:id="@+id/date"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                app:layout_constraintRight_toRightOf="parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_style2"
                 android:gravity="center"
-                android:text="검사 날짜" />
+                android:text="검사 날짜"
+                android:textColor="@color/green3"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
@@ -88,10 +108,14 @@
         <Button
             android:id="@+id/more"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="자세히 보기" />
+            android:text="자세히 보기"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/button_style"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 </LinearLayout>

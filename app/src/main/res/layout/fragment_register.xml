@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/accountTop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -20,8 +21,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/arrow_back"/>
-
+                android:src="@drawable/arrow_back"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
+            <Button
+                android:id="@+id/id"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="id"
+                android:visibility="invisible"
+                android:background="@drawable/button_style2"
+                android:textColor="#164B03"
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
 
@@ -41,104 +60,131 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="15"
                     android:text="이름"
                     android:textSize="15dp"
-                    android:layout_margin="10dp"
-                    android:ems="15"/>
+                    tools:ignore="TextSizeCheck" />
+
                 <EditText
                     android:id="@+id/register_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
                     android:layout_margin="10dp"
-                    android:maxLength="20"
                     android:ems="15"
-                    android:hint="홍길동"/>
+                    android:hint="홍길동"
+                    android:inputType="textPersonName"
+                    android:maxLength="20"
+                    tools:ignore="TouchTargetSizeCheck" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="15"
                     android:text="닉네임"
                     android:textSize="15dp"
-                    android:layout_margin="10dp"
-                    android:ems="15"/>
+                    tools:ignore="TextSizeCheck" />
+
                 <EditText
                     android:id="@+id/register_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
                     android:layout_margin="10dp"
-                    android:maxLength="20"
                     android:ems="15"
-                    android:hint="개발새발"/>
+                    android:hint="개발새발"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    tools:ignore="TouchTargetSizeCheck" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="15"
                     android:text="아이디"
                     android:textSize="15dp"
-                    android:layout_margin="10dp"
-                    android:ems="15"/>
+                    tools:ignore="TextSizeCheck" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center">
+
                     <EditText
                         android:id="@+id/register_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:maxLength="20"
                         android:ems="10"
                         android:hint="gaebalsaebal1234"
-                        android:inputType="textPersonName"/>
+                        android:inputType="textPersonName"
+                        android:maxLength="20"
+                        tools:ignore="TouchTargetSizeCheck" />
                     <Button
                         android:id="@+id/duplicateBtn"
-                        android:layout_width="wrap_content"
+                        android:layout_width="140dp"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/button_style3"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
                         android:text="중복확인"/>
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="15"
                     android:text="비밀번호"
                     android:textSize="15dp"
-                    android:layout_margin="10dp"
-                    android:ems="15"/>
+                    tools:ignore="TextSizeCheck" />
+
                 <EditText
                     android:id="@+id/register_pw"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:maxLength="20"
                     android:ems="15"
                     android:hint=""
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="15"
                     android:text="비밀번호 확인"
                     android:textSize="15dp"
-                    android:layout_margin="10dp"
-                    android:ems="15"/>
+                    tools:ignore="TextSizeCheck" />
+
                 <EditText
                     android:id="@+id/register_pw_re"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:maxLength="20"
                     android:ems="15"
                     android:hint=""
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <Button
                     android:id="@+id/register_complete"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:background="@drawable/button_style"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
                     android:text="회원가입"/>
             </LinearLayout>
         </ScrollView>

@@ -42,12 +42,17 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="match_parent"/>
+
                         <Button
                             android:id="@+id/board_deletebtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/button_style"
                             android:text="게시글 삭제"
-                            android:textSize="10dp"/>
+                            android:textColor="@color/white"
+                            android:textSize="10dp"
+                            android:textStyle="bold"
+                            tools:ignore="TextSizeCheck" />
                     </LinearLayout>
                     <TextView
                         android:id="@+id/board_date"
@@ -89,37 +94,59 @@
                         android:scaleType="fitCenter"
                         android:layout_gravity="center"
                         android:src="@drawable/unlikeimg"/>
+
                     <TextView
                         android:id="@+id/board_like"
+                        style="@style/Widget.AppCompat.Button.Small"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/button_style3"
                         android:text="좋아요"
+                        android:textColor="@color/white"
                         android:textSize="10dp"
-                        style="@style/Widget.AppCompat.Button.Small"/>
+                        android:textStyle="bold"
+                        tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/board_comment"
+                    style="@style/Widget.AppCompat.Button.Small"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@drawable/button_style3"
                     android:text="댓글수"
+                    android:textColor="@color/white"
                     android:textSize="10dp"
-                    style="@style/Widget.AppCompat.Button.Small"/>
+                    android:textStyle="bold"
+                    tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
                 <View
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"/>
+
                 <Button
                     android:id="@+id/board_likebtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/button_style"
                     android:text="좋아요"
-                    android:textSize="10dp"/>
+                    android:textColor="@color/white"
+                    android:textSize="10dp"
+                    android:textStyle="bold"
+                    tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
+
                 <Button
                     android:id="@+id/board_addbtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="댓글 작성하기"
-                    android:textSize="10dp"/>
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/button_style"
+                    android:text="댓글 작성"
+                    android:textColor="@color/white"
+                    android:textSize="10dp"
+                    android:textStyle="bold"
+                    tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
 
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView

@@ -16,20 +16,31 @@
 
         <!-- 상단 레이아웃 -->
         <LinearLayout
+            android:id="@+id/accountTop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="end" >
+            android:orientation="horizontal">
 
-            <!-- 뒤로가기 버튼 -->
-            <Button
+
+            <ImageButton
                 android:id="@+id/backButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/arrow_back"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            <TextView
+                style="@style/SubpageTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
+            <ImageView
+                android:id="@+id/accountBtn"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"/>
+
         </LinearLayout>
 
         <!-- 스피너 -->
@@ -38,7 +49,6 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:textAlignment="center"
@@ -217,9 +227,9 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/button_style"
+                android:background="@drawable/button_style2"
                 android:text="커뮤니티"
-                android:textColor="#FFFFFF"
+                android:textColor="#164B03"
                 android:textStyle="bold"
                 tools:ignore="TouchTargetSizeCheck" />
 
