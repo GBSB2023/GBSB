@@ -84,6 +84,7 @@ class CommentFragment : Fragment() {
 
         if(isFragmentExecuteFromMain){
             boardId = boardIdFromMain!!
+            model.setBoardId(boardId)
         }else{
             boardId = model.getBoardId()
         }
