@@ -40,9 +40,7 @@ class MainActivity : AppCompatActivity() {
     private var userFirebasePath = "TodoList/"
     lateinit var communityDB:DatabaseReference
 
-    // System
-    // Save the time the user pressed the Back button
-    private var backKeyPressedTime: Long = 0
+
     companion object {
         private lateinit var rdb: DatabaseReference
 
@@ -215,6 +213,17 @@ class MainActivity : AppCompatActivity() {
             communityRecentRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity,
             LinearLayoutManager.VERTICAL, false)
             recentCommunityAdapter = RecentCommunityAdapter(recentCommunityData)
+            recentCommunityAdapter.itemClickListener = object : RecentCommunityAdapter.OnRecentRowClickListener{
+                override fun onItemClick(boardId: String) {
+
+                    // Forward row click information and boardId to boardActivity
+                    val intent = Intent(this@MainActivity, CommunityActivity::class.java)
+                    intent.putExtra("RecentRowClicked", true)
+                    intent.putExtra("ClickedBoardId", boardId)
+                    startActivity(intent)
+
+                }
+            }
             communityRecentRecyclerView.adapter = recentCommunityAdapter
 
 
