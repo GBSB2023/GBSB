@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     // FireBase
     private var userFirebasePath = "TodoList/"
     lateinit var communityDB:DatabaseReference
-
+    private var isAnonymousUser = false
 
     companion object {
         private lateinit var rdb: DatabaseReference
@@ -168,10 +168,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun initLayout() {
 
-        // TodoList firebase reference
+        // Check user anonymous
         val curUser = FirebaseAuth.getInstance().currentUser
-        userFirebasePath += curUser?.uid
-        setRDB(Firebase.database.getReference(userFirebasePath))
+        isAnonymousUser = curUser?.isAnonymous!!
+
+        if(isAnonymousUser){
+            setRDB(Firebase.database.reference)
+        }else{
+            userFirebasePath += curUser.uid
+            setRDB(Firebase.database.getReference(userFirebasePath))
+        }
+
 
         // Community firebase reference
         communityDB = Firebase.database.getReference("Community")
@@ -229,7 +236,7 @@ class MainActivity : AppCompatActivity() {
 
             // TodoList Click
             todoListEnterBtn.setOnClickListener {
-                if(FirebaseAuth.getInstance().currentUser?.isAnonymous == true){
+                if(isAnonymousUser){
                     Toast.makeText(this@MainActivity, "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show()
                 }else{
                     val intent = Intent(this@MainActivity, TodolistActivity::class.java)
@@ -240,9 +247,16 @@ class MainActivity : AppCompatActivity() {
 
             // TodoListAddBtn Click
             todoListAddBtn.setOnClickListener {
-                val intent = Intent(this@MainActivity, TodolistActivity::class.java)
-                intent.putExtra("AddBtnClicked", true)
-                startActivity(intent)
+
+                if(isAnonymousUser){
+                    Toast.makeText(this@MainActivity, "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show()
+                }else{
+                    val intent = Intent(this@MainActivity, TodolistActivity::class.java)
+                    intent.putExtra("AddBtnClicked", true)
+                    startActivity(intent)
+                }
+
+
             }
 
             // CommunityBtn Click
@@ -254,8 +268,8 @@ class MainActivity : AppCompatActivity() {
 
             // Account Click
             accountBtn.setOnClickListener {
-                val currentUser = FirebaseAuth.getInstance().currentUser
-                if(currentUser?.isAnonymous==true){ // 익명 사용자일 경우
+
+                if(isAnonymousUser){ // 익명 사용자일 경우
                     Toast.makeText(this@MainActivity, "익명 로그인의 경우 해당 기능을 이용할 수 없습니다.", Toast.LENGTH_LONG).show()
                 }else{
                     val i= Intent(this@MainActivity, AccountActivity::class.java)

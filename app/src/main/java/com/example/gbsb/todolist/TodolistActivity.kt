@@ -201,6 +201,10 @@ class TodolistActivity : AppCompatActivity(),
 
         newChildRef.setValue(item)
         adapter.notifyDataSetChanged()
+
+        binding.noScheduleText.visibility = View.GONE
+        binding.recyclerView.visibility = View.VISIBLE
+
     }
 
     override fun editSchedule(editedSchedule: Schedule) {
