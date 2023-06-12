@@ -28,7 +28,6 @@ class CommunityActivity : AppCompatActivity() {
             val destinationFragment = CommentFragment.newInstance(clickedBoardId)
             supportFragmentManager.beginTransaction()
                 .replace(R.id.contentLayout, destinationFragment)
-                .addToBackStack(null)
                 .commit()
 
         // Normal case
