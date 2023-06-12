@@ -21,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.lang.System.exit
 import java.time.LocalDateTime
 import kotlin.system.exitProcess
 
@@ -88,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 val newList = recentList
                     .reversed()
-                    .take(5)
+                    .take(6)
 
                 Log.d("MainActivity", "recentCommunity Number : " + newList.size)
                 if(newList.isEmpty()){
@@ -232,7 +231,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             communityRecentRecyclerView.adapter = recentCommunityAdapter
-
 
             // TodoList Click
             todoListEnterBtn.setOnClickListener {
