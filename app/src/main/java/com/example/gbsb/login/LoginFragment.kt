@@ -168,8 +168,8 @@ class LoginFragment : Fragment() {
     private fun moveMainPage(user: FirebaseUser?) {
         // 파이어베이스 유저 상태가 있을 경우 다음 페이지로 넘어갈 수 있음
         if(user != null){
-
             startActivity(Intent(activity, MainActivity::class.java))
+            requireActivity().finish()
         }
     }
 

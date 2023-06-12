@@ -49,11 +49,10 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/accountInfo"
+                style="@style/largeBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="10dp"
-                android:background="#7D8F69">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -62,15 +61,10 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/Widget.AppCompat.Button.Small"
+                        style="@style/subtitleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:text="기본정보"
-                        android:textSize="15dp"
-                        android:textStyle="bold"
-                        android:textColor="#7D8F69"
                         tools:ignore="TextSizeCheck" />
                     <View
                         android:layout_width="0dp"
@@ -85,116 +79,92 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/Widget.AppCompat.Button.Small"
-                        android:layout_width="80dp"
+                        style="@style/entryText"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:text="메일"
-                        android:textSize="15dp"
                         tools:ignore="TextSizeCheck" />
 
                     <TextView
                         android:id="@+id/infoEmail"
-                        style="@style/Widget.AppCompat.Button.Small"
+                        style="@style/inputText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAllCaps="false"
                         android:textSize="15dp"
                         tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/Widget.AppCompat.Button.Small"
-                        android:layout_width="80dp"
+                        style="@style/entryText"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:text="번호"
-                        android:textSize="15dp"
                         tools:ignore="TextSizeCheck" />
 
                     <TextView
                         android:id="@+id/infoCall"
-                        style="@style/Widget.AppCompat.Button.Small"
+                        style="@style/inputText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAllCaps="false"
-                        android:textSize="15dp"
                         tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/Widget.AppCompat.Button.Small"
-                        android:layout_width="80dp"
+                        style="@style/entryText"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:text="출생년도"
-                        android:textSize="15dp"
                         tools:ignore="TextSizeCheck" />
 
                     <TextView
                         android:id="@+id/infoBirth"
-                        style="@style/Widget.AppCompat.Button.Small"
+                        style="@style/inputText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAllCaps="false"
-                        android:textSize="15dp"
                         tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/Widget.AppCompat.Button.Small"
-                        android:layout_width="80dp"
+                        style="@style/entryText"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:text="전공"
-                        android:textSize="15dp"
                         tools:ignore="TextSizeCheck" />
 
                     <TextView
                         android:id="@+id/infoMajor"
-                        style="@style/Widget.AppCompat.Button.Small"
+                        style="@style/inputText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAllCaps="false"
-                        android:textSize="15dp"
                         tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
 
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/accountIntroduce"
+                style="@style/largeBox2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="10dp"
-                android:background="#547153">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -203,7 +173,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/Widget.AppCompat.Button.Small"
+                        style="@style/subtitleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -238,6 +208,29 @@
                     tools:ignore="SpeakableTextPresentCheck" />
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/logoutUser"
+                    style="@style/buttonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="로그아웃"/>
+
+                <Button
+                    android:id="@+id/deleteUser"
+                    style="@style/buttonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="회원 탈퇴" />
+            </LinearLayout>
+
 
         </LinearLayout>
 

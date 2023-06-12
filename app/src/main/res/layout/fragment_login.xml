@@ -43,7 +43,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:ems="15"
-                android:hint="email@example.com"
+                android:hint="email@gbsb.com"
                 android:inputType="textEmailAddress"
                 android:maxLength="35"
                 tools:ignore="TouchTargetSizeCheck" />
