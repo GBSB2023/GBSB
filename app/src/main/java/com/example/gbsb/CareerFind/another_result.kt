@@ -2,14 +2,18 @@ package com.example.gbsb
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gbsb.account.AccountActivity
 import com.example.gbsb.databinding.AnotherResultBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class another_result: AppCompatActivity() {  // 전체 진로 추천 결과 보여 주는 화면
     lateinit var binding : AnotherResultBinding
     lateinit var adapter : reulst_Adapter
     val RecommandResultList: ArrayList<RecommandResultData> = ArrayList()
+    val currentUser = FirebaseAuth.getInstance().currentUser
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +46,15 @@ class another_result: AppCompatActivity() {  // 전체 진로 추천 결과 보�
             intent.putExtra("RecommandUser", receivedData)
             startActivity(intent)
             finish()
+        }
+        binding.id.setOnClickListener { // 사용자 정보 이동
+            if (currentUser?.isAnonymous == false){
+                val i= Intent(this, AccountActivity::class.java)
+                startActivity(i)
+            }
+            else{
+                Toast.makeText(this@another_result,"익명 로그인의 경우 해당 기능을 이용할 수 없습니다", Toast.LENGTH_SHORT).show()
+            }
         }
         binding.recyclerview.adapter = adapter
     }

@@ -2,16 +2,18 @@ package com.example.gbsb
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gbsb.account.AccountActivity
 import com.example.gbsb.databinding.CareerExplorationBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class Career_Exploration : AppCompatActivity() {  // 진로 탐색 화면 (질문 포함)
     lateinit var binding: CareerExplorationBinding
     private var number = 0
     private val questionFragmentTag = "questionFragment"
+    val currentUser = FirebaseAuth.getInstance().currentUser
+
     val UserChoiceList: ArrayList<String> = ArrayList<String>(6).apply {
         repeat(6) { add("")}
     }
@@ -38,14 +40,17 @@ class Career_Exploration : AppCompatActivity() {  // 진로 탐색 화면 (질�
         }
 
         binding.next.setOnClickListener {
+            val questionFragment = supportFragmentManager.findFragmentByTag(questionFragmentTag) as? questionFragment
+            val selectedOption = questionFragment?.getSelectedOption()
             if (number == 5) {
-                val intent = Intent(this, Career_Result_Activity::class.java)
-                intent.putStringArrayListExtra("userChoiceList", UserChoiceList)
-                startActivity(intent)
-                finish()
+                if (selectedOption != null)  {
+                    val intent = Intent(this, Career_Result_Activity::class.java)
+                    intent.putStringArrayListExtra("userChoiceList", UserChoiceList)
+                    startActivity(intent)
+                    finish()
+                }
+                else Toast.makeText(this,"아무것도 선택하지 않았습니다.\n선택 후 다음 창으로 이동해 주세요",Toast.LENGTH_SHORT).show()
             } else {
-                val questionFragment = supportFragmentManager.findFragmentByTag(questionFragmentTag) as? questionFragment
-                val selectedOption = questionFragment?.getSelectedOption()
                 if (selectedOption != null)  {
                     UserChoiceList.add(number, selectedOption)
                     number++
@@ -61,8 +66,13 @@ class Career_Exploration : AppCompatActivity() {  // 진로 탐색 화면 (질�
         }
 
         binding.id.setOnClickListener { //사용자 정보 이동
-            val i= Intent(this, AccountActivity::class.java)
-            startActivity(i)
+            if (currentUser?.isAnonymous == false){
+                val i= Intent(this, AccountActivity::class.java)
+                startActivity(i)
+            }
+            else{
+                Toast.makeText(this@Career_Exploration,"익명 로그인의 경우 해당 기능을 이용할 수 없습니다",Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

@@ -30,7 +30,7 @@ class reulst_Adapter (val items : ArrayList<RecommandResultData>): // 전체 진
             val drawable = holder.binding.imageView1.context.getDrawable(R.drawable.database)
             holder.binding.imageView1.setImageDrawable(drawable)
         }
-        else if(items[position].type == "WebFront"){
+        else if(items[position].type == "Web"){
             val drawable = holder.binding.imageView1.context.getDrawable(R.drawable.frontend)
             holder.binding.imageView1.setImageDrawable(drawable)
         }

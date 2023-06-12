@@ -4,15 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gbsb.account.AccountActivity
 import com.example.gbsb.databinding.CareerResultBinding
+import com.google.firebase.auth.FirebaseAuth
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Career_Result_Activity : AppCompatActivity() {
     lateinit var binding : CareerResultBinding
     var userChoiceList : ArrayList<String> = ArrayList()
+    val currentUser = FirebaseAuth.getInstance().currentUser
     var SI :Int = 0
     var DataBase : Int = 0
     var Web : Int = 0
@@ -40,8 +42,13 @@ class Career_Result_Activity : AppCompatActivity() {
             finish()
         }
         binding.id.setOnClickListener { // 사용자 정보 이동
-            val i= Intent(this@Career_Result_Activity, AccountActivity::class.java)
-            startActivity(i)
+            if (currentUser?.isAnonymous == false){
+                val i= Intent(this, AccountActivity::class.java)
+                startActivity(i)
+            }
+            else{
+                Toast.makeText(this@Career_Result_Activity,"익명 로그인의 경우 해당 기능을 이용할 수 없습니다", Toast.LENGTH_SHORT).show()
+            }
         }
         binding.check.setOnClickListener{// 다른 결과 확인
             val intent = Intent(this, another_result::class.java)

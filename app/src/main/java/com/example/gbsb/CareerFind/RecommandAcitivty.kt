@@ -43,6 +43,9 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
         if (currentUser?.isAnonymous == false){
             loadDataFromFirebase()
         }
+        else{
+            Toast.makeText(this@RecommandAcitivty,"현재 익명 로그인이므로 검사 결과가 서버에 저장 되지 않습니다.",Toast.LENGTH_SHORT).show()
+        }
     }
 
 
@@ -122,7 +125,7 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
         }
         binding.id.setOnClickListener{  // 사용자 정보 창으로 넘어가기
             if (currentUser?.isAnonymous == false){
-            val i= Intent(this, AccountActivity::class.java)
+            val i= Intent(this@RecommandAcitivty, AccountActivity::class.java)
                 startActivity(i)
             }
             else{

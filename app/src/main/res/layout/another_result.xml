@@ -22,17 +22,18 @@
             android:src="@drawable/arrow_back"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         <TextView
-            android:id="@+id/textView"
             style="@style/SubpageTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:text="전체 결과" />
         <ImageView
-            android:id="@+id/imageButton2"
+            android:id="@+id/id"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/baseline_account_circle_24" />
 
     </LinearLayout>
 
