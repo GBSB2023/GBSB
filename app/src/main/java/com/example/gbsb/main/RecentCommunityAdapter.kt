@@ -41,6 +41,7 @@ class RecentCommunityAdapter(private var items : ArrayList<Board>) : RecyclerVie
         holder.binding.apply {
             recentCommunityTitle.text = items[position].name
             recentCommunityTime.text = items[position].date.slice(timeSliceRange)
+            recentCommunityLikeNum.text = items[position].like.toString()
             recentCommunityCommentNum.text = items[position].comment.toString()
         }
     }

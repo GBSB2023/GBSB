@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="40dp">
+    android:layout_height="28dp">
 
     <TextView
         android:id="@+id/recentCommunityTitle"
@@ -23,11 +23,37 @@
         android:layout_marginEnd="16dp"
         android:text="06-10 13:45"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@id/recentCommunityLikeImg"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+<!--    Like number-->
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/recentCommunityLikeImg"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/likeimg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/recentCommunityLikeNum"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/recentCommunityLikeNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/recentCommunityCommentImg"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+<!--    Comment number-->
+    <ImageView
+        android:id="@+id/recentCommunityCommentImg"
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_marginEnd="8dp"
@@ -41,7 +67,7 @@
         android:id="@+id/recentCommunityCommentNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="8dp"
         android:text="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
