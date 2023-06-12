@@ -40,8 +40,7 @@ class CommunityActivity : AppCompatActivity() {
     private fun initBtn() {
         binding.apply {
             registerBack.setOnClickListener {
-                val i= Intent(this@CommunityActivity, MainActivity::class.java)
-                startActivity(i)
+                onBackPressed()
             }
         }
     }
@@ -54,4 +53,11 @@ class CommunityActivity : AppCompatActivity() {
     }
 
 
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }

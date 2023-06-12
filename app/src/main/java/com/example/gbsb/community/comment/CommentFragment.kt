@@ -123,7 +123,12 @@ class CommentFragment : Fragment() {
                 }
             }
             boardLikebtn.setOnClickListener {
-                checkLike()
+                val checkUser = FirebaseAuth.getInstance().currentUser
+                if(checkUser?.isAnonymous==true){ // 익명 사용자일 경우
+                    Toast.makeText(context, "익명 로그인의 경우 해당 기능을 이용할 수 없습니다.", Toast.LENGTH_LONG).show()
+                }else{
+                    checkLike()
+                }
             }
             boardDeletebtn.setOnClickListener {
                 var userRef = communitydb.child(boardId).child("uid")
@@ -177,7 +182,7 @@ class CommentFragment : Fragment() {
         if(!isLikeBtnBoard)
             return
         isLikeBtnBoard=false
-        var likeRef = likedb.child(boardId).child("like")
+        var likeRef = likedb.child(boardId).child(uid).child("like")
 
         likeRef.get().addOnCompleteListener {
                 task->
@@ -259,7 +264,7 @@ class CommentFragment : Fragment() {
             }
         })
 
-        var likeRef = likedb.child(boardId).child("like")
+        var likeRef = likedb.child(boardId).child(uid).child("like")
         likeRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
@@ -321,10 +326,16 @@ class CommentFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 if(!isLikeBtnComment)
                     return
+                val checkUser = FirebaseAuth.getInstance().currentUser
+                if(checkUser?.isAnonymous==true){ // 익명 사용자일 경우
+                    Toast.makeText(context, "익명 로그인의 경우 해당 기능을 이용할 수 없습니다.", Toast.LENGTH_LONG).show()
+                    return
+                }
                 isLikeBtnComment=false
+
                 val commentId = adapter.getItem(position).commentid
                 var count = adapter.getItem(position).like
-                var likeRef = likedb.child(boardId+commentId).child("like")
+                var likeRef = likedb.child(boardId+commentId).child(uid).child("like")
                 likeRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (!snapshot.exists()) {
