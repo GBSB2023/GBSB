@@ -1,10 +1,10 @@
 package com.example.gbsb.login
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +45,11 @@ class LoginFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         accountdb = Firebase.database.getReference("Accounts")
         infodb = Firebase.database.getReference("Info")
+
+        val currentUser = auth!!.currentUser
+        if(currentUser!=null&&currentUser.isAnonymous==false){
+            moveMainPage(currentUser)
+        }
 
         // google 로그인
         //GoogleSignInClient 객체 초기화
@@ -154,11 +159,10 @@ class LoginFragment : Fragment() {
             ?.addOnCompleteListener {
                     task ->
                 if(task.isSuccessful){
-                    // Creating a user account
+                    saveData(email)
                     moveMainPage(task.result?.user)
                 }
                 else{
-                    // Show the error message
                     Toast.makeText(activity, task.exception?.message, Toast.LENGTH_LONG).show()
                 }
             }
@@ -171,6 +175,13 @@ class LoginFragment : Fragment() {
             startActivity(Intent(activity, MainActivity::class.java))
             requireActivity().finish()
         }
+    }
+
+    private fun saveData(loginEmail :String) {
+        val pref = requireContext().getSharedPreferences("userEmail", MODE_PRIVATE)
+        val edit = pref.edit()
+        edit.putString("email", loginEmail)
+        edit.apply()
     }
 
     override fun onDestroyView() {
