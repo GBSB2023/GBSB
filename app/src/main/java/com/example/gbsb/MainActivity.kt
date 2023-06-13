@@ -13,11 +13,13 @@ import com.example.gbsb.account.AccountActivity
 import com.example.gbsb.community.CommunityActivity
 import com.example.gbsb.community.board.Board
 import com.example.gbsb.databinding.ActivityMainBinding
+import com.example.gbsb.login.LoginActivity
 import com.example.gbsb.main.RecentCommunityAdapter
 import com.example.gbsb.main.TodayScheduleAdapter
 import com.example.gbsb.todolist.Schedule
 import com.example.gbsb.todolist.TodolistActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -40,6 +42,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var communityDB:DatabaseReference
     private var isAnonymousUser = false
 
+    var auth: FirebaseAuth?= null
+    lateinit var currentUser: FirebaseUser
+
     companion object {
         private lateinit var rdb: DatabaseReference
 
@@ -61,6 +66,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        auth = FirebaseAuth.getInstance()
+        currentUser=auth!!.currentUser!!
 
         initLayout()
     }
@@ -268,7 +276,28 @@ class MainActivity : AppCompatActivity() {
             accountBtn.setOnClickListener {
 
                 if(isAnonymousUser){ // 익명 사용자일 경우
-                    Toast.makeText(this@MainActivity, "익명 로그인의 경우 해당 기능을 이용할 수 없습니다.", Toast.LENGTH_LONG).show()
+                    val builder = AlertDialog.Builder(this@MainActivity)
+                    builder.setTitle("익명 회원의 경우 해당 기능을 이용할 수 없습니다. 로그인 화면으로 이동할까요?")
+                    builder.setCancelable(false)
+                    builder.setPositiveButton("Yes") { dialog, which ->
+                        if (currentUser.isAnonymous){
+                            currentUser.delete().addOnCompleteListener {
+                                    task->
+                                if(!task.isSuccessful){
+                                    Toast.makeText(this@MainActivity, "익명 회원 삭제 중 에러 발생", Toast.LENGTH_LONG).show()
+                                }
+                            }
+                            val i= Intent(this@MainActivity, LoginActivity::class.java)
+                            startActivity(i)
+                            finish()
+                        }
+                    }
+
+                    builder.setNegativeButton("No") { dialog, which ->
+                        // Do nothing
+                    }
+
+                    builder.show()
                 }else{
                     val i= Intent(this@MainActivity, AccountActivity::class.java)
                     startActivity(i)
@@ -295,6 +324,14 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle("GBSB를 종료할까요?")
         builder.setCancelable(false)
         builder.setPositiveButton("Yes") { dialog, which ->
+            if (currentUser.isAnonymous){
+                currentUser.delete().addOnCompleteListener {
+                        task->
+                    if(!task.isSuccessful){
+                        Toast.makeText(this@MainActivity, "익명 회원 삭제 중 에러 발생", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
             moveTaskToBack(true) // 태스크를 백그라운드로 이동
             finishAndRemoveTask() // 액티비티 종료 + 태스크 리스트에서 지우기
             exitProcess(0)
