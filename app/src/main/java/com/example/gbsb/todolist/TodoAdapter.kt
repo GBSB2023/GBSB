@@ -2,8 +2,10 @@ package com.example.gbsb.todolist
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gbsb.R
@@ -61,12 +63,12 @@ class TodoAdapter(options: FirebaseRecyclerOptions<Schedule>)
             time.text = dateTimeStr
             todayScheduleDone.isChecked = doneValue
 
-            if(doneValue)
-                slideLayout.backgroundTintList = ColorStateList.valueOf(
-                    ContextCompat.getColor(this.root.context, R.color.todo_done_schedule_bg) )
-            else
-                slideLayout.backgroundTintList = ColorStateList.valueOf(
-                    ContextCompat.getColor(this.root.context, R.color.todo_default_schedule_bg) )
+            if(doneValue){
+                content.paintFlags = content.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }
+            else{
+                content.paintFlags = content.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            }
         }
     }
 
