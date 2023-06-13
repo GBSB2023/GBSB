@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gbsb.MainActivity
+import com.example.gbsb.account.AccountActivity
 import com.example.gbsb.databinding.ActivityTodolistBinding
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DataSnapshot
@@ -150,6 +151,12 @@ class TodolistActivity : AppCompatActivity(),
             // BackBtn
             backBtn.setOnClickListener {
                 val intent = Intent(this@TodolistActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+
+            // Account Click
+            todoListAccountBtn.setOnClickListener {
+                val intent = Intent(this@TodolistActivity, AccountActivity::class.java)
                 startActivity(intent)
             }
         }
