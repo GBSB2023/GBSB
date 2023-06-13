@@ -28,6 +28,7 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
 
     companion object {
         val RecommandUserList: ArrayList<RecommandUser> = ArrayList()
+        val RecommandUserListReverse: ArrayList<RecommandUser> = ArrayList()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +39,7 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
         auth = FirebaseAuth.getInstance()
         databaseRef = Firebase.database.getReference("Career")
 
+
         initLayout()
         inputData()
         if (currentUser?.isAnonymous == false){
@@ -47,6 +49,12 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
             Toast.makeText(this@RecommandAcitivty,"현재 익명 로그인이므로 검사 결과가 서버에 저장 되지 않습니다.",Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun reverseRecommandUserList() {
+        RecommandUserListReverse.clear()
+        RecommandUserListReverse.addAll(RecommandUserList.reversed())
+    }
+
 
 
     private fun loadDataFromFirebase() {
@@ -65,9 +73,9 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
                             RecommandUserList.add(user)
                         }
                     }
+                    reverseRecommandUserList()
                     adapter.notifyDataSetChanged()
                 }
-
                 override fun onCancelled(databaseError: DatabaseError) {
                     Toast.makeText(this@RecommandAcitivty, "오류 발생", Toast.LENGTH_SHORT).show()
                 }
@@ -85,6 +93,7 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
                     // 성공적으로 데이터가 저장되었을 때의 처리
                     Log.d("Firebase", "Data saved successfully")
                     RecommandUserList.add(careerData) // RecommandUserList에 데이터 추가
+                    reverseRecommandUserList()
                     adapter.notifyDataSetChanged() // 데이터 변경 알림
                 }
                 .addOnFailureListener { exception ->
@@ -94,9 +103,6 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
         }
     }
 
-
-
-
     fun inputData() {
         val receivedData = intent.getStringExtra("RecommandUser")
         if (receivedData != null) {
@@ -104,11 +110,10 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
             val currentDate = dateFormat.format(Date())
             val newRecommandUser = RecommandUser(receivedData, currentDate)
             RecommandUserList.add(newRecommandUser)
-
+            reverseRecommandUserList()
             if (currentUser?.isAnonymous == false) {
                 saveCareerData(newRecommandUser)
             }
-
         }
     }
 
@@ -116,7 +121,7 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
     private fun initLayout(){
         binding.recyclerview.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.VERTICAL,false)
-        adapter = MyAdapter(RecommandUserList)
+        adapter = MyAdapter(RecommandUserListReverse)
 
         binding.back.setOnClickListener{ // 메인화면으로 돌아가기
             val intent = Intent(this, MainActivity::class.java)
