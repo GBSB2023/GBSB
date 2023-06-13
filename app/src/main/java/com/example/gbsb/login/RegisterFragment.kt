@@ -170,7 +170,7 @@ class RegisterFragment : Fragment() {
 
     private fun createUserId() {
         var email = binding!!.registerId.text.toString().trim()
-        email += "@gsbs.com"
+        email += "@gbsb.com"
         var password = binding!!.registerPw.text.toString().trim()
         var name = binding!!.registerName.text.toString().trim()
         var nickname = binding!!.registerNickname.text.toString().trim()
