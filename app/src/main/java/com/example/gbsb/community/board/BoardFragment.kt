@@ -99,7 +99,7 @@ class BoardFragment : Fragment() {
     }
 
     private fun settingFromDB() {
-        val query = communitydb.limitToLast(100)
+        val query = communitydb.orderByChild("date").limitToLast(100)
         val option = FirebaseRecyclerOptions.Builder<Board>()
             .setQuery(query, Board::class.java)
             .build()
