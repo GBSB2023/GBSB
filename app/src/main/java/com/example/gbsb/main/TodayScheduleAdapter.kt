@@ -2,6 +2,7 @@ package com.example.gbsb.main
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -43,12 +44,12 @@ class TodayScheduleAdapter(private var items : ArrayList<Schedule>) : RecyclerVi
             todayScheduleTime.text = items[position].time
             todayScheduleDone.isChecked = items[position].done
 
+
             if(items[position].done){
-                todayRowLayout.backgroundTintList = ColorStateList.valueOf(
-                    ContextCompat.getColor(this.root.context, R.color.todo_done_schedule_bg) )
-            }else{
-                todayRowLayout.backgroundTintList = ColorStateList.valueOf(
-                    ContextCompat.getColor(this.root.context, R.color.todo_default_schedule_bg) )
+                todayScheduleContent.paintFlags = todayScheduleContent.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }
+            else{
+                todayScheduleContent.paintFlags = todayScheduleContent.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
             }
 
 
