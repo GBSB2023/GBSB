@@ -1,103 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="16dp"
     tools:context=".todolist.TodoEditFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/todoDialogTitle"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:text="날짜"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_date_picker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_date_picker" />
 
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:text="date"
-            app:layout_constraintBottom_toBottomOf="@+id/edit_date_picker"
-            app:layout_constraintStart_toStartOf="@+id/time_title"
-            app:layout_constraintTop_toTopOf="@+id/edit_date_picker"
-            app:layout_constraintVertical_bias="0.477" />
+    <DatePicker
+        android:id="@+id/edit_date_picker"
+        android:layout_width="250dp"
+        android:layout_height="106dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <DatePicker
-            android:id="@+id/edit_date_picker"
-            android:layout_width="250dp"
-            android:layout_height="106dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/edit_content"
+        android:layout_width="250dp"
+        android:layout_height="58dp"
+        android:ems="10"
+        android:hint="내용을 입력하세요 "
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/content_title"
+        app:layout_constraintTop_toBottomOf="@+id/edit_timePicker" />
 
-        <EditText
-            android:id="@+id/edit_content"
-            android:layout_width="250dp"
-            android:layout_height="58dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:ems="10"
-            android:hint="content"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_timePicker" />
+    <TextView
+        android:id="@+id/content_title"
+        style="@style/todoDialogTitle"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:text="내용"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_content"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/edit_content" />
 
-        <TextView
-            android:id="@+id/content_title"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:text="content"
-            app:layout_constraintBottom_toBottomOf="@+id/edit_content"
-            app:layout_constraintStart_toStartOf="@+id/done_title"
-            app:layout_constraintTop_toTopOf="@+id/edit_content"
-            app:layout_constraintVertical_bias="0.589" />
+    <TextView
+        android:id="@+id/done_title"
+        style="@style/todoDialogTitle"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_marginTop="32dp"
+        android:text="완료"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/content_title" />
 
-        <TextView
-            android:id="@+id/done_title"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:text="done"
-            tools:layout_editor_absoluteX="45dp"
-            tools:layout_editor_absoluteY="354dp" />
+    <TimePicker
+        android:id="@+id/edit_timePicker"
+        android:layout_width="250dp"
+        android:layout_height="106dp"
+        android:timePickerMode="spinner"
+        app:layout_constraintStart_toEndOf="@+id/time_title"
+        app:layout_constraintTop_toBottomOf="@+id/edit_date_picker" />
 
-        <TimePicker
-            android:id="@+id/edit_timePicker"
-            android:layout_width="250dp"
-            android:layout_height="106dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:timePickerMode="spinner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_date_picker" />
+    <TextView
+        android:id="@+id/time_title"
+        style="@style/todoDialogTitle"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:text="시간"
+        app:layout_constraintBottom_toTopOf="@+id/edit_content"
+        app:layout_constraintStart_toStartOf="@+id/content_title"
+        app:layout_constraintTop_toTopOf="@+id/edit_timePicker" />
 
-        <TextView
-            android:id="@+id/time_title"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_row="2"
-            android:layout_column="0"
-            android:text="time"
-            app:layout_constraintBottom_toBottomOf="@+id/edit_timePicker"
-            app:layout_constraintStart_toStartOf="@+id/content_title"
-            app:layout_constraintTop_toTopOf="@+id/edit_timePicker"
-            app:layout_constraintVertical_bias="0.495" />
+    <CheckBox
+        android:id="@+id/edit_CheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/done_title"
+        app:layout_constraintStart_toEndOf="@+id/done_title"
+        app:layout_constraintTop_toTopOf="@+id/done_title" />
 
-        <CheckBox
-            android:id="@+id/edit_CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/done_title"
-            app:layout_constraintStart_toStartOf="@+id/edit_content"
-            app:layout_constraintTop_toTopOf="@+id/done_title" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
