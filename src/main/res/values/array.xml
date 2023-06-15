@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="my_array">
+        <item>모바일 앱</item>
+        <item>웹</item>
+        <item>인공지능</item>
+        <item>클라우드</item>
+        <item>게임</item>
+        <item>보안</item>
+        <item>데이터베이스</item>
+        <item>전산시스템</item>
+    </string-array>
+</resources>

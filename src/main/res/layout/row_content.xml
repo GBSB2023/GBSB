@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rowContent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/contentName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="글 제목/본문"
+        android:textAlignment="center"
+        android:background="@drawable/button_style2"
+        android:textColor="#164B03"
+        android:textStyle="bold"
+        style="@style/Widget.AppCompat.Button.Small"/>
+    <LinearLayout
+        android:id="@+id/descriptionLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
+
+        <TextView
+            android:id="@+id/contentDate"
+            style="@style/smallButton"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="날짜"
+            tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/contentWriter"
+            style="@style/smallButton"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="작성자"
+            tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            style="@style/smallButton2">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:src="@drawable/likeimg"/>
+            <TextView
+                android:id="@+id/contentLike"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="10sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="좋아요"
+                tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            style="@style/smallButton2">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:src="@drawable/recent_comment"/>
+            <TextView
+                android:id="@+id/contentComment"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="10sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="댓글수"
+                tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"/>
+</LinearLayout>
