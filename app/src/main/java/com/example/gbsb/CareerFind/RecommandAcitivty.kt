@@ -138,8 +138,9 @@ class RecommandAcitivty : AppCompatActivity() { //진로 추천 화면
             }
         }
         binding.add.setOnClickListener{ // 진로 탐색 시작
-            val intent = Intent(this, FindCourse::class.java)
+            val intent = Intent(this, Career_Exploration::class.java)
             startActivity(intent)
+            finish()
         }
 
         adapter.btn1ClickListener = object:MyAdapter.OnBtn1ClickListener{  // 첫번째 언어 설명 페이지로 이동

@@ -37,7 +37,7 @@ class Career_Result_Activity : AppCompatActivity() {
     private fun initLayout() {
         val type = setInfor()
         binding.back.setOnClickListener{// 뒤로 가기
-            val intent = Intent(this, FindCourse::class.java)
+            val intent = Intent(this, RecommandAcitivty::class.java)
             startActivity(intent)
             finish()
         }
@@ -137,13 +137,13 @@ class Career_Result_Activity : AppCompatActivity() {
             "2" -> SI++
             "3" -> Game++
             "4" -> Cloud++
-            "5" -> Security++
+            "5" -> App++
         }
         when(userChoiceList[2]){
             "1" -> Web++
-            "2" -> SI++
+            "2" -> Security++
             "3" -> AI++
-            "4" -> Security++
+            "4" -> App++
             "5" -> Game++
         }
         when(userChoiceList[3]){
@@ -155,7 +155,7 @@ class Career_Result_Activity : AppCompatActivity() {
         }
         when(userChoiceList[4]){
             "1" -> SI++
-            "2" -> Web++
+            "2" -> Cloud++
             "3" -> DataBase++
             "4" -> Security++
             "5" -> AI++
@@ -165,7 +165,7 @@ class Career_Result_Activity : AppCompatActivity() {
             "2" -> AI++
             "3" -> SI++
             "4" -> Web++
-            "5" -> Security++
+            "5" -> App++
         }
 
         return findMaxValue()
@@ -182,7 +182,7 @@ class Career_Result_Activity : AppCompatActivity() {
             App -> "App"
             Cloud -> "Cloud"
             Game -> "Game"
-            else -> ""
+            else -> "App"
         }
     }
 }

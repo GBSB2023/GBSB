@@ -60,7 +60,7 @@ class Career_Exploration : AppCompatActivity() {  // 진로 탐색 화면 (질�
             }
         }
         binding.back.setOnClickListener {//뒤로 가기
-            val intent = Intent(this, FindCourse::class.java)
+            val intent = Intent(this, RecommandAcitivty::class.java)
             startActivity(intent)
             finish()
         }

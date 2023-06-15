@@ -2,14 +2,13 @@ package com.example.gbsb
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 
 class questionFragment : Fragment() { // 질문 Fragment
     val questionList : ArrayList<question_List> = ArrayList()
@@ -76,11 +75,11 @@ class questionFragment : Fragment() { // 질문 Fragment
     fun inputData(){ // 질문 데이터 삽입
         questionList.add(question_List("프로그램을 사용하다가 오류을 발견했다.\n모두의 중요도는 동일하다고 할때, 어떤 오류를 먼저 고치고 싶은가?",
             "1. 서브 페이지 화면 로딩 시간이 딜레이 되는 현상","2. 데이터 분석을 통한 맞춤형 광고 서비스 오류",
-            "3. 홈페이지 화면의 뒤틀린 이미, 폰트 깨짐 현상","4. (개인정보 보호법에 저촉되지 않는 상황) 민감 정보가 노출되는 상황",
+            "3. 홈페이지 화면의 뒤틀린 이미지, 폰트 깨짐 현상","4. (개인정보 보호법에 저촉되지 않는 상황) 민감 정보가 노출되는 상황",
             "5. 오류가 발생했을때, 할 수 있는 게임"))
         questionList.add(question_List("여러분의 서비스가 성공 했을때, 서비스를 성공시킨 요소는?",
             "1. 데이터 분석을 통한 효과적인 개인 맞춤형 서비스","2. 화려하거나 품격있는 디자인, 흥미로운 콘텐츠 제작",
-            "3. 게임적인 요소 도입","4. 안정적인 서비스 응용","5. 믿을수 있는 정보 관리"))
+            "3. 게임적인 요소 도입","4. 안정적인 서비스 응용","5. 핸드폰에서 손쉽게 사용"))
         questionList.add(question_List("당신은 음료 회사의 잘나가는 직원으로, 사장님이 당신에게 신메뉴 개발을 일임하겠다고 합니다. 당신의 음료 개발 방법은?"
             ,"1. 손님들의 눈길을 확 끌어보자! 요즘 유행하는 화려한 디자인으로 포장한 음료!",
             "2. 고객센터가 최우선! 프렌차이즈 매장마다 레시피가 다르면 안되니까 정확한 용량과 제조법은 필수!",
