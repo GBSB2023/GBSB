@@ -290,7 +290,10 @@ class LoginFragment : Fragment() {
 
     private fun saveUserToDB(user: FirebaseUser) {
         val email = user.email.toString().trim()
-        val name = user.displayName.toString().trim()
+        var name = user.displayName.toString().trim()
+        if(name=="null"){
+            name = "익명"
+        }
         val uId = user.uid
 
         val userRef = accountdb.child(uId).setValue(Account(email,"",name,"건국이",uId))

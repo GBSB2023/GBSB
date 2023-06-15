@@ -81,39 +81,43 @@ class CommentAddFragment : Fragment() {
 
             addComplete.setOnClickListener {
                 content = addComment.text.toString()
-                var commentId = (Random().nextInt(10000000)+10000000).toString()
-                var comment: UserComment = UserComment(writer, content, date, 0, uid, commentId)
-                commentdb.child(commentId).setValue(comment)
-                    .addOnCompleteListener {
+                if(content.isNullOrEmpty()){
+                    Toast.makeText(context, "내용을 입력하세요.", Toast.LENGTH_LONG).show()
+                }else{
+                    var commentId = (Random().nextInt(10000000)+10000000).toString()
+                    var comment: UserComment = UserComment(writer, content, date, 0, uid, commentId)
+                    commentdb.child(commentId).setValue(comment)
+                        .addOnCompleteListener {
+                                task->
+                            if(!task.isSuccessful){
+                                Toast.makeText(activity, "댓글 DB 등록 실패", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    var userRef = communitydb.child(boardId).child("comment")
+                    userRef.get().addOnCompleteListener {
                             task->
-                        if(!task.isSuccessful){
-                            Toast.makeText(activity, "댓글 DB 등록 실패", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                var userRef = communitydb.child(boardId).child("comment")
-                userRef.get().addOnCompleteListener {
-                        task->
-                    if(task.isSuccessful){
-                        val snapshot = task.result
-                        if(snapshot.exists()){
-                            val commentCount = task.result.value.toString().toInt()+1
-                            userRef.setValue(commentCount)
-                                .addOnCompleteListener {
-                                        task->
-                                    if(!task.isSuccessful){
-                                        Toast.makeText(activity, "board comment DB 수정 실패2", Toast.LENGTH_SHORT).show()
+                        if(task.isSuccessful){
+                            val snapshot = task.result
+                            if(snapshot.exists()){
+                                val commentCount = task.result.value.toString().toInt()+1
+                                userRef.setValue(commentCount)
+                                    .addOnCompleteListener {
+                                            task->
+                                        if(!task.isSuccessful){
+                                            Toast.makeText(activity, "board comment DB 수정 실패2", Toast.LENGTH_SHORT).show()
+                                        }
                                     }
-                                }
+                            }
+                        }else{
+                            Toast.makeText(activity, "board comment DB 수정 실패", Toast.LENGTH_SHORT).show()
                         }
-                    }else{
-                        Toast.makeText(activity, "board comment DB 수정 실패", Toast.LENGTH_SHORT).show()
                     }
+                    val fragment = requireActivity().supportFragmentManager.beginTransaction()
+                    val commentFragment = CommentFragment()
+                    fragment.addToBackStack(null)
+                    fragment.replace(R.id.contentLayout, commentFragment)
+                    fragment.commit()
                 }
-                val fragment = requireActivity().supportFragmentManager.beginTransaction()
-                val commentFragment = CommentFragment()
-                fragment.addToBackStack(null)
-                fragment.replace(R.id.contentLayout, commentFragment)
-                fragment.commit()
             }
         }
     }

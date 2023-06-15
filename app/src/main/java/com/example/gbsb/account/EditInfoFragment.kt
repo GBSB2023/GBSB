@@ -129,7 +129,7 @@ class EditInfoFragment:DialogFragment() {
         var isValid = true
 
         binding.apply {
-            if(!binding.editCall.error.isNullOrEmpty()||!binding.editBirth.error.isNullOrEmpty()){
+            if(!editCall.error.isNullOrEmpty()||!editBirth.error.isNullOrEmpty()){
                 isValid = false
             }
         }
