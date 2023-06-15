@@ -75,15 +75,20 @@ class BoardAddFragment : Fragment() {
 
             addComplete.setOnClickListener {
                 name = addName.text.toString()
-                content = addContent.text.toString()
-                category = addSpinner.selectedItem.toString()
-                var boardId = Random().nextInt(10000000).toString()
-                var board:Board=Board(name, content, date, writer, category, 0, 0, boardId, uid)
-                communitydb.child(boardId).setValue(board)
-                val fragment = requireActivity().supportFragmentManager.beginTransaction()
-                val boardFragment = BoardFragment()
-                fragment.replace(R.id.contentLayout, boardFragment)
-                fragment.commit()
+                if(name.isNullOrEmpty()){
+                    Toast.makeText(context, "제목은 반드시 입력하셔야 합니다.", Toast.LENGTH_LONG).show()
+                }else{
+                    content = addContent.text.toString()
+                    category = addSpinner.selectedItem.toString()
+                    var boardId = Random().nextInt(10000000).toString()
+                    var board:Board=Board(name, content, date, writer, category, 0, 0, boardId, uid)
+                    communitydb.child(boardId).setValue(board)
+                    val fragment = requireActivity().supportFragmentManager.beginTransaction()
+                    val boardFragment = BoardFragment()
+                    fragment.addToBackStack(null)
+                    fragment.replace(R.id.contentLayout, boardFragment)
+                    fragment.commit()
+                }
             }
         }
     }

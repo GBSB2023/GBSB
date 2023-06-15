@@ -44,7 +44,7 @@ class BoardFragment : Fragment() {
         activityBinding = (activity as? CommunityActivity)!!.binding
         Handler().postDelayed({
             hideProgressDialog()
-        },500)
+        },300)
         return binding!!.root
     }
 

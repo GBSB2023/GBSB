@@ -316,7 +316,7 @@ class CommentFragment : Fragment() {
     }
 
     private fun settingComment() {
-        val query = commentdb.limitToLast(50)
+        val query = commentdb.orderByChild("date").limitToLast(50)
         val option = FirebaseRecyclerOptions.Builder<UserComment>()
             .setQuery(query, UserComment::class.java)
             .build()

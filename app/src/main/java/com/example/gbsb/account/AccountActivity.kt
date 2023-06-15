@@ -2,6 +2,7 @@ package com.example.gbsb.account
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -32,6 +33,7 @@ class AccountActivity : AppCompatActivity() {
         binding = ActivityAccountBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.infoIntroduce.movementMethod=ScrollingMovementMethod()
         auth = FirebaseAuth.getInstance()
         initBtn()
         initAccount()

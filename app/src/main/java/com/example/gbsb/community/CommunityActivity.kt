@@ -55,9 +55,15 @@ class CommunityActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {
-            val intent = Intent(this, CommunityActivity::class.java)
-            startActivity(intent)
-            finish()
+            if (supportFragmentManager.backStackEntryCount==2){
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+                val intent = Intent(this, CommunityActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         } else {
             super.onBackPressed()
         }
