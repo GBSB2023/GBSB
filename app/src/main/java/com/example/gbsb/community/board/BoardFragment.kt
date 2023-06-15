@@ -93,8 +93,8 @@ class BoardFragment : Fragment() {
                     Toast.makeText(context, "익명 로그인의 경우 해당 기능을 이용할 수 없습니다.", Toast.LENGTH_LONG).show()
                 }else{
                     val fragment = requireActivity().supportFragmentManager.beginTransaction()
-                    fragment.addToBackStack(null)
                     val boardAddFragment = BoardAddFragment()
+                    fragment.addToBackStack(null)
                     fragment.replace(R.id.contentLayout, boardAddFragment)
                     fragment.commit()
                 }

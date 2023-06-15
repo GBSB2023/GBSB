@@ -116,7 +116,6 @@ class CommentFragment : Fragment() {
                     Toast.makeText(context, "익명 로그인의 경우 해당 기능을 이용할 수 없습니다.", Toast.LENGTH_LONG).show()
                 }else{
                     val fragment = requireActivity().supportFragmentManager.beginTransaction()
-                    fragment.addToBackStack(null)
                     val commentAddFragment = CommentAddFragment()
                     fragment.replace(R.id.contentLayout, commentAddFragment)
                     fragment.commit()
@@ -140,7 +139,7 @@ class CommentFragment : Fragment() {
                             val boarduid = task.result.value.toString()
                             if(boarduid == uid){
                                 val dialogBuilder = AlertDialog.Builder(context)
-                                dialogBuilder.setMessage("댓글을 삭제하시겠습니까?")
+                                dialogBuilder.setMessage("게시글을 삭제하시겠습니까?")
                                     .setPositiveButton("삭제하기", DialogInterface.OnClickListener{
                                             _, _ ->
                                         communitydb.child(boardId).removeValue()
@@ -158,9 +157,9 @@ class CommentFragment : Fragment() {
                                                 }
                                             }
                                         val fragment = requireActivity().supportFragmentManager.beginTransaction()
-                                        fragment.addToBackStack(null)
                                         val boardFragment = BoardFragment()
                                         fragment.replace(R.id.contentLayout, boardFragment)
+                                        fragment.remove(this@CommentFragment)
                                         fragment.commit()
                                     })
                                     .setNegativeButton("취소", null)
