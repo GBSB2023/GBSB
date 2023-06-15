@@ -16,6 +16,7 @@ import com.example.gbsb.databinding.ActivityMainBinding
 import com.example.gbsb.login.LoginActivity
 import com.example.gbsb.main.RecentCommunityAdapter
 import com.example.gbsb.main.TodayScheduleAdapter
+import com.example.gbsb.main.TodayScheduleDecorator
 import com.example.gbsb.todolist.Schedule
 import com.example.gbsb.todolist.TodolistActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -219,6 +220,9 @@ class MainActivity : AppCompatActivity() {
 
             }
             todayScheduleRecyclerView.adapter = todayScheduleAdapter
+            // set vertical spacing between rows
+            val itemDecorator = TodayScheduleDecorator(8)
+            todayScheduleRecyclerView.addItemDecoration(itemDecorator)
 
 
             // RecentCommunity Adapter
