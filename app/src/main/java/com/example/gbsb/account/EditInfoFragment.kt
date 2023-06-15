@@ -96,6 +96,7 @@ class EditInfoFragment:DialogFragment() {
                 } else {
                     callText.error = "010-1234-5678 또는 02-1234-5678 과 같은 전화번호 형식을 입력해주세요."
                 }
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
             }
 
         })
@@ -117,7 +118,7 @@ class EditInfoFragment:DialogFragment() {
                 } else {
                     birthText.error = "2000-01-01 과 같은 생일 형식으로 입력해주세요."
                 }
-
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
             }
 
         })

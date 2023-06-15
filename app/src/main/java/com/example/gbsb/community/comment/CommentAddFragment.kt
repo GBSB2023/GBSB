@@ -111,6 +111,7 @@ class CommentAddFragment : Fragment() {
                 }
                 val fragment = requireActivity().supportFragmentManager.beginTransaction()
                 val commentFragment = CommentFragment()
+                fragment.addToBackStack(null)
                 fragment.replace(R.id.contentLayout, commentFragment)
                 fragment.commit()
             }
