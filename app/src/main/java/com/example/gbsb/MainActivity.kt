@@ -141,11 +141,9 @@ class MainActivity : AppCompatActivity() {
                         todayList.add(it)
                     }
                 }
-                val newList = todayList.filter { schedule ->
-                    schedule.time >= curTime
-                }.sortedBy { schedule ->
+                val newList = todayList.sortedBy { schedule ->
                     schedule.time
-                }.take(3)
+                }
 
 
                 if(newList.isEmpty()){
@@ -249,20 +247,6 @@ class MainActivity : AppCompatActivity() {
                     intent.putExtra("AddBtnClicked", false)
                     startActivity(intent)
                 }
-            }
-
-            // TodoListAddBtn Click
-            todoListAddBtn.setOnClickListener {
-
-                if(isAnonymousUser){
-                    Toast.makeText(this@MainActivity, "로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT).show()
-                }else{
-                    val intent = Intent(this@MainActivity, TodolistActivity::class.java)
-                    intent.putExtra("AddBtnClicked", true)
-                    startActivity(intent)
-                }
-
-
             }
 
             // CommunityBtn Click

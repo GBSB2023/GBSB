@@ -41,11 +41,6 @@ class TodolistActivity : AppCompatActivity(),
         setContentView(binding.root)
 
         initLayout()
-        if(intent.getBooleanExtra("AddBtnClicked", false)){
-            val dialogFragment = TodoDialogFragment.newInstance(selectedDateTime)
-
-            dialogFragment.show(supportFragmentManager, "todo_item_add_dialog")
-        }
     }
 
     override fun onStart() {
