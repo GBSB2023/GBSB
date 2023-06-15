@@ -91,7 +91,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:overScrollMode="never"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="추가하려면 클릭하세요"
+                android:text="오늘 일정이 없습니다"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -114,18 +113,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/todoListAddBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            app:backgroundTint="#00FFFFFF"
-            app:fabCustomSize="48dp"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="@id/todoListInnerArea"
-            app:layout_constraintEnd_toEndOf="@id/todoListInnerArea"
-            app:srcCompat="@drawable/add" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
