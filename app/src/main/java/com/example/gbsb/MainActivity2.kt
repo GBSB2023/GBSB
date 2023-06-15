@@ -76,7 +76,6 @@ class MainActivity2 : AppCompatActivity() {
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
-                // 선택된 항목에 따라 해당하는 함수 호출
                 when (selectedItem) {
                     "모바일 앱" -> {
                         init()
@@ -106,13 +105,12 @@ class MainActivity2 : AppCompatActivity() {
                         init()
                         button7()
                     }
-                    "전산시스템" -> {
+                    "전산 시스템" -> {
                         init()
                         button8()
                     }
                 }
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // 아무 항목도 선택되지 않았을 때의 동작
             }
@@ -521,7 +519,7 @@ class MainActivity2 : AppCompatActivity() {
         binding.spinner.setSelection(3)
         binding.button1.text = "시스템 관리"
         binding.button2.text = "네트워크"
-        binding.button3.text = "Cloud 아키텍처"
+        binding.button3.text = "아키텍처"
         binding.textView1.text = "클라우드란?"
         binding.textView2.text = "클라우드 엔지니어란?"
         binding.textView3.text = "사용 언어"
@@ -979,7 +977,6 @@ class MainActivity2 : AppCompatActivity() {
         binding.button1.setOnCheckedChangeListener { group, checkedId ->
             if (binding.button1.isChecked) {
                 binding.button2.isChecked = false
-                binding.button3.isChecked = false
                 binding.textView1.text = "SI란?"
                 binding.textView2.text = "SI 개발자란?"
                 binding.textView3.text = "되기 위해서는?"
@@ -1021,7 +1018,6 @@ class MainActivity2 : AppCompatActivity() {
         binding.button2.setOnCheckedChangeListener { group, checkedId ->
             if (binding.button2.isChecked) {
                 binding.button1.isChecked = false
-                binding.button3.isChecked = false
                 binding.textView1.text = "SM란?"
                 binding.textView2.text = "SM 전문가란?"
                 binding.textView3.text = "되기 위해서는?"
