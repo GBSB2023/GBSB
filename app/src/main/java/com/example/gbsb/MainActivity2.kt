@@ -967,7 +967,7 @@ class MainActivity2 : AppCompatActivity() {
         binding.addtextView2.text = "전산 시스템 개발자는 컴퓨터시스템에서 운용되는 각종 유틸리티 소프트웨어를 설계하고 개발합니다. 운영체계를 해당 컴퓨터 하드웨어 시스템에 이식(Potting)하고 기능과 성능을 종합적으로 평가합니다.\n"
         binding.addtextView3.text = "Java, JavaScript, PHP"
         binding.bottomButton2.setOnClickListener {
-            val wikiUrl8 = "https://namu.wiki/w/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4"
+            val wikiUrl8 = "https://namu.wiki/w/%EC%BB%B4%ED%93%A8%ED%84%B0%EA%B3%B5%ED%95%99"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(wikiUrl8))
             startActivity(intent)
         }
