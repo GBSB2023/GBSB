@@ -136,8 +136,13 @@ class MainActivity2 : AppCompatActivity() {
         binding.button2.isChecked = false
         binding.button3.isChecked = false
     }
+    private fun init2(){
+        binding.button3.visibility = View.VISIBLE
+        binding.bottomButton1.visibility = View.VISIBLE
+    }
 
     private fun button1view(){
+        init2()
         binding.spinner.setSelection(0)
         binding.button1.text = "안드로이드"
         binding.button2.text = "iOS"
@@ -150,7 +155,7 @@ class MainActivity2 : AppCompatActivity() {
                     "ex) sns, 캘린더, 쇼핑, 예약 앱 등"
         binding.addtextView2.text =
             "모바일 앱 개발자는 기획자가 기획한 앱을 구체화해 스마트폰에서 사용이 가능하도록 프로그램을 개발하고 오류를 수정하고 업데이트합니다."
-        binding.addtextView3.text = "자바, 코틀린, 스위프트, 오브젝트 C"
+        binding.addtextView3.text = "Java, Kotlin, Swift, Objective-C"
         binding.bottomButton2.setOnClickListener {
             val wikiUrl1 =
                 "https://namu.wiki/w/%EB%B6%84%EB%A5%98:%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98"
@@ -176,8 +181,7 @@ class MainActivity2 : AppCompatActivity() {
                         "- 이클립스 : 자바를 비롯한 다양한 언어를 지원하는 프로그래밍 통합 개발 환경(IDE)이자 프로그래밍 도구입니다.\n" +
                         "\n" +
                         "■ 사용 언어\n" +
-                        "- 자바(Java) : 안드로이드 운영체제를 이해하고 안드로이드 환경에서 앱을 개발하기 위해서 알아야 합니다.\n" +
-                        "- 코틀린(Kotlin) : 구글에서 안드로이드 공식 언어로 지정해 많이 사용되고 있습니다."
+                        "Java, Kotlin"
                 binding.bottomButton1.visibility = View.GONE
                 binding.bottomButton2.setOnClickListener {
                     val wikiUrl11 =
@@ -206,8 +210,7 @@ class MainActivity2 : AppCompatActivity() {
                         "- Xcode : Apple의 macOS, iOS, watchOS 등의 소프트웨어 개발을 위한 통합 개발 환(IDE)입니다.\n" +
                         "\n" +
                         "■ 사용 언어\n" +
-                        "- 스위프트(Swift) : Apple의 iOS와 macOS를 위한 프로그래밍 언어입니다.\n" +
-                        "- 오브젝트 C : 애플의 iOS와 OS 운영체제에 기반한 앱 개발에 필요한 프로그밍 언어입니다."
+                        "Swift, Object C"
                 binding.bottomButton1.visibility = View.GONE
                 binding.bottomButton2.setOnClickListener {
                     val wikiUrl12 = "https://namu.wiki/w/Swift"
@@ -243,10 +246,8 @@ class MainActivity2 : AppCompatActivity() {
                         "\n" +
                         "■ 사용 언어\n" +
                         "크로스 플랫폼 지원 언어를 사용합니다.\n" +
-                        "1. 안드로이드\n" +
-                        "- Java 또는 Kotlin + 웹뷰를 사용합니다.\n" +
-                        "2. iOS\n" +
-                        "- Swift 또는 Objective-C + 웹뷰를 사용합니다."
+                        "1. 안드로이드 : Java/Kotlin + 웹뷰\n" +
+                        "2. iOS : Swift/Objective-C + 웹뷰"
                 binding.bottomButton1.visibility = View.GONE
                 binding.bottomButton2.setOnClickListener {
                     val wikiUrl13 =
@@ -261,6 +262,7 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
     private fun button2view() {
+        init2()
         binding.spinner.setSelection(1)
         binding.button1.text = "프론트엔드"
         binding.button2.text = "UX디자인"
@@ -271,7 +273,7 @@ class MainActivity2 : AppCompatActivity() {
         binding.addtextView1.text = "웹(Web)은 www(World Wide Web)의 약자로, 인터넷을 통해 정보와 자원을 공유하기 위한 전세계적인 컴퓨터 네트워크입니다. 우리는 서버로 요청하여 원하는 웹페이지를 열람할 수 있습니다.\n" +
                 "ex) 검색 사이트, 홈페이지, 쇼핑몰 등"
         binding.addtextView2.text = "웹 개발자는 웹 페이지, 웹 사이트 등을 개발합니다. 클라이언트 측과 서버 측의 개발을 담당하며, 웹 기술과 프로그래밍 언어로 동적이고 상호작용하는 WWW 기반 소프트웨어를 구축합니다."
-        binding.addtextView3.text = "HTML, CSS, JavaScript, PHP, Python"
+        binding.addtextView3.text = "HTML, CSS, JavaScript, Java, Python, PHP"
         binding.bottomButton2.setOnClickListener {
             val wikiUrl2 = "https://namu.wiki/w/%EC%9B%94%EB%93%9C%20%EC%99%80%EC%9D%B4%EB%93%9C%20%EC%9B%B9"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(wikiUrl2))
@@ -398,6 +400,7 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
     private fun button3view() {
+        init2()
         binding.spinner.setSelection(2)
         binding.button1.text = "머신 러닝"
         binding.button2.text = "사물인터넷"
@@ -468,7 +471,7 @@ class MainActivity2 : AppCompatActivity() {
                         "라이브러리, 데이터 모델, 신경망 구축\n" +
                         "\n" +
                         "■ 사용 언어\n" +
-                        "JAVA, C, Python"
+                        "Python, JAVA, C"
                 binding.bottomButton1.visibility = View.GONE
                 binding.bottomButton2.setOnClickListener {
                     val wikiUrl32 =
@@ -514,6 +517,7 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
     private fun button4view() {
+        init2()
         binding.spinner.setSelection(3)
         binding.button1.text = "시스템 관리"
         binding.button2.text = "네트워크"
@@ -633,6 +637,7 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
     private fun button5view(){
+        init2()
         binding.spinner.setSelection(4)
         binding.button1.text = "서버"
         binding.button2.text = "클라이언트"
@@ -643,9 +648,9 @@ class MainActivity2 : AppCompatActivity() {
         binding.addtextView1.text = "게임(Game)은 다양한 플랫폼에서 다양한 형태로 사용자에게 즐거움을 선사합니다. PC 게임은 컴퓨터를 기반으로 동작하며, 다양한 장르와 그래픽 품질로 인해 광범위한 게임 경험을 제공합니다. 모바일 게임은 스마트폰이나 태블릿과 같은 모바일 기기에서 플레이할 수 있으며, 간편하고 이동 중에도 즐길 수 있는 특징을 갖고 있습니다. 콘솔 게임은 특정 게임 기기(예: PlayStation, Xbox)에서 실행되는 게임으로, 강력한 하드웨어와 독특한 컨트롤러로 인해 몰입도 높은 게임 플레이를 제공합니다.\n" +
                 "ex) PC게임, 온라인 게임, 모바일 게임, 콘솔 게임 등"
         binding.addtextView2.text = "게임 개발자는 창의적인 아이디어와 기술적인 능력을 바탕으로 게임을 개발합니다. 게임의 기획, 디자인, 프로그래밍, 그래픽 및 음향 제작 등 다양한 역할을 수행합니다. 게임 개발자들은 사용자 경험을 최적화하고, 게임의 균형과 재미를 조절하여 흥미로운 게임 환경을 구축합니다. 또한, 팀원들과 협력하여 프로젝트를 관리하고, 문제를 해결하며, 시간과 예산을 효율적으로 관리하는 역할도 맡습니다. 최신 기술과 트렌드를 학습하며 게임 엔진과 도구를 사용하여 게임을 개발하고 테스트하는 것도 게임 개발자의 중요한 업무입니다. 새로운 아이디어와 혁신적인 기술을 통해 플레이어들에게 즐거움과 도전을 선사하는 역할을 수행합니다."
-        binding.addtextView3.text = "언리얼 엔진(C++, blueprint): 성능 최적화가 요구되는 대규모 고사양의 게임\n" +
-                "유니티 엔진(C#): 캐주얼 또는 모바일 게임\n" +
-                "python, Lua: 게임 플레이 로직의 빠른 변경이 필요한 경우"
+        binding.addtextView3.text = "- 언리얼 엔진(C++, blueprint): 성능 최적화가 요구되는 대규모 고사양의 게임\n" +
+                "- 유니티 엔진(C#): 캐주얼 또는 모바일 게임\n" +
+                "- Python, Lua: 게임 플레이 로직의 빠른 변경이 필요한 경우"
         binding.bottomButton2.setOnClickListener {
             val wikiUrl5 = "https://namu.wiki/w/PC%20%EA%B2%8C%EC%9D%B4%EB%B0%8D"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(wikiUrl5))
@@ -678,8 +683,7 @@ class MainActivity2 : AppCompatActivity() {
                         "5. 스케일링 및 성능 최적화: 게임 서버는 플레이어 수가 증가할 때도 안정적으로 동작해야 합니다. 확장 가능한 아키텍처를 설계하고, 성능 모니터링 및 최적화 기술을 활용하여 서버의 확장성과 성능을 유지해야 합니다.\n" +
                         "\n" +
                         "■ 사용 언어\n" +
-                        "1. C++: C++은 게임 서버 개발에 널리 사용되는 언어입니다. 이는 높은 성능과 저수준 제어가 가능하며, 메모리 관리에 대한 직접적인 제어가 가능하기 때문입니다. 게임 서버의 핵심 로직이나 네트워크 통신, 데이터베이스 연동 등에 C++을 활용하여 빠르고 효율적인 서버를 개발할 수 있습니다.\n" +
-                        "2. Python: Python은 게임 서버 개발에서 접근성과 생산성을 높여줄 수 있는 언어입니다. Python은 간결하고 읽기 쉬운 문법을 가지며, 빠른 프로토타이핑과 개발 속도를 지원합니다. 게임 서버의 간단한 스크립팅, 게임 로직 개발, 데이터 처리 등 다양한 부분에서 Python을 활용할 수 있습니다."
+                        "C++, Python"
                 binding.bottomButton1.visibility = View.GONE
                 binding.bottomButton2.setOnClickListener {
                     val wikiUrl51 = "https://namu.wiki/w/%EA%B2%8C%EC%9E%84%20%EC%84%9C%EB%B2%84"
@@ -709,10 +713,7 @@ class MainActivity2 : AppCompatActivity() {
                         "그래픽 API (예: DirectX, OpenGL)와 3D 그래픽 엔진 (예: Unity, Unreal Engine)을 활용한 그래픽 및 렌더링에 대한 이해, 플레이어가 느끼는 사용자 경험 및 UI 디자인에 대한 이해\n" +
                         "\n" +
                         "■ 사용 언어\n" +
-                        "1. C++:\n" +
-                        "C++은 게임 클라이언트 개발에서 가장 많이 사용되는 언어 중 하나입니다. C++은 메모리 및 프로세서 사용을 효율적으로 제어할 수 있으며, 빠른 속도와 뛰어난 성능을 제공합니다. C++을 사용하여 게임 엔진을 만들고, 그래픽 및 오디오 드라이버와 같은 하드웨어 인터페이스를 제어할 수 있습니다.\n" +
-                        "2. C#:\n" +
-                        "C#은 Unity와 같은 게임 엔진에서 많이 사용되는 언어입니다. C#은 C++보다 상대적으로 쉽고 간단한 구문을 가지고 있으며, 개발 시간을 단축할 수 있습니다. 또한 .NET 프레임워크를 기반으로 하므로 윈도우즈 플랫폼에서 높은 호환성을 제공합니다.\n"
+                        "C++, C#\n"
                 binding.bottomButton1.visibility = View.GONE
                 binding.bottomButton2.setOnClickListener {
                     val wikiUrl52 =
@@ -727,6 +728,7 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
     private fun button6view(){
+        init2()
         binding.spinner.setSelection(5)
         binding.button1.text = "화이트 해킹"
         binding.button2.text = "악성코드 분석"
@@ -736,7 +738,7 @@ class MainActivity2 : AppCompatActivity() {
         binding.textView3.text = "사용 언어"
         binding.addtextView1.text = "보안(Security)은 시스템, 네트워크 또는 정보를 외부로부터 불법적인 침입이나 피해로부터 보호하는 조치입니다. 기밀성, 무결성, 가용성을 보장하여 데이터의 비밀성 유지, 변조 방지 및 서비스 제공을 보장합니다. 이를 위해 암호화, 인증, 접근 제어 등의 기술과 정책이 사용됩니다. 또한, 보안은 개인 정보 보호, 시스템 및 네트워크의 취약점 탐지 및 대응 등을 포함하여 종합적인 접근이 필요합니다."
         binding.addtextView2.text = "보안 개발자는 시스템 및 소프트웨어의 보안 측면을 설계, 개발 및 유지보수합니다. 이들은 해킹, 악성 코드 및 다른 보안 위협으로부터 시스템을 보호하기 위해 보안 기술과 암호화 알고리즘을 이해하고 활용합니다. 취약점 분석, 보안 테스트 및 패치 관리와 같은 작업을 수행하여 시스템의 취약성을 최소화하고 새로운 보안 도구와 기술에 대한 연구 및 개발을 수행하여 신속하고 효과적인 보안 솔루션을 제공합니다. 정보 보안 정책 및 규정을 준수하며, 사용자 데이터의 기밀성과 무결성을 보장하는 역할을 담당합니다."
-        binding.addtextView3.text = "C, 어셈블리어"
+        binding.addtextView3.text = "C, 어셈블리어(Assembly language)"
         binding.bottomButton2.setOnClickListener {
             val wikiUrl6 = "https://namu.wiki/w/%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(wikiUrl6))
@@ -795,7 +797,7 @@ class MainActivity2 : AppCompatActivity() {
                         "- API동작 방식, 다양한 옵션 사용의 성능 영향, 효율적인 코딩 방법\n" +
                         "\n" +
                         "■ 사용 언어\n" +
-                        "C, Assembly, Python"
+                        "C, Assembly language, Python"
                 binding.bottomButton1.visibility = View.GONE
                 binding.bottomButton2.setOnClickListener {
                     val wikiUrl62 = "https://namu.wiki/w/%EC%95%85%EC%84%B1%EC%BD%94%EB%93%9C"
@@ -841,6 +843,7 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
     private fun button7view(){
+        init2()
         binding.spinner.setSelection(6)
         binding.button1.text = "db 관리"
         binding.button2.text = "db 보안"
@@ -853,9 +856,7 @@ class MainActivity2 : AppCompatActivity() {
                 "1. MySQL: MySQL은 가장 널리 사용되는 오픈 소스 관계형 데이터베이스 관리 시스템(RDBMS) 중 하나입니다. 표준 SQL 문법을 따르며, 데이터베이스의 구축, 관리, 조작을 위해 사용됩니다.\n" +
                 "2. Oracle SQL: Oracle SQL은 Oracle Database에서 사용되는 SQL 언어입니다. Oracle은 대규모 엔터프라이즈급 데이터베이스 시스템으로 널리 알려져 있으며, Oracle SQL은 이 시스템과의 상호작용을 위해 사용됩니다.\n" +
                 "3. MongoDB : MongoDB는 오픈 소스 NoSQL 데이터베이스 시스템으로, 비관계형 데이터를 저장하고 관리하는 데 사용됩니다. MongoDB는 도큐먼트 지향 데이터 모델을 사용하며, JSON과 비슷한 BSON(Binary JSON) 형식으로 데이터를 저장합니다."
-        binding.addtextView3.text = "1. MySQL: MySQL은 가장 널리 사용되는 오픈 소스 관계형 데이터베이스 관리 시스템(RDBMS) 중 하나입니다. 표준 SQL 문법을 따르며, 데이터베이스의 구축, 관리, 조작을 위해 사용됩니다.\n" +
-                "2. Oracle SQL: Oracle SQL은 Oracle Database에서 사용되는 SQL 언어입니다. Oracle은 대규모 엔터프라이즈급 데이터베이스 시스템으로 널리 알려져 있으며, Oracle SQL은 이 시스템과의 상호작용을 위해 사용됩니다.\n" +
-                "3. MongoDB : MongoDB는 오픈 소스 NoSQL 데이터베이스 시스템으로, 비관계형 데이터를 저장하고 관리하는 데 사용됩니다. MongoDB는 도큐먼트 지향 데이터 모델을 사용하며, JSON과 비슷한 BSON(Binary JSON) 형식으로 데이터를 저장합니다."
+        binding.addtextView3.text = "MySQL, Oracle SQL, MongoDB"
         binding.bottomButton2.setOnClickListener {
             val wikiUrl7 = "https://namu.wiki/w/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(wikiUrl7))
@@ -876,9 +877,7 @@ class MainActivity2 : AppCompatActivity() {
                 binding.addtextView2.text =
                     "데이터베이스 관리자는 조직이 사용하는 데이터베이스 시스템을 설계, 구축, 유지보수하는 역할을 수행합니다. 그들은 데이터의 효율적인 관리와 보안을 보장하고, 데이터베이스의 가용성과 성능을 최적화하는 것을 목표로 합니다."
                 binding.addtextView3.text = "■ 사용 언어\n" +
-                        "- SQL(Structured Query Language): 데이터베이스 관리와 관련된 작업을 수행하기 위한 표준 언어로, 데이터의 검색, 수정, 삭제, 추가 등을 수행할 수 있습니다.\n" +
-                        "- 스크립트 언어인 Python, PowerShell, Bash: 자동화된 작업을 수행합니다.\n" +
-                        "- Perl, Ruby 등 다양한 언어를 사용할 수 있습니다."
+                        "SQL(Structured Query Language) / Python, PowerShell, Bash / Perl, Ruby"
                 binding.bottomButton1.visibility = View.GONE
                 binding.bottomButton2.setOnClickListener {
                     val wikiUrl71 = "https://namu.wiki/w/DBMS"
@@ -910,10 +909,7 @@ class MainActivity2 : AppCompatActivity() {
                             "5. 보안 정책 및 절차 개발: 데이터베이스 보안 정책과 절차를 개발하고 문서화하여 조직 내에서 보안을 일관되게 유지할 수 있도록 합니다. 데이터 기밀성 및 무결성을 유지하기 위한 데이터 보안 표준을 수립하고 교육을 제공합니다.\n" +
                             "6. 위협 대응: 데이터베이스 시스템에 대한 내부 및 외부 위협에 대응하기 위해 사고 대응 계획을 개발하고, 사고 발생 시 조사 및 대응을 수행합니다. 데이터 유출, 해킹 및 기타 보안 사고에 대비하여 예방 및 대응을 계획합니다."
                 binding.addtextView3.text = "■ 사용 언어\n" +
-                        "1. SQL (Structured Query Language): 데이터베이스 관리 시스템과 상호 작용하기 위해 SQL을 사용합니다. SQL은 데이터베이스에서 데이터를 쿼리, 조작, 보안 설정 등 다양한 작업을 수행하는 데에 널리 사용되는 언어입니다.\n" +
-                        "2. Python: Python은 데이터베이스 접근, 데이터 처리, 암호화, 로깅 및 감사 등 다양한 작업을 수행하는 데에 유용합니다. 또한 Python에는 데이터베이스 관련 라이브러리와 프레임워크가 풍부하게 제공되어 있습니다.\n" +
-                        "3. Shell 스크립팅 언어 (예: Bash): 데이터베이스 보안 전문가는 데이터베이스 서버를 관리하고 모니터링하는 데에 Shell 스크립팅 언어를 사용할 수 있습니다. Bash 스크립트를 작성하여 데이터베이스 관련 작업을 자동화하고 일관된 작업을 수행할 수 있습니다.\n" +
-                        "4. 데이터베이스 관리 도구: 데이터베이스 보안 전문가는 데이터베이스 관리 도구를 활용하여 보안 작업을 수행할 수 있습니다. 이러한 도구는 데이터베이스 쿼리, 보안 설정, 로깅 및 감사 기능 등을 제공하며, 데이터베이스 관리 및 보안 작업을 용이하게 합니다. 예를 들어, Oracle 데이터베이스의 경우 SQL*Plus, SQL Developer 등의 도구를 사용할 수 있습니다.\n"
+                        "SQL, Python, Shell 스크립팅 언어(ex. Bash), 데이터베이스 관리 도구(ex. SQL*Plus, SQL Developer)\n"
                 binding.bottomButton1.visibility = View.GONE
                 binding.bottomButton2.setOnClickListener {
                     val wikiUrl72 =
@@ -946,11 +942,7 @@ class MainActivity2 : AppCompatActivity() {
                             "5. 데이터 마이그레이션: 기존 시스템으로부터 데이터를 추출하여 새로운 데이터베이스 시스템으로 이전하는 데이터 마이그레이션 전략을 개발하고 실행합니다. 데이터의 일관성, 정합성 및 효율성을 유지하며, 마이그레이션 프로세스를 관리합니다.\n" +
                             "6. 데이터 아키텍처 관리: 데이터 아키텍처 관련 문서화, 표준 및 가이드라인 개발, 아키텍처"
                 binding.addtextView3.text = "■ 사용 언어\n" +
-                        "1. SQL (Structured Query Language): 데이터베이스 관리 시스템과 상호 작용하기 위해 SQL을 사용합니다. SQL은 데이터베이스에서 데이터를 쿼리, 조작, 관리하는 데에 널리 사용되는 언어입니다. 데이터 아키텍트는 SQL을 사용하여 데이터 모델링, 데이터 통합, 데이터 품질 관리, 데이터 마이그레이션 등을 수행합니다.\n" +
-                        "2. Python: Python은 데이터 아키텍트가 사용하는 주요 프로그래밍 언어 중 하나입니다. Python은 데이터 처리, 데이터 분석, 데이터 모델링 등 다양한 작업에 유용하며, 데이터베이스 시스템과의 상호 작용을 지원하는 다양한 라이브러리와 프레임워크가 있습니다.\n" +
-                        "3. ETL 도구: Extract, Transform, Load (ETL)은 데이터 통합을 위한 과정으로, ETL 도구는 데이터 아키텍트가 사용하는 중요한 도구입니다. ETL 도구에는 Talend, Informatica, SSIS 등이 있으며, 이러한 도구는 데이터 추출, 변환, 적재 작업을 자동화하고 데이터 통합 아키텍처를 구현하는 데에 사용됩니다.\n" +
-                        "4. UML (Unified Modeling Language): UML은 시스템 및 소프트웨어 모델링을 위한 표준 언어입니다. 데이터 아키텍트는 UML을 사용하여 데이터 모델링 및 아키텍처 설계를 문서화하고 시각화하는 데에 활용할 수 있습니다.\n" +
-                        "5. Shell 스크립팅 언어: 데이터 아키텍트는 데이터 통합, 데이터 마이그레이션, 작업 자동화 등을 위해 Shell 스크립팅 언어를 사용할 수 있습니다. Bash 스크립트를 사용하여 데이터 아키텍처와 관련된 작업을 자동화하고 일관성 있게 수행할 수 있습니다."
+                        "SQL, Python, ETL 도구(ex. Talend, Informatica, SSIS), UML(Unified Modeling Language), Shell 스크립팅 언어"
                 binding.bottomButton1.visibility = View.GONE
                 binding.bottomButton2.setOnClickListener {
                     val wikiUrl7 =
@@ -965,6 +957,7 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
     private fun button8view() {
+        init2()
         binding.spinner.setSelection(7)
         binding.button1.text = "SI"
         binding.button2.text = "SM"
@@ -1012,9 +1005,7 @@ class MainActivity2 : AppCompatActivity() {
                         "국내 SI 업계는 주로 스프링 프레임워크(전자정부표준프레임워크)를 기반으로 하는 Java 웹 개발이나 모바일 앱 개발을 합니다. JavaScript와 PHP도 가능하고 비주얼 베이직도 일부 사용하고 있습니다.\n" +
                         "\n" +
                         "■ 사용 언어\n" +
-                        "- Java\n" +
-                        "- JavaScript\n" +
-                        "- PHP : 대표적인 서버 사이드 스크립트 언어로 전 세계 수많은 웹 시스템의 기반이 되는 언어입니다."
+                        "Java, JavaScript, PHP"
                 binding.bottomButton1.visibility = View.GONE
                 binding.bottomButton2.setOnClickListener {
                     val wikiUrl81 =
