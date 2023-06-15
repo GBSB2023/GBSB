@@ -1,9 +1,11 @@
 package com.example.gbsb.community.comment
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
+import android.os.Message
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +47,7 @@ class CommentFragment : Fragment() {
     private var isFragmentExecuteFromMain = false
     private var boardIdFromMain:String ?= null
 
+    private var progressDialog: ProgressDialog? = null
 
 
     companion object {
@@ -91,6 +94,7 @@ class CommentFragment : Fragment() {
 
         communitydb = Firebase.database.getReference("Community")
         likedb = Firebase.database.getReference("Like")
+        showProgressDialog()
         var userRef = communitydb.child(boardId)
         userRef.get().addOnCompleteListener {
                 task->
@@ -106,6 +110,18 @@ class CommentFragment : Fragment() {
 
             }
         }
+        hideProgressDialog()
+    }
+
+    private fun showProgressDialog() {
+        progressDialog = ProgressDialog(context)
+        progressDialog?.setMessage("loading...")
+        progressDialog?.setCancelable(false)
+        progressDialog?.show()
+    }
+
+    private fun hideProgressDialog() {
+        progressDialog?.dismiss()
     }
 
     private fun initBtn() {
@@ -131,6 +147,7 @@ class CommentFragment : Fragment() {
                 }
             }
             boardDeletebtn.setOnClickListener {
+                showProgressDialog()
                 var userRef = communitydb.child(boardId).child("uid")
                 userRef.get().addOnCompleteListener {
                         task->
@@ -161,6 +178,7 @@ class CommentFragment : Fragment() {
                                         fragment.addToBackStack(null)
                                         val boardFragment = BoardFragment()
                                         fragment.replace(R.id.contentLayout, boardFragment)
+                                        hideProgressDialog()
                                         fragment.commit()
                                     })
                                     .setNegativeButton("취소", null)
@@ -174,6 +192,7 @@ class CommentFragment : Fragment() {
                         Toast.makeText(activity, "board 삭제 중 DB 접근 실패", Toast.LENGTH_SHORT).show()
                     }
                 }
+                hideProgressDialog()
             }
         }
     }
@@ -247,6 +266,7 @@ class CommentFragment : Fragment() {
         communitydb.child(boardId).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
+                    showProgressDialog()
                     val data = snapshot.getValue(Board::class.java)
                     binding?.apply {
                         boardName.text=data!!.name
@@ -256,6 +276,7 @@ class CommentFragment : Fragment() {
                         boardLike.text=data!!.like.toString()
                         boardComment.text=data!!.comment.toString()
                     }
+                    hideProgressDialog()
                 }
             }
 

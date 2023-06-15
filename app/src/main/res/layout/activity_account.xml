@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:text="Personal Data" />
+                    android:text="계정 정보" />
                 <ImageView
                     android:id="@+id/accountBtn"
                     android:layout_width="70dp"
