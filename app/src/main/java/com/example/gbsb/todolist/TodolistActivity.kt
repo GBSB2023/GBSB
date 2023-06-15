@@ -46,6 +46,7 @@ class TodolistActivity : AppCompatActivity(),
     override fun onStart() {
         super.onStart()
         adapter.startListening()
+        refreshData()
     }
 
     override fun onStop() {
