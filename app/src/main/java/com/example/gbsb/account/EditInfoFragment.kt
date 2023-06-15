@@ -69,6 +69,7 @@ class EditInfoFragment:DialogFragment() {
     private fun initBtn() {
         binding.validBtn.setOnClickListener {
             if(validateRegister()){
+                Toast.makeText(activity, "올바른 양식입니다!", Toast.LENGTH_LONG).show()
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.isEnabled = true
             }else{
                 Toast.makeText(activity, "양식을 올바르게 작성해주세요.", Toast.LENGTH_LONG).show()

@@ -1,6 +1,8 @@
 package com.example.gbsb.community.board
 
+import android.app.ProgressDialog
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,13 +32,19 @@ class BoardFragment : Fragment() {
     private lateinit var communitydb: DatabaseReference
     lateinit var activityBinding: ActivityCommunityBinding
 
+    private var progressDialog: ProgressDialog? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        showProgressDialog()
         binding = FragmentBoardBinding.inflate(layoutInflater, container, false)
         activityBinding = (activity as? CommunityActivity)!!.binding
+        Handler().postDelayed({
+            hideProgressDialog()
+        },500)
         return binding!!.root
     }
 
@@ -46,6 +54,17 @@ class BoardFragment : Fragment() {
         initSpinner()
         initContent()
         initBtn()
+    }
+
+    private fun showProgressDialog() {
+        progressDialog = ProgressDialog(context)
+        progressDialog?.setMessage("loading...")
+        progressDialog?.setCancelable(false)
+        progressDialog?.show()
+    }
+
+    private fun hideProgressDialog() {
+        progressDialog?.dismiss()
     }
 
     private fun initSpinner() {
