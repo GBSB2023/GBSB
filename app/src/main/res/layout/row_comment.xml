@@ -76,11 +76,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="날짜"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="시간"/>
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
