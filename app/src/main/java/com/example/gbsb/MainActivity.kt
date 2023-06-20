@@ -265,7 +265,7 @@ class MainActivity : AppCompatActivity() {
 
                 if(isAnonymousUser){ // 익명 사용자일 경우
                     val builder = AlertDialog.Builder(this@MainActivity)
-                    builder.setTitle("익명 회원의 경우 해당 기능을 이용할 수 없습니다. 로그인 화면으로 이동할까요?")
+                    builder.setTitle("익명 회원은 이용 불가한 기능입니다. 로그인 화면으로 이동할까요?")
                     builder.setCancelable(false)
                     builder.setPositiveButton("Yes") { dialog, which ->
                         if (currentUser.isAnonymous){
@@ -286,6 +286,8 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     builder.show()
+
+
                 }else{
                     val i= Intent(this@MainActivity, AccountActivity::class.java)
                     startActivity(i)
