@@ -36,6 +36,7 @@
                             android:id="@+id/board_writer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textAllCaps="false"
                             android:layout_margin="5dp"
                             android:text="작성자"/>
                         <View
@@ -67,6 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:textAllCaps="false"
                 android:text="글 제목"
                 android:textSize="20dp"
                 android:textStyle="bold"/>
@@ -75,6 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:textAllCaps="false"
                 android:text="글 본문"
                 android:textSize="20dp"/>
             <LinearLayout
