@@ -7,9 +7,12 @@
 
     <TextView
         android:id="@+id/recentCommunityTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:focusable="true"
         android:text="최근 글 제목입니다."
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
