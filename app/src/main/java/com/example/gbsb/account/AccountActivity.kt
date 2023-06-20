@@ -39,6 +39,35 @@ class AccountActivity : AppCompatActivity() {
         initAccount()
     }
 
+    private val infoValueEventListener = object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            // infodb의 내용이 변경될 때의 동작
+            if (snapshot.exists()) {
+                val data = snapshot.getValue(Info::class.java)
+                var email = data!!.email
+                var call = data!!.call
+                var birth = data!!.birth
+                var major = data!!.major
+                var introduce = data!!.introduce
+                binding.infoEmail.text = email
+                binding.infoCall.text = call
+                binding.infoBirth.text = birth
+                binding.infoMajor.text = major
+                binding.infoIntroduce.text = introduce
+
+                info = Info(email, call, birth, major, introduce)
+                model.setData(info)
+                model.setuId(auth!!.currentUser!!.uid)
+            } else {
+                Toast.makeText(this@AccountActivity, "snapshot이 존재하지 않습니다.", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            Toast.makeText(this@AccountActivity, "DB 조회 중 에러 발생", Toast.LENGTH_LONG).show()
+        }
+    }
+
     private fun initAccount() {
         currentUser=auth!!.currentUser!!
         accountdb = Firebase.database.getReference("Accounts")
@@ -46,35 +75,7 @@ class AccountActivity : AppCompatActivity() {
         infodb = Firebase.database.getReference("Info").child(uid)
 
         if(uid != null){
-            val query = infodb
-            query.addValueEventListener(object: ValueEventListener { // infodb의 내용이 변경될때마다 발생되는 이벤트
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if(snapshot.exists()){
-                        val data = snapshot.getValue(Info::class.java)
-                        var email = data!!.email
-                        var call = data!!.call
-                        var birth = data!!.birth
-                        var major = data!!.major
-                        var introduce = data!!.introduce
-                        binding.infoEmail.text = email
-                        binding.infoCall.text = call
-                        binding.infoBirth.text = birth
-                        binding.infoMajor.text = major
-                        binding.infoIntroduce.text = introduce
-
-                        info= Info(email, call, birth, major, introduce)
-                        model.setData(info)
-                        model.setuId(uid)
-                    }
-                    else{
-                        Toast.makeText(this@AccountActivity, "정상적으로 회원탈퇴 처리 되었습니다.", Toast.LENGTH_LONG).show()
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@AccountActivity, "DB 조회 중 에러 발생", Toast.LENGTH_LONG).show()
-                }
-            })
+            infodb.addValueEventListener(infoValueEventListener)
         }
 
     }
@@ -114,6 +115,7 @@ class AccountActivity : AppCompatActivity() {
         dialogBuilder.setTitle("회원탈퇴")
         dialogBuilder.setMessage("정말로 회원탈퇴하시겠습니까?")
         dialogBuilder.setPositiveButton("확인") { dialog, which ->
+            infodb.removeEventListener(infoValueEventListener)
             deleteDB()
             userDelete()
         }
@@ -135,8 +137,9 @@ class AccountActivity : AppCompatActivity() {
                 val i= Intent(this@AccountActivity, LoginActivity::class.java)
                 startActivity(i)
                 finish()
-            }else{
-                Toast.makeText(this@AccountActivity, "회원탈퇴 처리 중 에러 발생", Toast.LENGTH_LONG).show()
+            }else {
+                val errorMessage = task.exception?.message
+                Toast.makeText(this@AccountActivity, "회원탈퇴 처리 중 에러 발생: $errorMessage", Toast.LENGTH_LONG).show()
             }
         }
     }
